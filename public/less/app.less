@@ -1,0 +1,68 @@
+@green:#388e3c;
+@grey:#F5F5F5;
+@dark-grey:#333;
+@white:#fff;
+
+@import "_nav.less";
+@import "_dash.less";
+
+.njc-intranet {
+  padding-top:2em;
+  background:@dark-grey;
+  font-family:helvetica, verdana, sans-serif;
+  font-weight:100;
+  font-size:10pt;
+  min-height:100vh;
+
+  header {
+    background:#fff;
+    .checkbox {display:inline-block;margin-right:0.75em;}
+    .action {margin-top:1em;}
+    .form-control {border: solid 1px #aaa;}
+    padding-bottom:2em;
+  }
+
+  main {
+    background:@grey;
+    min-height:45em;
+    padding-top:1em;
+    padding-bottom:2em;
+  }
+
+  .btn, .form-control {
+    border-radius:0;
+    outline:none;
+    border:none;
+  }
+
+  .btn-primary {
+    color:#fff;
+    background:@green;
+    &:hover, &:active, &:focus {color:#fff;border:none;outline:none;background:@green;}
+  }
+
+  .btn-secondary {
+    color:#fff;
+    background:@dark-grey;
+    font-size:smaller;
+    &:hover, &:active, &:focus {color:#fff;border:none;outline:none;}
+  }
+
+  .btn-cta {
+    background:#fff;
+  }
+
+  .document-tile {
+    background:#fff;
+    border:none;
+    padding:1em;
+    height:4em;
+    cursor:pointer;
+    margin-bottom:2em;
+    .document-tile-title { margin-top:0.5em;}
+  }
+
+  .alert {
+    border-radius:0;
+  }
+}

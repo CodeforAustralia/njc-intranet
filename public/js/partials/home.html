@@ -1,0 +1,38 @@
+<main class="page dash container" id="home">
+  <div class="row alert alert-danger">
+    <div class="col-xs-12">
+      <p>This is an alert with a <span class="btn btn-cta">Call to action</span></p>
+    </div>
+  </div>
+  <div class="row status">
+    <div class="col-xs-6">
+      <h2>You are currently set to {{ vm.current_user.status }}</h2>
+    </div>
+    <div class="col-xs-6">
+      {{ vm.now.day_of_the_week }}<br/>
+      {{ vm.now.time }} | {{ vm.now.date }}
+    </div>
+  </div>
+  <div class="row duty-worker">
+    <div class="col-xs-6">
+      <h3>Duty worker for today</h3>
+      <h4>{{ vm.duty_worker.name }}</h4>
+    </div>
+    <div class="col-xs-6">
+      <p>{{ vm.duty_worker.email }}<br/>{{ vm.duty_worker.phone }}</p>
+    </div>
+  </div>
+  <div class="row updates">
+    <div class="col-xs-6">
+      <h2>Announcements</h2>
+      <article ng-repeat="announcement in vm.announcements">
+        <h3>{{ announcement.title }}</h3>
+        <p>{{ announcement.summary }}</p>
+      </article>
+    </div>
+    <div class="col-xs-6">
+      <h2>New to NJC?</h2>
+      <p>Some links, tools and information to get you going.</p>
+    </div>
+  </div>
+</main>
