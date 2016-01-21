@@ -8,7 +8,7 @@
   /*@ngInject*/
   function HomeController($scope, $log, $rootScope, moment){
 
-    var vm = this;
+    let vm = this;
 
     console.log(moment);
 
@@ -19,6 +19,16 @@
       {'title': 'Announcement 2', 'summary': 'Blandit torquatos adversarium eum cu, usu id scaevola expetenda, his ad debet fabulas complectitur. Pro ex cetero splendide. Sit an eius partem, et ius amet choro mentitum. Cum et nullam invenire. Prima discere id vis, quo tale assum iusto ei.'},
       {'title': 'Announcement 3', 'summary': 'Ei alia alterum legimus vel. Sed lorem suavitate id. Vis et quem esse nonumes, qui quando disputando conclusionemque te. Decore nemore duo cu. Qui an appareat oporteat. Mea et facilisi convenire reformidans.'}
     ];
+
+    vm.duty_worker = {
+      name: 'Ezekiel Kigbo',
+      email: 'hi@eakigbo.me',
+      phone: '0400111222'
+    };
+
+    vm.current_user = {
+      status: 'Out',
+    };
 
     $log.log(vm.now);
 

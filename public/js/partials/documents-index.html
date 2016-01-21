@@ -1,0 +1,24 @@
+<main class="page documents container" id="documents-index">
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>Documents</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <ul class="filter-tab">
+        <li class="filter-tab-item" ng-repeat="category in vm.categories">
+          <a class="{{ category.active }}">{{ category.title }}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12" ng-repeat="item in vm.content">
+      <h3>{{ item.title }}</h3>
+      <ul>
+        <li ng-repeat="doc in item.documents">{{ doc.title }}</li>
+      </ul>
+    </div>
+  </div>
+</main>

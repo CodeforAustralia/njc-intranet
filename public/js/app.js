@@ -48,6 +48,7 @@
   	})
     .state('documents', {
       abstract: true,
+      template: '<ui-view/>',
       resolve: {
 
       }

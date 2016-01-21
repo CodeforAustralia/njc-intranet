@@ -6,19 +6,23 @@
   </div>
   <div class="row status">
     <div class="col-xs-6">
-      <h2>You are currently set to {{ vm.current_user.status }}</h2>
+      <h2 class="status-content">You status is currently {{ vm.current_user.status }}</h2>
     </div>
-    <div class="col-xs-6">
-      {{ vm.now.day_of_the_week }}<br/>
-      {{ vm.now.time }} | {{ vm.now.date }}
+    <div class="col-xs-6 text-right">
+      <span class="status-day">{{ vm.now.day_of_the_week }}</span><br/>
+      <span class="status-datetime">{{ vm.now.time }} | {{ vm.now.date }}</span>
     </div>
   </div>
   <div class="row duty-worker">
     <div class="col-xs-6">
-      <h3>Duty worker for today</h3>
-      <h4>{{ vm.duty_worker.name }}</h4>
+      <div class="duty-worker-avatar pull-left">
+        <img src="http://dummyimage.com/300" alt="{{ vm.duty_worker.name }}" />
+      </div>
+      <div class="duty-worker-name">
+        <p>Duty worker for today...<br/><span class="duty-worker-name-content">{{ vm.duty_worker.name }}</span></p>
+      </div>
     </div>
-    <div class="col-xs-6">
+    <div class="col-xs-6 duty-worker-contact text-right">
       <p>{{ vm.duty_worker.email }}<br/>{{ vm.duty_worker.phone }}</p>
     </div>
   </div>
@@ -33,6 +37,12 @@
     <div class="col-xs-6">
       <h2>New to NJC?</h2>
       <p>Some links, tools and information to get you going.</p>
+      <ul>
+        <li>This</li>
+        <li>is</li>
+        <li>A</li>
+        <li>Link</li>
+      </ul>
     </div>
   </div>
 </main>
