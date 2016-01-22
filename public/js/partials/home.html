@@ -1,10 +1,10 @@
 <main class="page dash container" id="home">
-  <div class="row alert alert-danger">
+  <div class="row alert alert-danger component">
     <div class="col-xs-12">
       <p>This is an alert with a <span class="btn btn-cta">Call to action</span></p>
     </div>
   </div>
-  <div class="row status">
+  <div class="row status component">
     <div class="col-xs-6">
       <h2 class="status-content">You status is currently {{ vm.current_user.status }}</h2>
     </div>
@@ -13,7 +13,7 @@
       <span class="status-datetime">{{ vm.now.time }} | {{ vm.now.date }}</span>
     </div>
   </div>
-  <div class="row duty-worker">
+  <div class="row duty-worker component">
     <div class="col-xs-6">
       <div class="duty-worker-avatar pull-left">
         <img src="http://dummyimage.com/300" alt="{{ vm.duty_worker.name }}" />
@@ -26,7 +26,7 @@
       <p>{{ vm.duty_worker.email }}<br/>{{ vm.duty_worker.phone }}</p>
     </div>
   </div>
-  <div class="row updates">
+  <!--<div class="row updates component">
     <div class="col-xs-6">
       <h2>Announcements</h2>
       <article ng-repeat="announcement in vm.announcements">
@@ -44,5 +44,5 @@
         <li>Link</li>
       </ul>
     </div>
-  </div>
+  </div>-->
 </main>

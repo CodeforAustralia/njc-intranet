@@ -13,11 +13,15 @@
       </ul>
     </div>
   </div>
-  <div class="row">
-    <div class="col-xs-12" ng-repeat="item in vm.content">
+  <div class="row documents-listing">
+    <div class="col-xs-12 col-sm-4 document-group" ng-repeat="item in vm.content">
       <h3>{{ item.title }}</h3>
-      <ul>
-        <li ng-repeat="doc in item.documents">{{ doc.title }}</li>
+      <ul class="document-group-list">
+        <li ng-repeat="doc in item.documents">
+          <span class="fa fa-rocket">{{ doc.type }}</span>
+          <a href="{{ doc.link }}">{{ doc.title }}</a><br/>
+          <span>{{ doc.summary }}</span>
+        </li>
       </ul>
     </div>
   </div>
