@@ -4,6 +4,6 @@ angular.module('njcIntranetApp', [
   'ui.router',
   'angular-cache',
   'angularMoment',
-  'formly',
-  'formlyBootstrap'
+  'formly', 'formlyBootstrap',
+  'angularFileUpload'
 ]);

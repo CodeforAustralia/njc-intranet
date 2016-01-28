@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "angular-formly": "~7.3.9",
-    "angular-formly-templates-bootstrap": "~6.2.0"
+    "angular-formly-templates-bootstrap": "~6.2.0",
+    "angular-file-upload": "^2.2.0"
   }
 }
