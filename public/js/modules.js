@@ -3,5 +3,7 @@
 angular.module('njcIntranetApp', [
   'ui.router',
   'angular-cache',
-  'angularMoment'
+  'angularMoment',
+  'formly',
+  'formlyBootstrap'
 ]);

@@ -61,6 +61,15 @@
       resolve: {
 
       }
+  	})
+    .state('documents.new', {
+  		url: '/documents/new',
+  		templateUrl: 'js/partials/documents-new.html',
+  		controller: 'DocumentsNewController',
+      controllerAs: 'vm',
+      resolve: {
+
+      }
   	});
   }
 

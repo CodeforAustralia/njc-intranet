@@ -5,24 +5,31 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col-xs-9">
       <ul class="filter-tab">
         <li class="filter-tab-item" ng-repeat="category in vm.categories">
           <a class="{{ category.active }}">{{ category.title }}</a>
         </li>
       </ul>
     </div>
+    <div class="col-xs-3 text-right">
+      <button class="btn btn-primary" ui-sref="documents.new">
+        <span class="fa fa-upload"></span>&nbsp;Add new document
+      </button>
+    </div>
   </div>
   <div class="row documents-listing">
     <div class="col-xs-12 col-sm-4 document-group" ng-repeat="item in vm.content">
-      <h3>{{ item.title }}</h3>
-      <ul class="document-group-list">
-        <li ng-repeat="doc in item.documents">
-          <span class="fa fa-rocket">{{ doc.type }}</span>
-          <a href="{{ doc.link }}">{{ doc.title }}</a><br/>
-          <span>{{ doc.summary }}</span>
-        </li>
-      </ul>
+      <div class="document-group-content">
+        <h3>{{ item.title }}</h3>
+        <ul class="document-group-list">
+          <li ng-repeat="doc in item.documents">
+            <span class="fa fa-rocket">{{ doc.type }}</span>
+            <a href="{{ doc.link }}">{{ doc.title }}</a><br/>
+            <span>{{ doc.summary }}</span>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </main>

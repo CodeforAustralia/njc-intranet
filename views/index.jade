@@ -16,6 +16,8 @@ block content
               a(ui-sref="staff") Staff
             li
               a(ui-sref="logout") Logout
+  //
+    TODO: Add search functionality
     .row
       .col-xs-12
         input.form-control.search-field(type='text', placeholder='Search for a document, staff member or general information', ng-model='vm.search_filter', ng-change='vm.filter()')
