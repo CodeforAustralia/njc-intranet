@@ -59,7 +59,9 @@
   		controller: 'DocumentsIndexController',
       controllerAs: 'vm',
       resolve: {
-
+        documents: function(DocumentService){
+          return DocumentService.all();
+        }
       }
   	})
     .state('documents.new', {

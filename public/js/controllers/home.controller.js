@@ -8,7 +8,7 @@
   /*@ngInject*/
   function HomeController($scope, $log, $rootScope, moment){
 
-    let vm = this;
+    var vm = this;
 
     console.log(moment);
 
@@ -33,7 +33,7 @@
     $log.log(vm.now);
 
     function getToday(){
-      const now = new moment();
+      var now = new moment();
       //console.log(now);
       return {
         day_of_the_week: now.format('dddd'),
