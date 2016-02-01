@@ -9,7 +9,7 @@
   function DocumentsIndexController($scope, $log, $rootScope, moment){
     $log.log($scope);
 
-    let vm = this;
+    var vm = this;
 
     vm.categories = [{'title':'All documents', 'active': 'active'}, {'title':'Finance', 'active':''}, {'title':'HR','active':''}, {'title':'OH&S', 'active':''}];
     vm.content = [

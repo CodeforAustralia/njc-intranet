@@ -8,9 +8,11 @@
   /*@ngInject*/
   function DocumentsNewController($scope, $log, $rootScope, moment, FileUploader){
     $log.log($scope);
-    let vm = this;
+    var vm = this;
 
-    $scope.uploader = new FileUploader();
+    $scope.uploader = new FileUploader({
+      url: "/uploads"
+    });
 
 
     vm.categories = [{'title':'All documents', 'active': 'active'}, {'title':'Finance', 'active':''}, {'title':'HR','active':''}, {'title':'OH&S', 'active':''}];
@@ -80,7 +82,9 @@
 
     vm.submit = function(){
       // submit the form
+      $log.log("Submitting the form");
       $log.log(vm.document);
+      $log.log($scope.uploader);
     };
 
     function init(){

@@ -4,11 +4,22 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var mongoose = require('mongoose');
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var uploads = require('./routes/uploads');
 
 var app = express();
+
+// console message colours
+var chalk = require('chalk'); // colour our output
+var error = chalk.bold.bgRed;
+var warning = chalk.bold.bgYellow;
+var success = chalk.bold.bgGreen;
+
+// db connection
+var db;
+var dbName = "njc_intranet";
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -24,6 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/uploads', uploads);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -43,6 +55,24 @@ if (app.get('env') === 'development') {
       message: err.message,
       error: err
     });
+  });
+  // connect to mongodb
+  mongoose.connect('mongodb://localhost/' + dbName);
+  db = mongoose.connection;
+
+  db.on('error', console.error.bind(console, 'connection error:'));
+  db.once('open', function(callback){
+    console.log(success("Connected to monogodb"));
+  });
+}
+else {
+  // connect to remote mongodb
+  mongoose.connect(process.env.MONGOLAB_URI); // connect to monoglabs
+  db = mongoose.connection;
+
+  db.on('error', console.error.bind(console, 'connection error:'));
+  db.once('open', function(callback){
+    console.log(success("Connected to monogodb"));
   });
 }
 
