@@ -6,13 +6,14 @@
     .controller('DocumentsNewController', DocumentsNewController);
 
   /*@ngInject*/
-  function DocumentsNewController($scope, $log, $rootScope, moment, FileUploader){
+  function DocumentsNewController($scope, $log, $rootScope, moment, FileUploader, toastr){
     $log.log($scope);
     var vm = this;
 
     vm.uploader = new FileUploader({
       url: "/uploads",
-      formData: []
+      formData: [],
+      removeAfterUpload: true
     });
 
     vm.uploader.onBeforeUploadItem = function(item){
@@ -22,6 +23,17 @@
         topic: vm.document.topics.topic,
         category: vm.document.topics.category,
       });
+    };
+
+    vm.uploader.onErrorItem = function(item, response, status){
+      console.log('onSuccessItem');
+      toastr.error("There was an error uploading your file, try again","Error");
+    };
+
+    vm.uploader.onCompleteAll = function(){
+      console.log("Uploaded!");
+      toastr.success("File uploaded!","Success");
+      vm.document = {};
     };
 
     vm.categories = [{'title':'All documents', 'active': 'active'}, {'title':'Finance', 'active':''}, {'title':'HR','active':''}, {'title':'OH&S', 'active':''}];

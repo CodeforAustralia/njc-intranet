@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var multer = require('multer');
+var path = require('path');
 var Documents = require('../models/documents');
 
 var uploader = multer({dest: './uploads'});
@@ -9,16 +10,9 @@ var uploader = multer({dest: './uploads'});
 // handle the file upload, return an id object that can be used to associate the file with a document
 router.post('/', uploader.single('file'), function(req, res, next) {
   // handle a single file upload
-  console.log("Uploading a file");
-  console.log(req.file);
-  console.log(req.param);
-  console.log(req.body);
-  // get the file path
-
   // move the file to proper storage
-  var file_path = "";
-  var file_ext = "";
-
+  var filepath = req.file.path;
+  var fileext = path.extname(req.file.originalname);
   // create the database entry
   var model = req.body; // get the post fields submitted
 
@@ -29,21 +23,19 @@ router.post('/', uploader.single('file'), function(req, res, next) {
       category: model.category,
       topic: model.topic,
     },
-    revision: {path: file_path},
-    extension: file_ext
+    revision: {path: filepath},
+    extension: fileext
   });
 
   doc.save(function(err, document){
-    console.log(err);
-    if (err) throw new Error(err);
-
-
-    console.log("Saved the new file");
-    console.log(document);
+    if (err) return res.json(err);
   });
 
+  console.log("SAVED");
+
   // delete uploaded file
-  res.send("Done");
+  res.json(doc);
+  //res.send(doc);
 });
 
 router.patch('/', function(req, res, next) {

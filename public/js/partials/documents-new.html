@@ -7,12 +7,12 @@
   <div class="row">
     <form method="post" enctype="multipart/form-data" class="col-xs-6" ng-submit="vm.submit()">
       <formly-form model="vm.document" fields="vm.fields">
-        <input type="file" nv-file-select uploader="vm.uploader" filters="{doc|docx|pdf|ppt|txt}"/><br/>
-        <ul>
-            <li ng-repeat="item in vm.uploader.queue">
-                Name: <span ng-bind="item.file.name"></span>
-            </li>
-        </ul>
+        <div class="form-group">
+          <input type="file" nv-file-select uploader="vm.uploader" filters="{doc|docx|pdf|ppt|txt}"/><br/>
+        </div>
+        <!--<div class="form-group" ng-repeat="item in vm.uploader.queue">
+          File to upload: <span ng-bind="item.file.name"></span>
+        </div>-->
         <button class="btn btn-primary" type="submit">
           <span class="fa fa-save"></span>&nbsp;Add document
         </button>
