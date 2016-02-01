@@ -10,10 +10,19 @@
     $log.log($scope);
     var vm = this;
 
-    $scope.uploader = new FileUploader({
-      url: "/uploads"
+    vm.uploader = new FileUploader({
+      url: "/uploads",
+      formData: []
     });
 
+    vm.uploader.onBeforeUploadItem = function(item){
+      item.formData.push({
+        title: vm.document.title,
+        description: vm.document.description,
+        topic: vm.document.topics.topic,
+        category: vm.document.topics.category,
+      });
+    };
 
     vm.categories = [{'title':'All documents', 'active': 'active'}, {'title':'Finance', 'active':''}, {'title':'HR','active':''}, {'title':'OH&S', 'active':''}];
     vm.document = { title: "", description: "", topics: "" };
@@ -84,7 +93,8 @@
       // submit the form
       $log.log("Submitting the form");
       $log.log(vm.document);
-      $log.log($scope.uploader);
+      vm.uploader.uploadAll();
+      $log.log(vm.uploader);
     };
 
     function init(){

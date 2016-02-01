@@ -36,6 +36,7 @@ performance/temp*.html
 *~
 *.swp
 angular.js.tmproj
+uploads/
 node_modules/
 bower_components/
 angular.xcodeproj

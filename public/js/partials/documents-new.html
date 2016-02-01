@@ -7,9 +7,9 @@
   <div class="row">
     <form method="post" enctype="multipart/form-data" class="col-xs-6" ng-submit="vm.submit()">
       <formly-form model="vm.document" fields="vm.fields">
-        <input type="file" nv-file-select uploader="uploader"/><br/>
+        <input type="file" nv-file-select uploader="vm.uploader" filters="{doc|docx|pdf|ppt|txt}"/><br/>
         <ul>
-            <li ng-repeat="item in uploader.queue">
+            <li ng-repeat="item in vm.uploader.queue">
                 Name: <span ng-bind="item.file.name"></span>
             </li>
         </ul>
