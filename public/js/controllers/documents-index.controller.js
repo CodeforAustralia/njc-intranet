@@ -6,11 +6,11 @@
     .controller('DocumentsIndexController', DocumentsIndexController);
 
   /*@ngInject*/
-  function DocumentsIndexController($scope, $log, $rootScope, moment, documents){
+  function DocumentsIndexController($scope, $log, $rootScope, moment, documentList){
     $log.log($scope);
 
     var vm = this;
-    $log.log(documents);
+    $log.log(documentList);
 
     vm.categories = [{'title':'All documents', 'active': 'active'}, {'title':'Finance', 'active':''}, {'title':'HR','active':''}, {'title':'OH&S', 'active':''}];
     vm.content = [

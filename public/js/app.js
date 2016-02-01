@@ -5,8 +5,8 @@
   angular.module('njcIntranetApp')
     .config(function($urlRouterProvider){
       // route the default state to the app home
-      $urlRouterProvider.when('', '/home');
-      $urlRouterProvider.when('/', '/home');
+      $urlRouterProvider.when('', '/staff');
+      $urlRouterProvider.when('/', '/staff');
     })
     .config(function (CacheFactoryProvider) {
       angular.extend(CacheFactoryProvider.defaults, { maxAge: 15 * 60 * 1000 });
@@ -46,6 +46,24 @@
 
       }
   	})
+    .state('staff', {
+      abstract: true,
+      template: '<ui-view/>',
+      resolve: {
+
+      }
+  	})
+    .state('staff.index', {
+  		url: '/staff',
+  		templateUrl: 'js/partials/staff-index.html',
+  		controller: 'StaffIndexController',
+      controllerAs: 'vm',
+      resolve: {
+        staffList: function(StaffService){
+          return StaffService.all();
+        }
+      }
+  	})
     .state('documents', {
       abstract: true,
       template: '<ui-view/>',
@@ -59,7 +77,7 @@
   		controller: 'DocumentsIndexController',
       controllerAs: 'vm',
       resolve: {
-        documents: function(DocumentService){
+        documentList: function(DocumentService){
           return DocumentService.all();
         }
       }

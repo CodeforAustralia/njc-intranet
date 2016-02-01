@@ -8,6 +8,7 @@ var mongoose = require('mongoose');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var documents = require('./routes/documents');
+var staff = require('./routes/staff');
 var uploads = require('./routes/uploads');
 
 var app = express();
@@ -36,6 +37,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/staff', staff);
 app.use('/documents', documents);
 app.use('/uploads', uploads);
 
