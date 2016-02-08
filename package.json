@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "mongod & node ./bin/www",
+    "start": "mongod & PORT=4000 nodemon ./bin/www",
     "postinstall": "bower cache clean && bower install"
   },
   "dependencies": {
