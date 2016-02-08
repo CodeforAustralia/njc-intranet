@@ -12,7 +12,6 @@ var staff = require('./routes/staff');
 var uploads = require('./routes/uploads');
 
 var app = express();
-
 // console message colours
 var chalk = require('chalk'); // colour our output
 var error = chalk.bold.bgRed;

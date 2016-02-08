@@ -5,7 +5,7 @@
   "scripts": {
     "start": "mongod & PORT=4000 nodemon ./bin/www",
     "postinstall": "bower cache clean && bower install"
-  },
+  },  
   "dependencies": {
     "body-parser": "~1.12.4",
     "bower": "^1.7.2",
