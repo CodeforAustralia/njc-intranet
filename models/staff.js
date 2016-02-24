@@ -2,9 +2,16 @@
 var mongoose = require('mongoose');
 
 var StaffSchema = mongoose.Schema({
-  name: {
-    first: String,
-    last: String
+  name: String,
+  contact: {
+    email: String,
+    phone: Number,
+    mobile: Number,
+    ext: String,
+  },
+  organisation: {
+    team: String,
+    role: String
   },
   status: {
     in: {type: Boolean, default: false},

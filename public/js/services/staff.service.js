@@ -10,6 +10,9 @@
       all: function(){
         $log.log("Getting all the staff");
         return $http.get("/staff");
+      },
+      create: function(staff){
+        return $http.post("/staff", staff);
       }
     };
   }
