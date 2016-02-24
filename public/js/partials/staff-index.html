@@ -1,4 +1,4 @@
-<main class="page documents container" id="documents-index">
+<main class="page staff container" id="staff-index">
   <div class="row">
     <div class="col-xs-12">
       <h2>Staff</h2>
@@ -10,8 +10,8 @@
   <div class="row">
     <div class="col-xs-9">
       <ul class="filter-tab">
-        <li class="filter-tab-item" ng-repeat="category in vm.categories">
-          <a class="{{ category.active }}">{{ category.title }}</a>
+        <li class="filter-tab-item" ng-repeat="team in vm.teams">
+          <a class="{{ category.active }}">{{ team.title }}</a>
         </li>
       </ul>
     </div>
@@ -21,18 +21,11 @@
       </button>
     </div>
   </div>
-  <div class="row documents-listing">
-    <div class="col-xs-12 col-sm-4 document-group" ng-repeat="item in vm.content">
-      <div class="document-group-content">
-        <h3>{{ item.title }}</h3>
-        <ul class="document-group-list">
-          <li ng-repeat="doc in item.documents">
-            <span class="fa fa-rocket">{{ doc.type }}</span>
-            <a href="{{ doc.link }}">{{ doc.title }}</a><br/>
-            <span>{{ doc.summary }}</span>
-          </li>
-        </ul>
-      </div>
+  <div class="row staff-listing">
+    <div class="col-xs-12 staff-member" ng-repeat="staff_member in vm.staff">
+      <h3 class="staff-member-name">{{ staff_member.name }}</h3>
+      <span class="staff-member-role">{{ staff_member.organisation.role }}</span>
+      <span class="staff-member-status">{{ staff_member.status.in }}</span>
     </div>
   </div>
 </main>
