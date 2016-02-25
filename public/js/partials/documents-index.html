@@ -6,11 +6,7 @@
   </div>
   <div class="row">
     <div class="col-xs-9">
-      <ul class="filter-tab">
-        <li class="filter-tab-item" ng-repeat="category in vm.categories">
-          <a class="{{ category.active }}">{{ category.title }}</a>
-        </li>
-      </ul>
+      <filter-tabs tabs=vm.categories></filter-tabs>
     </div>
     <div class="col-xs-3 text-right">
       <button class="btn btn-primary" ui-sref="documents.new">

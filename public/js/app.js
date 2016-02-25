@@ -64,6 +64,14 @@
         }
       }
   	})
+    .state('staff.new', {
+  		url: '/staff/new',
+  		templateUrl: 'js/partials/staff-new.html',
+  		controller: 'StaffNewController',
+      controllerAs: 'vm',
+      resolve: {
+      }
+  	})
     .state('documents', {
       abstract: true,
       template: '<ui-view/>',

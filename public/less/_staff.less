@@ -1,0 +1,49 @@
+.staff {}
+
+.staff-listing {
+  .staff-member {
+    padding:1%;
+    margin:1% 1.5%;
+    width:97%;
+    background:white;
+  }
+
+  .staff-member-avatar {
+    padding:1%;
+    width:5%;
+    float:left;
+    margin-right:1em;
+  }
+
+  .staff-member-details {
+    float:left;
+    width:75%;
+    .staff-member-details-name {
+      margin-top:0.5;
+    }
+  }
+
+  .staff-member-status {
+    float:right;
+    text-align:right;
+    width:15%;
+
+    .staff-member-status-text {
+      margin-top:1.5em;
+      display:inline-block;
+    }
+
+    .staff-member-status-out,
+    .staff-member-status-in {
+      display:inline-block;
+      width:2em;
+      height:2em;
+      border-radius:50%;
+      margin:1em;
+      float:right;
+    }
+
+    .staff-member-status-in {background:@green;}
+    .staff-member-status-out {background:@red;}
+  }
+}

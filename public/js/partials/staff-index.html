@@ -1,37 +1,38 @@
-<main class="page documents container" id="documents-index">
+<main class="page staff container" id="staff-index">
   <div class="row">
     <div class="col-xs-12">
       <h2>Staff</h2>
     </div>
   </div>
   <div class="row duty-worker">
-    
+
   </div>
   <div class="row">
     <div class="col-xs-9">
-      <ul class="filter-tab">
-        <li class="filter-tab-item" ng-repeat="category in vm.categories">
-          <a class="{{ category.active }}">{{ category.title }}</a>
-        </li>
-      </ul>
+      <filter-tabs tabs=vm.teams></filter-tabs>
     </div>
     <div class="col-xs-3 text-right">
-      <button class="btn btn-primary" ui-sref="documents.new">
-        <span class="fa fa-upload"></span>&nbsp;Add new document
+      <button class="btn btn-primary" ui-sref="staff.new">
+        <span class="fa fa-upload"></span>&nbsp;Add staff member
       </button>
     </div>
   </div>
-  <div class="row documents-listing">
-    <div class="col-xs-12 col-sm-4 document-group" ng-repeat="item in vm.content">
-      <div class="document-group-content">
-        <h3>{{ item.title }}</h3>
-        <ul class="document-group-list">
-          <li ng-repeat="doc in item.documents">
-            <span class="fa fa-rocket">{{ doc.type }}</span>
-            <a href="{{ doc.link }}">{{ doc.title }}</a><br/>
-            <span>{{ doc.summary }}</span>
-          </li>
-        </ul>
+  <div class="row staff-listing">
+    <div class="col-xs-12 staff-member" ng-repeat="staff_member in vm.staff">
+      <div class="staff-member-avatar">
+        <span class="fa fa-user fa-3x"></span>
+      </div>
+      <div class="staff-member-details">
+        <h3 class="staff-member-details-name">{{ staff_member.name }}</h3>
+        <span class="staff-member-details-role">{{ staff_member.organisation.role }}</span>
+      </div>
+      <div class="staff-member-status" ng-if="staff_member.status.in">
+        <span class="staff-member-status-text">Currently in</span>
+        &nbsp;<span class="staff-member-status-in"></span>
+      </div>
+      <div class="staff-member-status" ng-if="!staff_member.status.in">
+        <span class="staff-member-status-text">Currently out</span>
+        &nbsp;<span class="staff-member-status-out"></span>
       </div>
     </div>
   </div>
