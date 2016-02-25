@@ -23,9 +23,16 @@
   </div>
   <div class="row staff-listing">
     <div class="col-xs-12 staff-member" ng-repeat="staff_member in vm.staff">
-      <h3 class="staff-member-name">{{ staff_member.name }}</h3>
-      <span class="staff-member-role">{{ staff_member.organisation.role }}</span>
-      <span class="staff-member-status">{{ staff_member.status.in }}</span>
+      <div class="staff-member-avatar">
+        <span class="fa fa-user fa-3x"></span>
+      </div>
+      <div class="staff-member-details">
+        <h3 class="staff-member-details-name">{{ staff_member.name }}</h3>
+        <span class="staff-member-details-role">{{ staff_member.organisation.role }}</span>
+      </div>
+      <div class="staff-member-status">
+        <span class="staff-member-details-status-value">{{ staff_member.status.in }}</span>
+      </div>
     </div>
   </div>
 </main>
