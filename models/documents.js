@@ -9,11 +9,12 @@ var DocumentSchema = mongoose.Schema({
     category: String,
     topic: String,
   },
-  revision: {
+  revision: [{
     path: String,
     version: {type: Number, default: 1},
-    created_at: {type: Date, default: new Date()}
-  }
+    created_at: {type: Date, default: new Date()},
+    content_type: String
+  }]
 });
 
 var Documents = mongoose.model('Documents', DocumentSchema);

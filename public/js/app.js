@@ -90,6 +90,18 @@
         }
       }
   	})
+    .state('documents.view', {
+  		url: '/documents/:id',
+  		templateUrl: 'js/partials/documents-view.html',
+  		controller: 'DocumentsViewController',
+      controllerAs: 'vm',
+      resolve: {
+        documentItem: function($log, $stateParams, DocumentService){
+          $log.log($stateParams);
+          return DocumentService.get();
+        }
+      }
+  	})
     .state('documents.new', {
   		url: '/documents/new',
   		templateUrl: 'js/partials/documents-new.html',

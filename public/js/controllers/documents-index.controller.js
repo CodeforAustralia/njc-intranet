@@ -13,15 +13,22 @@
     $log.log(documentList);
 
     vm.categories = [{'title':'All documents', 'active': 'active'}, {'title':'Finance', 'active':''}, {'title':'HR','active':''}, {'title':'OH&S', 'active':''}];
-    vm.content = [
-      {'title':'Leave', 'documents': [{'title':'Leave form'}, {'title':'Leave procedures'}, {'title':'Leave policy'}]},
-      {'title':'Feedback', 'documents': [{'title':'Feedback form'}, {'title':'Feedback procedures'}, {'title':'Feedback policy'}]},
-      {'title':'Feedback', 'documents': [{'title':'Feedback form'}, {'title':'Feedback procedures'}, {'title':'Feedback policy'}]},
-      {'title':'Feedback', 'documents': [{'title':'Feedback form'}, {'title':'Feedback procedures'}, {'title':'Feedback policy'}]}
-    ];
 
     function init(){
       $log.log("Loaded the documents index controller");
+      $log.log("content");
+      vm.content = [];
+      // group by topic
+      var groups = _.groupBy(documentList.data, function(item){
+        return item.metadata.topic;
+      });
+
+      _.forEach(groups, function(group, key){
+        console.log(group);
+        console.log(key);
+        vm.content.push({"title": key, "documents": group});
+      });
+      $log.log(vm.content);
     }
 
     init();

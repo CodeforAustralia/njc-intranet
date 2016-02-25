@@ -23,7 +23,7 @@ router.post('/', uploader.single('file'), function(req, res, next) {
       category: model.category,
       topic: model.topic,
     },
-    revision: {path: filepath},
+    revision: [{path: filepath}],
     extension: fileext
   });
 

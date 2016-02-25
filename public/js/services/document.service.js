@@ -10,6 +10,10 @@
       all: function(){
         $log.log("Getting all the documents");
         return $http.get("/documents");
+      },
+      get: function(id){
+        // by default just return the latest version of a document
+        return $http.get("/documents");
       }
     };
   }

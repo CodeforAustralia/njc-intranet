@@ -9,7 +9,7 @@ router.get('/', function(req, res, next){
 
   // execute the query at a later time
   q.exec(function (err, docs) {
-    if (err) return handleError(err);
+    if (err) return res.json(err);
     res.json(docs);
   });
 });
