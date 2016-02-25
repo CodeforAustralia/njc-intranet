@@ -19,7 +19,7 @@
     float:left;
     width:75%;
     .staff-member-details-name {
-      margin-top:0;
+      margin-top:0.5;
     }
   }
 
@@ -27,5 +27,23 @@
     float:right;
     text-align:right;
     width:15%;
+
+    .staff-member-status-text {
+      margin-top:1.5em;
+      display:inline-block;
+    }
+
+    .staff-member-status-out,
+    .staff-member-status-in {
+      display:inline-block;
+      width:2em;
+      height:2em;
+      border-radius:50%;
+      margin:1em;
+      float:right;
+    }
+
+    .staff-member-status-in {background:@green;}
+    .staff-member-status-out {background:@red;}
   }
 }

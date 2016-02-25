@@ -9,11 +9,7 @@
   </div>
   <div class="row">
     <div class="col-xs-9">
-      <ul class="filter-tab">
-        <li class="filter-tab-item" ng-repeat="team in vm.teams">
-          <a class="{{ category.active }}">{{ team.title }}</a>
-        </li>
-      </ul>
+      <filter-tabs tabs=vm.teams></filter-tabs>
     </div>
     <div class="col-xs-3 text-right">
       <button class="btn btn-primary" ui-sref="staff.new">
@@ -30,8 +26,13 @@
         <h3 class="staff-member-details-name">{{ staff_member.name }}</h3>
         <span class="staff-member-details-role">{{ staff_member.organisation.role }}</span>
       </div>
-      <div class="staff-member-status">
-        <span class="staff-member-details-status-value">{{ staff_member.status.in }}</span>
+      <div class="staff-member-status" ng-if="staff_member.status.in">
+        <span class="staff-member-status-text">Currently in</span>
+        &nbsp;<span class="staff-member-status-in"></span>
+      </div>
+      <div class="staff-member-status" ng-if="!staff_member.status.in">
+        <span class="staff-member-status-text">Currently out</span>
+        &nbsp;<span class="staff-member-status-out"></span>
       </div>
     </div>
   </div>
