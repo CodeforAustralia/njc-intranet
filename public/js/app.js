@@ -98,7 +98,7 @@
       resolve: {
         documentItem: function($log, $stateParams, DocumentService){
           $log.log($stateParams);
-          return DocumentService.get();
+          return DocumentService.get($stateParams.id);
         }
       }
   	})

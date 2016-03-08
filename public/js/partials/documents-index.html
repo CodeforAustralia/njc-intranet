@@ -20,7 +20,7 @@
         <h3>{{ item.title }}</h3>
         <ul class="document-group-list">
           <li ng-repeat="doc in item.documents">
-            <span class="fa fa-rocket">{{ doc.type }}</span>
+            <span class="fa fa-file">{{ doc.type }}</span>
             <a href="/documents/{{ doc._id }}">{{ doc.title }}</a><br/> <!-- for now just open the link in a new window -->
             <span>{{ doc.summary }}</span>
           </li>
