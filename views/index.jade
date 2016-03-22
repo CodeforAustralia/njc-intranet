@@ -1,26 +1,32 @@
 extends layout
 
 block content
-  header.container
-    .row
-      .col-xs-6
-        h1 NJC
-      .col-xs-6.text-right.action
-        nav
-          ul
-            li
-              a(ui-sref="staff.index") Home
-            li
-              a(ui-sref="documents.index") Documents
-            //
+  header.global-header
+    .container
+      .row
+        .col-xs-12
+          a.header-logo
+            img(src="/intranet-static/imgs/njc-logo.png")
+            h1.header-title NJC
+          nav.header-nav
+            ul
               li
-                a(ui-sref="staff") Staff
-            li
-              a(ui-sref="logout") Logout
+                a(ui-sref="staff.index") Home
+              li
+                a(ui-sref="documents.index") Documents
+              //
+                li
+                  a(ui-sref="staff") Staff
+              li
+                a(ui-sref="logout") Logout
   //
     TODO: Add search functionality
     .row
       .col-xs-12
         input.form-control.search-field(type='text', placeholder='Search for a document, staff member or general information', ng-model='vm.search_filter', ng-change='vm.filter()')
-  div(ui-view).app
-  footer
+  main
+    .page(ui-view)
+  footer.global-footer
+    .container
+      .row
+        .col-xs-12

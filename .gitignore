@@ -1,3 +1,4 @@
+# General
 /bootstrap/compiled.php
 /vendor
 composer.phar
@@ -7,6 +8,8 @@ composer.phar
 Thumbs.db
 tests/_output/*
 
+# IDE files
+.tags*
 
 # Laravel
 /bootstrap/compiled.php

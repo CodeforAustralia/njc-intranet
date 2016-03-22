@@ -1,4 +1,4 @@
-<main class="page staff container" id="staff-index">
+<section class="page staff container" id="staff-index">
   <div class="row">
     <div class="col-xs-12">
       <h2>Staff</h2>
@@ -17,23 +17,23 @@
       </button>
     </div>
   </div>
-  <div class="row staff-listing">
-    <div class="col-xs-12 staff-member" ng-repeat="staff_member in vm.staff">
-      <div class="staff-member-avatar">
+  <div class="staff-listing">
+    <div class="row staff-member" ng-repeat="staff_member in vm.staff">
+      <div class="staff-member-avatar col-xs-3">
         <span class="fa fa-user fa-3x"></span>
       </div>
-      <div class="staff-member-details">
+      <div class="staff-member-details col-xs-6">
         <h3 class="staff-member-details-name">{{ staff_member.name }}</h3>
         <span class="staff-member-details-role">{{ staff_member.organisation.role }}</span>
       </div>
-      <div class="staff-member-status" ng-if="staff_member.status.in">
+      <div class="staff-member-status col-xs-3" ng-if="staff_member.status.in">
         <span class="staff-member-status-text">Currently in</span>
         &nbsp;<span class="staff-member-status-in"></span>
       </div>
-      <div class="staff-member-status" ng-if="!staff_member.status.in">
+      <div class="staff-member-status col-xs-3" ng-if="!staff_member.status.in">
         <span class="staff-member-status-text">Currently out</span>
         &nbsp;<span class="staff-member-status-out"></span>
       </div>
     </div>
   </div>
-</main>
+</section>
