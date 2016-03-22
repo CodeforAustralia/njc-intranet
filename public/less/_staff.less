@@ -1,16 +1,18 @@
 .staff {}
 
 .staff-listing {
+
+  table tbody  tr td {
+    padding-top:1.5em;
+  }
+
   .staff-member {
-    padding:1%;
-    margin:1% 1.5%;
-    width:97%;
     background:white;
+    margin-bottom:1em;
   }
 
   .staff-member-avatar {
-    padding:1%;
-    margin-right:1em;
+    padding:0.5em 0;
   }
 
   .staff-member-details {
@@ -19,25 +21,13 @@
     }
   }
 
+  .staff-member-status-in, .staff-member-status-out {padding-top:1em;}
+  .staff-member-status-in {color:@green;}
+  .staff-member-status-out {color:@red;}
+
   .staff-member-status {
     text-align:right;
 
-    .staff-member-status-text {
-      margin-top:1.5em;
-      display:inline-block;
-    }
-
-    .staff-member-status-out,
-    .staff-member-status-in {
-      display:inline-block;
-      width:2em;
-      height:2em;
-      border-radius:50%;
-      margin:1em;
-      float:right;
-    }
-
-    .staff-member-status-in {background:@green;}
-    .staff-member-status-out {background:@red;}
+    .staff-member-status-text {}
   }
 }
