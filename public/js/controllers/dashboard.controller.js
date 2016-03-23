@@ -3,10 +3,10 @@
   // App bootstrapping + DI
   /*@ngInject*/
   angular.module('njcIntranetApp')
-    .controller('HomeController', HomeController);
+    .controller('DashboardController', DashboardController);
 
   /*@ngInject*/
-  function HomeController($scope, $log, $rootScope, moment){
+  function DashboardController($scope, $log, $rootScope, moment){
 
     var vm = this;
 
@@ -22,7 +22,7 @@
 
     vm.duty_worker = {
       name: 'Ezekiel Kigbo',
-      email: 'hi@eakigbo.me',
+      email: 'ezekiel@codeforaustralia.org',
       phone: '0400111222'
     };
 

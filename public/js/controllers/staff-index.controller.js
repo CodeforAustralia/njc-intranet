@@ -13,7 +13,12 @@
 
     vm.staff = staffList.data;
     vm.duty_worker = findDutyWorker(vm.staff);
-    vm.teams = [{'title':'All staff', 'active': 'active'}, {'title':'Client services', 'active':''}, {'title':'Information team', 'active':''}, {'title':'Project innovation team','active':''}];
+    vm.teams = [
+      {'label':'All staff', 'value':'', 'active': 'active'},
+      {'label':'Client services', 'value':'Client services', 'active':''},
+      {'label':'Information team', 'value':'Information team', 'active':''},
+      {'label':'Project innovation team','value':'Project innovation team','active':''}
+    ];
 
     function init(){
       $log.log("Loaded the staff index controller");

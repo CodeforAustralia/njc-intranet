@@ -8,7 +8,7 @@
   </div>
   <div class="row">
     <div class="col-xs-9">
-      <filter-tabs tabs=vm.teams></filter-tabs>
+      <filter-tabs tabs="vm.teams" active="vm.activeTab" default=""></filter-tabs>
     </div>
     <div class="col-xs-3 text-right">
       <button class="btn btn-primary" ui-sref="staff.new">
@@ -18,42 +18,18 @@
   </div>
   <div class="staff-listing">
     <table class="table table-condensed">
-      <!--<thead>
-        <tr>
-          <th>&nbsp;</th>
-          <th>Staff Member</th>
-          <th>Role</th>
-          <th>Team</th>
-          <th>Status</th>
-        </tr>
-      </thead>-->
       <tbody>
-        <tr class="staff-member" ng-repeat="staff_member in vm.staff">
+        <tr class="staff-member" ng-repeat="staff_member in vm.staff | filter:vm.activeTab">
           <td class="staff-member-avatar text-center"><span class="fa fa-user fa-3x"></span></td>
           <td class="staff-member-details-name">{{ staff_member.name }}</td>
           <td class="staff-member-details-role">{{ staff_member.organisation.role }}</td>
           <td class="staff-member-details-team">{{ staff_member.organisation.team }}</td>
           <td class="staff-member-status" ng-if="staff_member.status.in">Currently in</td>
           <td class="staff-member-status-in" ng-if="staff_member.status.in"><span class="fa fa-circle fa-2x"></span></td>
-          <td class="staff-member-status" ng-if="!staff_member.status.in">Currently out</td>
-          <td class="staff-member-status-out" ng-if="!staff_member.status.in"><span class="fa fa-circle fa-2x"></span></td>
+          <td class="staff-member-status text-center" ng-if="!staff_member.status.in">Currently out</td>
+          <td class="staff-member-status-out text-center" ng-if="!staff_member.status.in"><span class="fa fa-circle fa-2x"></span></td>
         </tr>
       </tbody>
     </table>
-      <!--<div class="staff-member-avatar col-xs-2 text-center">
-        <span class="fa fa-user fa-3x"></span>
-      </div>
-      <div class="staff-member-details col-xs-7">
-        <h3 class="staff-member-details-name">{{ staff_member.name }}</h3>
-        <span class="staff-member-details-role">{{ staff_member.organisation.role }}</span>
-      </div>
-      <div class="staff-member-status col-xs-3" ng-if="staff_member.status.in">
-        <span class="staff-member-status-text">Currently in</span>
-        &nbsp;<span class="staff-member-status-in"></span>
-      </div>
-      <div class="staff-member-status col-xs-3" ng-if="!staff_member.status.in">
-        <span class="staff-member-status-text col-xs-8">Currently out</span>
-        &nbsp;<span class="staff-member-status-out col-xs-4"></span>
-      </div>-->
   </div>
 </section>

@@ -38,9 +38,9 @@
       }
   	})*/
     .state('home', {
-  		url: '/home',
-  		templateUrl: 'js/partials/home.html',
-  		controller: 'HomeController',
+  		url: '/dashboard',
+  		templateUrl: 'js/partials/dashboard.html',
+  		controller: 'DashboardController',
       controllerAs: 'vm',
       resolve: {
 

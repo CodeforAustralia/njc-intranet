@@ -6,7 +6,7 @@
   </div>
   <div class="row">
     <div class="col-xs-9">
-      <filter-tabs tabs=vm.categories></filter-tabs>
+      <filter-tabs tabs="vm.categories" active="vm.activeTab" default=""></filter-tabs>
     </div>
     <div class="col-xs-3 text-right">
       <button class="btn btn-primary" ui-sref="documents.new">
@@ -15,7 +15,7 @@
     </div>
   </div>
   <div class="row documents-listing">
-    <div class="col-xs-12 col-sm-4 document-group" ng-repeat="item in vm.content">
+    <div class="col-xs-12 col-sm-4 document-group" ng-repeat="item in vm.content | filter:vm.activeTab">
       <div class="document-group-content">
         <h3>{{ item.title }}</h3>
         <ul class="document-group-list">

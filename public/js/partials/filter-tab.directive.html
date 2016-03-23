@@ -1,5 +1,5 @@
 <ul class="filter-tab">
   <li class="filter-tab-item" ng-repeat="tab in tabs">
-    <a class="{{ tab.active }}">{{ tab.title }}</a>
+    <a class="{{ tab.active }}" ng-click="updateActiveTab(this.tab)">{{ tab.label }}</a>
   </li>
 </ul>
