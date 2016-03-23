@@ -20,6 +20,18 @@
       {'label':'OH&S', 'value':'OH&S','active':''}
     ];
 
+    // move this to a service
+    vm.topics = [
+      {topic: "Client feedback", category: "HR"},
+      {topic: "Leave", category: "HR"},
+      {topic: "Workplace functions", category: "HR"},
+      {topic: "Aggresive clients", category: "OH&S"},
+      {topic: "Chemicals", category: "OH&S"},
+      {topic: "Emergencies", category: "OH&S"},
+      {topic: "First aid", category: "OH&S"},
+      {topic: "Risk assessment", category: "OH&S"},
+    ];
+
     function init(){
       $log.log("Loaded the documents index controller");
       $log.log("content");
@@ -30,10 +42,15 @@
       });
 
       _.forEach(groups, function(group, key){
-        console.log(group);
-        console.log(key);
-        vm.content.push({"title": key, "documents": group});
+        $log.log(group);
+        $log.log(key);
+        // extract the category
+        var c = _.find(vm.topics, {'topic':key});
+        $log.log(c);
+        vm.content.push({"title": key, "documents": group, "category": c.category});
       });
+
+      $log.log("Cleaned up");
       $log.log(vm.content);
     }
 
