@@ -6,12 +6,20 @@
     .controller('StaffNewController', StaffNewController);
 
   /*@ngInject*/
-  function StaffNewController($scope, $log, $rootScope, moment, toastr, StaffService){
+  function StaffNewController($scope, $log, $rootScope, moment, toastr, StaffService, Teams){
     $log.log($scope);
     var vm = this;
 
     vm.model = {};
-    vm.teams = [{name: "Information team", value: "Information team"}, {name: "Client services", value: "Client services"}, {name: "Project innovation team", value: "Project innovation team"}];
+    //vm.teams = [{name: "Information team", value: "Information team"}, {name: "Client services", value: "Client services"}, {name: "Project innovation team", value: "Project innovation team"}];
+    vm.teams = [];
+    _.each(Teams.data, function(team, key){
+      if (team.value !== '')
+        vm.teams.push({name: team.label, value: team.value});
+    });
+
+    $log.log("TEAMS");
+    $log.log(vm.teams);
     vm.fields = [
       {
         key: 'name',

@@ -9,6 +9,8 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var documents = require('./routes/documents');
 var staff = require('./routes/staff');
+var topics = require('./routes/topics');
+var categories = require('./routes/categories');
 var uploads = require('./routes/uploads');
 
 var app = express();
@@ -39,8 +41,10 @@ app.use('/intranet-static', express.static('public'));
 
 app.use('/', routes);
 app.use('/users', users);
-app.use('/staff', staff);
-app.use('/documents', documents);
+app.use('/api/staff', staff);
+app.use('/api/documents', documents);
+app.use('/api/topics', topics);
+app.use('/api/categories', categories);
 app.use('/uploads', uploads);
 
 // catch 404 and forward to error handler

@@ -50,7 +50,9 @@
       abstract: true,
       template: '<ui-view/>',
       resolve: {
-
+        Teams: function(TeamService){
+          return TeamService.all();
+        }
       }
   	})
     .state('staff.index', {
@@ -76,7 +78,12 @@
       abstract: true,
       template: '<ui-view/>',
       resolve: {
-
+        Categories: function(CategoryService){
+          return CategoryService.all();
+        },
+        Topics: function(TopicService){
+          return TopicService.all();
+        }
       }
   	})
     .state('documents.index', {

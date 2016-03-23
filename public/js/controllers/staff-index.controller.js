@@ -6,19 +6,14 @@
     .controller('StaffIndexController', StaffIndexController);
 
   /*@ngInject*/
-  function StaffIndexController($scope, $log, $rootScope, moment, staffList){
+  function StaffIndexController($scope, $log, $rootScope, moment, staffList, Teams){
     $log.log($scope);
 
     var vm = this;
 
     vm.staff = staffList.data;
     vm.duty_worker = findDutyWorker(vm.staff);
-    vm.teams = [
-      {'label':'All staff', 'value':'', 'active': 'active'},
-      {'label':'Client services', 'value':'Client services', 'active':''},
-      {'label':'Information team', 'value':'Information team', 'active':''},
-      {'label':'Project innovation team','value':'Project innovation team','active':''}
-    ];
+    vm.teams = Teams.data;
 
     function init(){
       $log.log("Loaded the staff index controller");

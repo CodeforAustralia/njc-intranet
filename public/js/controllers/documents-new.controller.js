@@ -6,7 +6,7 @@
     .controller('DocumentsNewController', DocumentsNewController);
 
   /*@ngInject*/
-  function DocumentsNewController($scope, $log, $rootScope, moment, FileUploader, toastr){
+  function DocumentsNewController($scope, $log, $rootScope, moment, FileUploader, toastr, Categories, Topics){
     $log.log($scope);
     var vm = this;
 
@@ -36,7 +36,8 @@
       vm.document = {};
     };
 
-    vm.categories = [{'title':'All documents', 'active': 'active'}, {'title':'Finance', 'active':''}, {'title':'HR','active':''}, {'title':'OH&S', 'active':''}];
+    vm.categories = Categories.data;
+    vm.topics = Topics.data;
     vm.document = { title: "", description: "", topics: "" };
 
     vm.fields = [
@@ -86,16 +87,7 @@
           label: 'Select a topic area',
           placeholder: 'Select a topic area',
           required: true,
-          options: [
-            {topic: "Client feedback", category: "HR"},
-            {topic: "Leave", category: "HR"},
-            {topic: "Workplace functions", category: "HR"},
-            {topic: "Aggresive clients", category: "OH&S"},
-            {topic: "Chemicals", category: "OH&S"},
-            {topic: "Emergencies", category: "OH&S"},
-            {topic: "First aid", category: "OH&S"},
-            {topic: "Risk assessment", category: "OH&S"},
-          ],
+          options: vm.topics,
           ngOptions: 'option as option.topic group by option.category for option in to.options'
         }
       }
