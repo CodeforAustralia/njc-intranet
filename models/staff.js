@@ -13,6 +13,13 @@ var StaffSchema = mongoose.Schema({
     team: String,
     role: String
   },
+  work_schedule: {
+    'monday':false,
+    'tuesday':false,
+    'wednesday':false,
+    'thursday':false,
+    'friday':false,
+  },
   status: {
     in: {type: Boolean, default: false},
     duty_worker: {type: Boolean, default: false}

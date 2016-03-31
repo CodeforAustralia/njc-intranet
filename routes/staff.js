@@ -5,7 +5,7 @@ var Staff = require('../models/staff');
 
 /* GET all the staff */
 router.get('/', function(req, res, next){
-  var q = Staff.find();
+  var q = Staff.find().sort('name');
 
   // execute the query at a later time
   q.exec(function (err, docs) {
@@ -37,6 +37,11 @@ router.post('/', function(req, res, next){
     if (err) return res.json(err);
     res.json(staff);
   });
+
+});
+
+/* PATCH /:id patch the model with the specified id */
+router.patch('/:id', function(req, res, next){
 
 });
 

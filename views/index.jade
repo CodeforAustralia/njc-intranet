@@ -1,13 +1,19 @@
 extends layout
 
 block content
+  .global-alert
+    .container
+      .row
+        p.col-xs-12
+          strong BETA&nbsp;
+          | - We are still testing this, please <a ui-sref="evaluation">report any issues</a> you encounter
   header.global-header
     .container
       .row
         .col-xs-12
           a.header-logo
             img(src="/intranet-static/imgs/njc-logo.png")
-            h1.header-title NJC
+            h1.header-title NJC Intranet
           nav.header-nav
             ul
               li

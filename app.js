@@ -12,6 +12,7 @@ var staff = require('./routes/staff');
 var topics = require('./routes/topics');
 var categories = require('./routes/categories');
 var uploads = require('./routes/uploads');
+var seeders = require('./routes/seeders');
 
 var app = express();
 // console message colours
@@ -46,6 +47,7 @@ app.use('/api/documents', documents);
 app.use('/api/topics', topics);
 app.use('/api/categories', categories);
 app.use('/uploads', uploads);
+app.use('/seeders', seeders);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
