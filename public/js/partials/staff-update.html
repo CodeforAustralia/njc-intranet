@@ -1,0 +1,37 @@
+<section ng-cloak class="page update-staff container" id="staff-update">
+  <div class="row">
+    <div class="col-xs-12">
+      <button class="btn btn-secondary" ui-sref="staff.index">
+        <span class="fa fa-home"></span>&nbsp;Return home
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>In/Out for {{ vm.staff.name }}</h2>
+    </div>
+  </div>
+  <div class="row">
+    <form method="post" enctype="multipart/form-data" class="col-xs-6" ng-submit="vm.updateStatus()">
+      <formly-form model="vm.model.status" fields="vm.fields.status">
+        <button class="btn btn-primary" type="submit">
+          <span class="fa fa-save"></span>&nbsp;Update {{ vm.staff.name }}'s status
+        </button>
+      </formly-form>
+    </form>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>Details {{ vm.staff.name }}</h2>
+    </div>
+  </div>
+  <div class="row">
+    <form method="post" enctype="multipart/form-data" class="col-xs-6" ng-submit="vm.updateDetails()">
+      <formly-form model="vm.model.details" fields="vm.fields.details">
+        <button class="btn btn-primary" type="submit">
+          <span class="fa fa-save"></span>&nbsp;Update details
+        </button>
+      </formly-form>
+    </form>
+  </div>
+</section>

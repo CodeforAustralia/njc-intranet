@@ -5,8 +5,8 @@ var StaffSchema = mongoose.Schema({
   name: String,
   contact: {
     email: String,
-    phone: Number,
-    mobile: Number,
+    phone: {type: Number, default: ""},
+    mobile: {type: Number, default: ""},
     ext: String,
   },
   organisation: {

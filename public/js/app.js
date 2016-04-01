@@ -74,6 +74,17 @@
       resolve: {
       }
   	})
+    .state('staff.update', {
+  		url: '/staff/:id',
+  		templateUrl: 'js/partials/staff-update.html',
+  		controller: 'StaffUpdateController',
+      controllerAs: 'vm',
+      resolve: {
+        StaffMember: function($stateParams, StaffService){
+          return StaffService.get($stateParams.id);
+        }
+      }
+  	})
     .state('documents', {
       abstract: true,
       template: '<ui-view/>',

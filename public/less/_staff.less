@@ -7,6 +7,7 @@
   }
 
   .staff-member {
+    position:relative;
     background:white;
     margin-bottom:1em;
   }
@@ -15,19 +16,23 @@
     padding:0.5em 0;
   }
 
-  .staff-member-details {
-    .staff-member-details-name {
-      margin-top:0.5;
-    }
+  .staff-member-details-staff span {
+    padding:0 0.5em;
   }
 
-  .staff-member-status-in, .staff-member-status-out {padding-top:1em;}
+  .staff-member-details-name {
+    margin-top:0.5em;
+  }
+
+  .staff-member-details-role {
+    font-size:small;
+  }
+
   .staff-member-status-in {color:@green;}
   .staff-member-status-out {color:@red;}
-
-  .staff-member-status {
-    text-align:right;
-
-    .staff-member-status-text {}
+  .staff-member-status-text {
+    color:@dark-grey;
+    text-transform: capitalize;;
   }
+
 }

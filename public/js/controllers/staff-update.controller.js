@@ -3,14 +3,34 @@
   // App bootstrapping + DI
   /*@ngInject*/
   angular.module('njcIntranetApp')
-    .controller('StaffNewController', StaffNewController);
+    .controller('StaffUpdateController', StaffUpdateController);
 
   /*@ngInject*/
-  function StaffNewController($scope, $log, $rootScope, moment, toastr, StaffService, Teams){
+  function StaffUpdateController($scope, $log, $rootScope, moment, toastr, StaffService, Teams, StaffMember){
     $log.log($scope);
     var vm = this;
 
-    vm.model = {};
+    $log.log("STAFF MEMBER");
+    $log.log(StaffMember);
+
+    vm.staff = StaffMember.data[0];
+
+    // make sure the contact / organistaion fields are present
+    vm.staff.contact = vm.staff.contact || {};
+    vm.staff.organisation = vm.staff.organisation || {};
+
+    vm.model = {
+      details: {
+        name: vm.staff.name,
+        email: vm.staff.contact.email,
+        role: vm.staff.organisation.role || "",
+        ext: vm.staff.contact.ext || "",
+        phone: vm.staff.contact.phone || "",
+        mobile: vm.staff.contact.mobile || "",
+        team: vm.staff.organisation.team || ""
+      },
+      status: vm.staff.status
+    };
     //vm.teams = [{name: "Information team", value: "Information team"}, {name: "Client services", value: "Client services"}, {name: "Project innovation team", value: "Project innovation team"}];
     vm.teams = [];
     _.each(Teams.data, function(team, key){
@@ -20,7 +40,27 @@
 
     $log.log("TEAMS");
     $log.log(vm.teams);
-    vm.fields = [
+    vm.fields = {};
+    vm.fields.status = [
+      {
+        key: 'in',
+        type: 'checkbox',
+        templateOptions: {
+          label: 'Currently in?',
+          required: true
+        }
+      },
+      {
+        key: 'duty_worker',
+        type: 'checkbox',
+        templateOptions: {
+          label: 'Is '+vm.staff.name+' the duty worker?',
+          required: true
+        }
+      },
+    ];
+
+    vm.fields.details = [
       {
         key: 'name',
         type: 'input',
@@ -87,14 +127,26 @@
       }
     ];
 
-    vm.submit = function(){
-      // submit the form
-      $log.log("Submitting the form");
-      StaffService.create(vm.model).then(function(){
-        toastr.success("New staff member created!","Success");
-        vm.model = {};
+    vm.updateStatus = function(){
+      $log.log("Update status");
+      $log.log(vm.model.status);
+      var model = _.extend(vm.model.details, vm.model.status);
+      StaffService.update(vm.staff._id, model).then(function(){
+        toastr.success("Updated status!","Success");
       }, function(){
-        toastr.error("There was an error creating the new staff member, try again","Error");
+        toastr.error("There was an error updating the status, please refresh and try again","Error");
+      });
+    };
+
+    vm.updateDetails = function(){
+      // submit the form
+      $log.log("Update details");
+      $log.log(vm.model.details);
+      var model = _.extend(vm.model.details, vm.model.status);
+      StaffService.update(vm.staff._id, model).then(function(){
+        toastr.success("Updated details!","Success");
+      }, function(){
+        toastr.error("There was an error updating the details, please refresh and try again","Error");
       });
     };
 

@@ -1,4 +1,5 @@
 var express = require('express');
+var _ = require('lodash');
 var router = express.Router();
 
 var Staff = require('../models/staff');
@@ -8,9 +9,21 @@ router.get('/', function(req, res, next){
   var q = Staff.find().sort('name');
 
   // execute the query at a later time
-  q.exec(function (err, docs) {
+  q.exec(function (err, staff) {
     if (err) return res.json(err);
-    res.json(docs);
+    res.json(staff);
+  });
+});
+
+/* GET a staff member by id */
+router.get('/:id', function(req, res, next){
+  var id = req.params.id;
+  var q = Staff.find({_id: id});
+
+  // execute the query at a later time
+  q.exec(function (err, staff) {
+    if (err) return res.json(err);
+    res.json(staff);
   });
 });
 
@@ -21,14 +34,14 @@ router.post('/', function(req, res, next){
   var staff = new Staff({
     name: model.name,
     contact: {
-      ext: model.ext,
-      email: model.email,
-      phone: model.phone,
-      mobile: model.mobile,
+      ext: model.ext || null,
+      email: model.email || null,
+      phone: model.phone || null,
+      mobile: model.mobile || null,
     },
     organisation: {
-      team: model.team,
-      role: model.role,
+      team: model.team || null,
+      role: model.role || null,
     }
   });
 
@@ -40,7 +53,40 @@ router.post('/', function(req, res, next){
 
 });
 
-/* PATCH /:id patch the model with the specified id */
+/* PUT /:id full update of the model with the specified id */
+router.put('/:id', function(req, res, next){
+  var id = req.params.id;
+  var model = req.body;
+
+  var staff = {
+    name: model.name,
+    contact: {
+      ext: model.ext,
+      email: model.email,
+      phone: model.phone || "",
+      mobile: model.mobile || "",
+    },
+    organisation: {
+      team: model.team,
+      role: model.role,
+    },
+    status: {
+      in: model.in,
+      duty_worker: model.duty_worker,
+    }
+  };
+
+  Staff.findByIdAndUpdate(id, {$set: staff}, function(err, data){
+    console.log(err);
+    console.log(staff);
+    console.log(data);
+    if (err) return res.json(err);
+    res.json(staff);
+  });
+
+});
+
+/* PATCH /:id partial update of the model with the specified id */
 router.patch('/:id', function(req, res, next){
 
 });
