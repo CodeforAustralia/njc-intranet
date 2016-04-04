@@ -5,8 +5,8 @@
   angular.module('njcIntranetApp')
     .config(function($urlRouterProvider){
       // route the default state to the app home
-      $urlRouterProvider.when('', '/staff');
-      $urlRouterProvider.when('/', '/staff');
+      $urlRouterProvider.when('', '/dashboard');
+      $urlRouterProvider.when('/', '/dashboard');
     })
     .config(function (CacheFactoryProvider) {
       angular.extend(CacheFactoryProvider.defaults, { maxAge: 15 * 60 * 1000 });
@@ -28,7 +28,7 @@
 
   function stateConfig($stateProvider){
     $stateProvider
-  	/*.state('login', { // state for showing all movies
+  	.state('login', { // state for showing all movies
   		url: '/',
   		templateUrl: 'js/partials/login.html',
   		controller: 'LoginController',
@@ -36,14 +36,16 @@
       resolve: {
 
       }
-  	})*/
-    .state('home', {
+  	})
+    .state('dashboard', {
   		url: '/dashboard',
   		templateUrl: 'js/partials/dashboard.html',
   		controller: 'DashboardController',
       controllerAs: 'vm',
       resolve: {
-
+        DutyWorker: function(StaffService){
+          return StaffService.dutyWorker();
+        }
       }
   	})
     .state('staff', {

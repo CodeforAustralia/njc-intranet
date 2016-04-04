@@ -19,6 +19,10 @@
       },
       update: function(id, staff){
         return $http.put("api/staff/" + id, staff);
+      },
+      dutyWorker: function(){
+        return $http
+                .get("api/staff?duty_worker=true");
       }
     };
   }

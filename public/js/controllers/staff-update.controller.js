@@ -47,7 +47,6 @@
         type: 'checkbox',
         templateOptions: {
           label: 'Currently in?',
-          required: true
         }
       },
       {
@@ -55,7 +54,6 @@
         type: 'checkbox',
         templateOptions: {
           label: 'Is '+vm.staff.name+' the duty worker?',
-          required: true
         }
       },
     ];

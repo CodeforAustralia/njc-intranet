@@ -17,14 +17,17 @@ block content
           nav.header-nav
             ul
               li
-                a(ui-sref="staff.index") Home
+                a(ui-sref="dashboard") Home
               li
                 a(ui-sref="documents.index") Documents
-              //
-                li
-                  a(ui-sref="staff") Staff
+              li
+                a(ui-sref="staff.index") Staff
               li
                 a(ui-sref="logout") Logout
+      .row.top-widget.notices-widget
+         .col-xs-12
+           njc-notices
+
   //
     TODO: Add search functionality
     .row

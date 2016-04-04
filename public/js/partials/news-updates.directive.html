@@ -1,0 +1,21 @@
+<div ng-cloak class="njc-news-updates">
+  <div class="news-updates-container njc-widget-container">
+    <div class="row news-updates-header">
+      <div class="col-xs-12">
+        <h2>News Updates</h2>
+      </div>
+    </div>
+    <div class="row news-updates-info njc-widget-info">
+      <div ng-repeat="news_item in news" class="col-xs-12 news-updates-content">
+        <h3 class="news-updates-content-posted">{{ news_item.posted | date: "mediumDate" }}</h3>
+        <p class="news-updates-content-subject">{{ news_item.subject }}</p>
+        <p class="news-updates-content-more-info">
+          <a href="{{ news_item.permalink }}">more details&hellip;</a>
+        </p>
+      </div>
+    </div>
+    <div class="news-updates-more">
+      <button class="btn btn-primary">View older updates</button>
+    </div>
+  </div>
+</div>

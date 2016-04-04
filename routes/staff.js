@@ -6,8 +6,10 @@ var Staff = require('../models/staff');
 
 /* GET all the staff */
 router.get('/', function(req, res, next){
-  var q = Staff.find().sort('name');
+  var params = {};
+  if (req.query.duty_worker) params['status.duty_worker'] = req.query.duty_worker;
 
+  var q = Staff.find(params).sort('name');
   // execute the query at a later time
   q.exec(function (err, staff) {
     if (err) return res.json(err);
@@ -57,6 +59,7 @@ router.post('/', function(req, res, next){
 router.put('/:id', function(req, res, next){
   var id = req.params.id;
   var model = req.body;
+  var curr_duty_worker = {};
 
   var staff = {
     name: model.name,
@@ -76,15 +79,40 @@ router.put('/:id', function(req, res, next){
     }
   };
 
+  // if updating the duty worker, unset the previous one
+  if (staff.status.duty_worker){
+    resetDutyWorker()
+    .then(function(data){
+      console.log(data);
+      updateById(id, staff, res);
+    })
+    .catch(function(err){
+      console.log("ERROR");
+      console.log(err);
+    });
+  }
+  else {
+    updateById(id, staff, res);
+  }
+});
+
+function updateById(id, staff, res){
+  console.log("Updating");
   Staff.findByIdAndUpdate(id, {$set: staff}, function(err, data){
-    console.log(err);
-    console.log(staff);
-    console.log(data);
     if (err) return res.json(err);
+
     res.json(staff);
   });
+}
 
-});
+function resetDutyWorker(){
+  return new Promise(function(resolve, reject){
+    Staff.update({'status.duty_worker': true}, {$set: {'status.duty_worker': false}}, {multi: true}, function(err, data){
+      if (err) return reject(err);
+      return resolve(data);
+    });
+  });
+}
 
 /* PATCH /:id partial update of the model with the specified id */
 router.patch('/:id', function(req, res, next){

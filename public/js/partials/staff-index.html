@@ -23,6 +23,7 @@
           <!--<th>&nbsp;</th>-->
           <th>Name / Role</th>
           <th>Team</th>
+          <th>Duty Worker</th>
           <th>In/Out</th>
           <th>Update</th>
         </tr>
@@ -35,6 +36,9 @@
             <span class="staff-member-details-role">{{ staff_member.organisation.role }}</span>
           </td>
           <td class="staff-member-details-team">{{ staff_member.organisation.team }}</td>
+          <td class="staff-member-details-duty-worker">
+            <span ng-if="staff_member.status.duty_worker" class="fa fa-check"></span>
+          </td>
           <td class="staff-member-status staff-member-status-in" ng-if="staff_member.status.in">
             <span class="staff-member-status-text">In</span>&nbsp;
             <span class="fa fa-circle"></span>

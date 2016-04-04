@@ -1,48 +1,16 @@
-<main ng-cloak class="page dash container" id="home">
-  <div class="row alert alert-danger component">
-    <div class="col-xs-12">
-      <p>This is an alert with a <span class="btn btn-cta">Call to action</span></p>
+<section ng-cloak class="page dashboard" id="dashboard">
+  <div class="row widgets">
+    <div class="col-sm-4 col-xs-12 vertical-center dashboard-widget update-in-out-status-widget">
+      <njc-update-in-out-status></njc-update-in-out-status>
+    </div>
+    <div class="col-sm-4 col-xs-12 vertical-center dashboard-widget duty-worker-widget">
+      <njc-duty-worker duty-worker="vm.duty_worker"></njc-duty-worker>
+    </div>
+    <div class="col-sm-4 col-xs-12 vertical-center dashboard-widget weather-widget">
+      <njc-weather weather="vm.weather"></njc-weather>
     </div>
   </div>
-  <div class="row status component">
-    <div class="col-xs-6">
-      <h2 class="status-content">You status is currently {{ vm.current_user.status }}</h2>
-    </div>
-    <div class="col-xs-6 text-right">
-      <span class="status-day">{{ vm.now.day_of_the_week }}</span><br/>
-      <span class="status-datetime">{{ vm.now.time }} | {{ vm.now.date }}</span>
-    </div>
+  <div class="row dashboard-widget news-updates-widget">
+    <njc-news-updates news="vm.news"></njc-news-updates>
   </div>
-  <div class="row duty-worker component">
-    <div class="col-xs-6">
-      <div class="duty-worker-avatar pull-left">
-        <img src="http://dummyimage.com/300" alt="{{ vm.duty_worker.name }}" />
-      </div>
-      <div class="duty-worker-name">
-        <p>Duty worker for today...<br/><span class="duty-worker-name-content">{{ vm.duty_worker.name }}</span></p>
-      </div>
-    </div>
-    <div class="col-xs-6 duty-worker-contact text-right">
-      <p>{{ vm.duty_worker.email }}<br/>{{ vm.duty_worker.phone }}</p>
-    </div>
-  </div>
-  <!--<div class="row updates component">
-    <div class="col-xs-6">
-      <h2>Announcements</h2>
-      <article ng-repeat="announcement in vm.announcements">
-        <h3>{{ announcement.title }}</h3>
-        <p>{{ announcement.summary }}</p>
-      </article>
-    </div>
-    <div class="col-xs-6">
-      <h2>New to NJC?</h2>
-      <p>Some links, tools and information to get you going.</p>
-      <ul>
-        <li>This</li>
-        <li>is</li>
-        <li>A</li>
-        <li>Link</li>
-      </ul>
-    </div>
-  </div>-->
-</main>
+</section>

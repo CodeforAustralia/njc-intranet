@@ -1,0 +1,19 @@
+<div ng-cloak class="njc-notices">
+  <div class="notices-container njc-widget-container">
+    <div class="notices-icon njc-widget-icon">
+      <p>
+        <span class="fa fa-clock-o"></span>
+        &nbsp; {{ clock | date:"medium"}}
+      </p>
+    </div>
+    <div ng-if="notices" class="notices-info njc-widget-info">
+      <div class="notices-info-content" ng-repeat="notice in notices">
+        <p>
+          <span class="fa fa-{{type}}"></span>
+          &nbsp;
+          <span class="notices-info-content-notice">{{ notice.notice }}</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
