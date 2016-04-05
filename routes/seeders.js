@@ -4,7 +4,7 @@ var fs = require('fs');
 var _ = require('lodash');
 var Staff = require('../models/staff');
 
-var StaffList = require('../models/seeds/staff-list.json');
+//var StaffList = require('../models/seeds/staff-list.json'); - path to staff seeder if needed
 
 /* GET /staff - Seed the staff db */
 router.get('/staff', function(req, res, next){
