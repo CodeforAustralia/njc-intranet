@@ -37,9 +37,22 @@
 
       }
   	})
-    .state('dashboard', {
+    .state('app', {
+      abstract: true,
+      views: {
+        "page": {
+          templateUrl: 'js/partials/dashboard.html'
+        },
+        "modal": { template: "" }
+      },
+    })
+    .state('app.dashboard', {
   		url: '/dashboard',
-  		templateUrl: 'js/partials/dashboard.html',
+      views: {
+        "page": {
+          templateUrl: 'js/partials/dashboard.html'
+        }
+      },
   		controller: 'DashboardController',
       controllerAs: 'vm',
       resolve: {
@@ -48,6 +61,34 @@
         }
       }
   	})
+    .state('app.modal', {
+      views: {
+        "modal": {
+          template: '<section ui-view="modal"></section>',
+          abstract: true
+        }
+      },
+    })
+    .state('app.modal.update-status', {
+  		//url: '/status',
+      onEnter: function($log, $stateParams, $state, $modal) {
+        $log.log("onEnter");
+        var myModal = $modal({
+          title: 'Update in/out status',
+          contentTemplate: 'js/partials/staff-update-status.html',
+      		controller: 'StaffStatusUpdateController',
+          controllerAs: 'vm',
+          show: true,
+          resolve: {
+            StaffList: function(StaffService){
+              return StaffService.all();
+            }
+          }
+        });
+      },
+      onExit: function($log, $state){
+      }
+    })
     .state('staff', {
       abstract: true,
       template: '<ui-view/>',
@@ -63,7 +104,7 @@
   		controller: 'StaffIndexController',
       controllerAs: 'vm',
       resolve: {
-        staffList: function(StaffService){
+        StaffList: function(StaffService){
           return StaffService.all();
         }
       }
