@@ -22,23 +22,45 @@
     })
     .config(stateConfig)
     .constant('_', window._)
-    .run(function($log, $rootScope, $location){
+    .run(function($log, $rootScope, $location, $state, AuthService){
       $log.log("Running the app");
+      $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+        if (toState.authenticate && !AuthService.isAuthenticated()){
+          // User isn’t authenticated
+          $state.transitionTo("auth.login");
+          event.preventDefault();
+        }
+      });
     });
 
   function stateConfig($stateProvider){
     $stateProvider
-  	.state('login', { // state for showing all movies
-  		url: '/',
+    .state('auth', {
+      abstract: true,
+      template: "<ui-view />"
+    })
+  	.state('auth.login', { // state for showing all movies
+  		url: '/login',
   		templateUrl: 'js/partials/login.html',
-  		controller: 'LoginController',
+  		controller: 'AuthController',
       controllerAs: 'vm',
+      resolve: {
+
+      }
+  	})
+    .state('auth.logout', { // state for showing all movies
+  		url: '/login',
+  		templateUrl: 'js/partials/logout.html',
+  		controller: 'AuthController',
+      controllerAs: 'vm',
+      authenticate : false,
       resolve: {
 
       }
   	})
     .state('app', {
       templateUrl: 'js/partials/layout.html',
+      authenticate : true,
       resolve: {
         Teams: function(TeamService){
           return TeamService.all();
@@ -47,6 +69,7 @@
     })
     .state('app.dashboard', {
   		url: '/dashboard',
+      authenticate : true,
       views: {
         "content": {
           templateUrl: 'js/partials/dashboard.html',
@@ -65,6 +88,7 @@
   	})
     .state('app.dashboard.modal-update-status', {
   		url: '/status',
+      authenticate : true,
       resolve: {
         StaffList: function(StaffService){
           return StaffService.all();
@@ -80,6 +104,7 @@
     })
     .state('app.staff', {
       abstract: true,
+      authenticate : true,
       views: {
         "content": {
           template: '<ui-view/>',
@@ -96,6 +121,7 @@
   		templateUrl: 'js/partials/staff-index.html',
   		controller: 'StaffIndexController',
       controllerAs: 'vm',
+      authenticate : true,
       resolve: {
         StaffList: function(StaffService){
           return StaffService.all();
@@ -107,6 +133,7 @@
   		templateUrl: 'js/partials/staff-new.html',
   		controller: 'StaffNewController',
       controllerAs: 'vm',
+      authenticate : true,
       resolve: {
       }
   	})
@@ -115,6 +142,7 @@
   		templateUrl: 'js/partials/staff-update.html',
   		controller: 'StaffUpdateController',
       controllerAs: 'vm',
+      authenticate : true,
       resolve: {
         StaffMember: function($stateParams, StaffService){
           return StaffService.get($stateParams.id);
@@ -123,6 +151,7 @@
   	})
     .state('app.documents', {
       abstract: true,
+      authenticate : true,
       views: {
         "content": {
           template: '<ui-view/>',
@@ -142,6 +171,7 @@
   		templateUrl: 'js/partials/documents-index.html',
   		controller: 'DocumentsIndexController',
       controllerAs: 'vm',
+      authenticate : true,
       resolve: {
         documentList: function(DocumentService){
           return DocumentService.all();
@@ -153,6 +183,7 @@
   		templateUrl: 'js/partials/documents-view.html',
   		controller: 'DocumentsViewController',
       controllerAs: 'vm',
+      authenticate : true,
       resolve: {
         documentItem: function($log, $stateParams, DocumentService){
           $log.log($stateParams);
@@ -165,6 +196,7 @@
   		templateUrl: 'js/partials/documents-new.html',
   		controller: 'DocumentsNewController',
       controllerAs: 'vm',
+      authenticate : true,
       resolve: {
 
       }

@@ -1,0 +1,13 @@
+<div id="alerts-container" class="container"></div>
+<div class="container">
+  <form class="data-form row" name="vm.form" novalidate ng-submit="vm.submit()">
+    <section class="col-xs-6">
+      <h2>Login</h2>
+      <formly-form model="vm.model" fields="vm.fields" form="vm.form">
+       <button type="submit" class="btn btn-primary" ng-disabled="vm.form.$invalid">
+         <span class="fa fa-user"></span>&nbsp;Login
+       </button>
+      </formly-form>
+    </section>
+  </form>
+</div>

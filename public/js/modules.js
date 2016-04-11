@@ -2,6 +2,7 @@
 
 angular.module('njcIntranetApp', [
   'ui.router',
+  'ngSanitize',
   'angular-cache',
   'mgcrea.ngStrap',
   'angularMoment',
