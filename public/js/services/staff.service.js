@@ -18,6 +18,8 @@
         return $http.post("api/staff", staff);
       },
       update: function(id, staff){
+        $log.log(id);
+        $log.log(staff);
         return $http.put("api/staff/" + id, staff);
       },
       dutyWorker: function(){

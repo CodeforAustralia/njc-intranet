@@ -1,6 +1,9 @@
 <section ng-cloak class="page update-staff-status" id="staff-update">
   <form method="post" enctype="multipart/form-data" ng-submit="vm.updateStatus()">
     <formly-form model="vm.model.status" fields="vm.fields.status">
+      <button class="btn btn-primary" type="submit">
+        <span class="fa fa-save"></span>&nbsp;Update status
+      </button>
     </formly-form>
   </form>
 </section>

@@ -38,67 +38,60 @@
       }
   	})
     .state('app', {
-      abstract: true,
-      views: {
-        "page": {
-          templateUrl: 'js/partials/dashboard.html'
-        },
-        "modal": { template: "" }
-      },
+      templateUrl: 'js/partials/layout.html',
+      resolve: {
+        Teams: function(TeamService){
+          return TeamService.all();
+        }
+      }
     })
     .state('app.dashboard', {
   		url: '/dashboard',
       views: {
-        "page": {
-          templateUrl: 'js/partials/dashboard.html'
+        "content": {
+          templateUrl: 'js/partials/dashboard.html',
+          controller: 'DashboardController',
+          controllerAs: 'vm',
+        },
+        "modal": {
+          template: ""
         }
       },
-  		controller: 'DashboardController',
-      controllerAs: 'vm',
       resolve: {
         DutyWorker: function(StaffService){
           return StaffService.dutyWorker();
         }
       }
   	})
-    .state('app.modal', {
-      views: {
-        "modal": {
-          template: '<section ui-view="modal"></section>',
-          abstract: true
+    .state('app.dashboard.modal-update-status', {
+  		url: '/status',
+      resolve: {
+        StaffList: function(StaffService){
+          return StaffService.all();
         }
       },
-    })
-    .state('app.modal.update-status', {
-  		//url: '/status',
-      onEnter: function($log, $stateParams, $state, $modal) {
-        $log.log("onEnter");
-        var myModal = $modal({
-          title: 'Update in/out status',
-          contentTemplate: 'js/partials/staff-update-status.html',
-      		controller: 'StaffStatusUpdateController',
+      views: {
+        "content": {},
+        "modal@app": {
+          controller: 'StaffUpdateModalController',
           controllerAs: 'vm',
-          show: true,
-          resolve: {
-            StaffList: function(StaffService){
-              return StaffService.all();
-            }
-          }
-        });
-      },
-      onExit: function($log, $state){
+        }
       }
     })
-    .state('staff', {
+    .state('app.staff', {
       abstract: true,
-      template: '<ui-view/>',
+      views: {
+        "content": {
+          template: '<ui-view/>',
+        }
+      },
       resolve: {
         Teams: function(TeamService){
           return TeamService.all();
         }
       }
   	})
-    .state('staff.index', {
+    .state('app.staff.index', {
   		url: '/staff',
   		templateUrl: 'js/partials/staff-index.html',
   		controller: 'StaffIndexController',
@@ -109,7 +102,7 @@
         }
       }
   	})
-    .state('staff.new', {
+    .state('app.staff.new', {
   		url: '/staff/new',
   		templateUrl: 'js/partials/staff-new.html',
   		controller: 'StaffNewController',
@@ -117,7 +110,7 @@
       resolve: {
       }
   	})
-    .state('staff.update', {
+    .state('app.staff.update', {
   		url: '/staff/:id',
   		templateUrl: 'js/partials/staff-update.html',
   		controller: 'StaffUpdateController',
@@ -128,9 +121,13 @@
         }
       }
   	})
-    .state('documents', {
+    .state('app.documents', {
       abstract: true,
-      template: '<ui-view/>',
+      views: {
+        "content": {
+          template: '<ui-view/>',
+        }
+      },
       resolve: {
         Categories: function(CategoryService){
           return CategoryService.all();
@@ -140,7 +137,7 @@
         }
       }
   	})
-    .state('documents.index', {
+    .state('app.documents.index', {
   		url: '/documents',
   		templateUrl: 'js/partials/documents-index.html',
   		controller: 'DocumentsIndexController',
@@ -151,7 +148,7 @@
         }
       }
   	})
-    .state('documents.view', {
+    .state('app.documents.view', {
   		url: '/documents/:id',
   		templateUrl: 'js/partials/documents-view.html',
   		controller: 'DocumentsViewController',
@@ -163,7 +160,7 @@
         }
       }
   	})
-    .state('documents.new', {
+    .state('app.documents.new', {
   		url: '/documents/new',
   		templateUrl: 'js/partials/documents-new.html',
   		controller: 'DocumentsNewController',

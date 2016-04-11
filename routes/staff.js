@@ -60,24 +60,37 @@ router.put('/:id', function(req, res, next){
   var id = req.params.id;
   var model = req.body;
   var curr_duty_worker = {};
+  var staff = {};
 
-  var staff = {
-    name: model.name,
-    contact: {
-      ext: model.ext,
-      email: model.email,
-      phone: model.phone || "",
-      mobile: model.mobile || "",
-    },
-    organisation: {
-      team: model.team,
-      role: model.role,
-    },
-    status: {
-      in: model.in,
-      duty_worker: model.duty_worker,
-    }
-  };
+  if (model.name && model.contact && model.organisation){
+    staff = {
+      name: model.name,
+      contact: {
+        ext: model.ext,
+        email: model.email,
+        phone: model.phone || "",
+        mobile: model.mobile || "",
+      },
+      organisation: {
+        team: model.team,
+        role: model.role,
+      },
+      status: {
+        in: model.in,
+        duty_worker: model.duty_worker,
+      }
+    };
+  }
+
+  if (model.status){
+    console.log("Status");
+    staff = {
+      status: {
+        in: model.status.in,
+        duty_worker: model.status.duty_worker,
+      }
+    };
+  }
 
   // if updating the duty worker, unset the previous one
   if (staff.status.duty_worker){
