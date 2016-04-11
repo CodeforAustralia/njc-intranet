@@ -67,6 +67,7 @@
       var model = vm.model.status;
       StaffService.update(vm.model.status._id, vm.model).then(function(){
         toastr.success("Updated status!","Success");
+        $scope.$emit('UPDATE_DUTY_WORKER');
       }, function(){
         toastr.error("There was an error updating the status, please refresh and try again","Error");
       });

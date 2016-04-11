@@ -18,6 +18,13 @@
         name: ""
       };
 
+      $rootScope.duty_worker = {};
+
+      $rootScope.$on('UPDATE_DUTY_WORKER', function(){
+        $log.log("Caught - UPDATE_DUTY_WORKER");
+        $rootScope.$broadcast('UPDATE_DUTY_WORKER');
+      });
+
       $log.log("AppController loading");
     })
     .config(stateConfig)
@@ -42,7 +49,7 @@
   	.state('auth.login', { // state for showing all movies
   		url: '/login',
   		templateUrl: 'js/partials/login.html',
-  		controller: 'AuthController',
+  		controller: 'LoginController',
       controllerAs: 'vm',
       resolve: {
 
@@ -50,10 +57,14 @@
   	})
     .state('auth.logout', { // state for showing all movies
   		url: '/login',
-  		templateUrl: 'js/partials/logout.html',
-  		controller: 'AuthController',
+  		controller: function($scope, AuthService, $state){
+        AuthService
+          .logout()
+          .then(function(){
+            $state.go('auth.login');
+          });
+      },
       controllerAs: 'vm',
-      authenticate : false,
       resolve: {
 
       }

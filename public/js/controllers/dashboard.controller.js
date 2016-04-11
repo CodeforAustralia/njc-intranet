@@ -6,7 +6,7 @@
     .controller('DashboardController', DashboardController);
 
   /*@ngInject*/
-  function DashboardController($scope, $log, $rootScope, moment, DutyWorker){
+  function DashboardController($scope, $log, $rootScope, moment, DutyWorker, StaffService){
 
     var vm = this;
 
@@ -23,6 +23,18 @@
       {"posted": Date.now(), "subject":"News item 5", "permalink":"/news/5"},
     ];
     vm.now = getToday();
+
+    $rootScope.$on('UPDATE_DUTY_WORKER', updateDutyWorker);
+
+    function updateDutyWorker(){
+      $log.log("Update the duty worker");
+      StaffService
+        .dutyWorker()
+        .then(function(worker){
+          $log.log(worker);
+          vm.duty_worker = worker.data[0];
+        });
+    }
 
     /*vm.announcements = [
       {'title': 'Announcement 1', 'summary': 'Lorem ipsum dolor sit amet, posse scaevola ei pri, nec ne aperiam oblique. In nam epicuri menandri, eu nibh gubergren urbanitas sea, per no ubique fuisset insolens. Zril reformidans te cum, pri commune definiebas cu. Ei lorem virtute nec. Alii ipsum convenire ne pro, cu has error docendi deseruisse, brute tantas pertinacia has te.'},

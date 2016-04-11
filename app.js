@@ -65,6 +65,7 @@ if (_.isUndefined(config.passport_secret) || config.passport_secret === "<your-p
 app.use(session({ secret: config.passport_secret, resave: false, saveUninitialized: false}));
 app.use(passport.initialize());
 app.use(passport.session());
+
 passport.use(new LocalStrategy(authUser.authenticate()));
 passport.serializeUser(authUser.serializeUser());
 passport.deserializeUser(authUser.deserializeUser());
