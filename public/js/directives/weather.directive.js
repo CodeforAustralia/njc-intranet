@@ -3,11 +3,11 @@
   // App bootstrapping + DI
   /*@ngInject*/
   angular.module('njcIntranetApp')
-    .directive('njcWeather', function($log){
+    .directive('njcWeather', function($log, Constants){
       return {
         restrict: "EA", // element or attribute only
         replace: true, // replace the element
-        templateUrl: '/intranet-static/js/partials/weather.directive.html',
+        templateUrl: Constants.urls.public+'/js/partials/weather.directive.html',
         scope: {
 
         },

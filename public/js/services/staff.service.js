@@ -5,26 +5,26 @@
     .service('StaffService', StaffService);
 
   /*@ngInject*/
-  function StaffService($log, $http){
+  function StaffService($log, $http, Constants){
     return {
       all: function(){
         $log.log("Getting all the staff");
-        return $http.get("/intranet/api/staff");
+        return $http.get(Constants.urls.api+"/staff");
       },
       get: function(id){
-        return $http.get("/intranet/api/staff/" + id);
+        return $http.get(Constants.urls.api+"/staff/" + id);
       },
       create: function(staff){
-        return $http.post("/intranet/api/staff", staff);
+        return $http.post(Constants.urls.api+"/staff", staff);
       },
       update: function(id, staff){
         $log.log(id);
         $log.log(staff);
-        return $http.put("/intranet/api/staff/" + id, staff);
+        return $http.put(Constants.urls.api+"/staff/" + id, staff);
       },
       dutyWorker: function(){
         return $http
-                .get("/intranet/api/staff?duty_worker=true")
+                .get(Constants.urls.api+"/staff?duty_worker=true")
                 .then(function(data){
                   $log.log("Duty worker result: ");
                   $log.log(data);

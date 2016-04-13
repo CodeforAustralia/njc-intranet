@@ -10,3 +10,5 @@ angular.module('njcIntranetApp', [
   'angularFileUpload',
   'toastr'
 ]);
+
+angular.module('njcIntranetApp.Constants', []);

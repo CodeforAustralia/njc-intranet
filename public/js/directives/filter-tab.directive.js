@@ -3,11 +3,11 @@
   // App bootstrapping + DI
   /*@ngInject*/
   angular.module('njcIntranetApp')
-    .directive('filterTabs', function($log){
+    .directive('filterTabs', function($log, Constants){
       return {
         restrict: "EA", // element or attribute only
         replace: true, // replace the element
-        templateUrl: '/intranet-static/js/partials/filter-tab.directive.html',
+        templateUrl: Constants.urls.public+'/js/partials/filter-tab.directive.html',
         scope: {
           'tabs': '=',
           'active': '=',

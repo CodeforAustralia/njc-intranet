@@ -3,11 +3,11 @@
   // App bootstrapping + DI
   /*@ngInject*/
   angular.module('njcIntranetApp')
-    .directive('njcNotices', function($log, $interval){
+    .directive('njcNotices', function($log, $interval, Constants){
       return {
         restrict: "EA", // element or attribute only
         replace: true, // replace the element
-        templateUrl: '/intranet-static/js/partials/notices.directive.html',
+        templateUrl: Constants.urls.public+'/js/partials/notices.directive.html',
         scope: {
           notices: '='
         },

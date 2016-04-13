@@ -6,7 +6,7 @@
     .controller('StaffUpdateModalController', StaffUpdateModalController);
 
   /*@ngInject*/
-  function StaffUpdateModalController($scope, $state, $log, $rootScope, moment, toastr, StaffService, StaffList, $modal){
+  function StaffUpdateModalController($scope, $state, $log, $rootScope, moment, toastr, StaffService, StaffList, $modal, Constants){
     $log.log($scope);
     var vm = this;
 
@@ -14,7 +14,7 @@
 
     var modal = $modal({
       title: 'Update in/out status',
-      contentTemplate: '/intranet-static/js/partials/staff-update-status.html',
+      contentTemplate: Constants.urls.public+'/js/partials/staff-update-status.html',
       show: true,
       scope: $scope,
     });

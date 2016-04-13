@@ -27,22 +27,25 @@
 
       $log.log("AppController loading");
     })
-    .config(stateConfig)
     .constant('_', window._)
-    .run(function($log, $rootScope, $location, $state, AuthService){
+    .config(stateConfig)
+    .run(function($log, $rootScope, $location, $state, AuthService, Constants){
+      $log.log("Constants");
+      $log.log(Constants);
+
       $log.log("Running the app");
       $log.log("Check auth");
       $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
         if (toState.authenticate && !AuthService.isAuthenticated()){
           $log.log("Not Authenticated");
           // User isn’t authenticated
-          $state.transitionTo("auth.login");
-          event.preventDefault();
+          //$state.transitionTo("auth.login");
+          //event.preventDefault();
         }
       });
     });
 
-  function stateConfig($stateProvider){
+  function stateConfig($stateProvider, Constants){
     $stateProvider
     .state('auth', {
       abstract: true,
@@ -50,7 +53,7 @@
     })
   	.state('auth.login', {
   		url: '/login',
-  		templateUrl: '/intranet-static/js/partials/login.html',
+  		templateUrl: Constants.urls.public+'/js/partials/login.html',
   		controller: 'LoginController',
       controllerAs: 'vm',
       resolve: {
@@ -72,7 +75,7 @@
       }
   	})
     .state('app', {
-      templateUrl: '/intranet-static/js/partials/layout.html',
+      templateUrl: Constants.urls.public+'/js/partials/layout.html',
       authenticate : true,
       resolve: {
         Teams: function($log, TeamService){
@@ -86,7 +89,7 @@
       authenticate : true,
       views: {
         "content": {
-          templateUrl: '/intranet-static/js/partials/dashboard.html',
+          templateUrl: Constants.urls.public+'/js/partials/dashboard.html',
           controller: 'DashboardController',
           controllerAs: 'vm',
         },
@@ -136,7 +139,7 @@
   	})
     .state('app.staff.index', {
   		url: '/staff',
-  		templateUrl: '/intranet-static/js/partials/staff-index.html',
+  		templateUrl: Constants.urls.public+'/js/partials/staff-index.html',
   		controller: 'StaffIndexController',
       controllerAs: 'vm',
       authenticate : true,
@@ -148,7 +151,7 @@
   	})
     .state('app.staff.new', {
   		url: '/staff/new',
-  		templateUrl: '/intranet-static/js/partials/staff-new.html',
+  		templateUrl: Constants.urls.public+'/js/partials/staff-new.html',
   		controller: 'StaffNewController',
       controllerAs: 'vm',
       authenticate : true,
@@ -157,7 +160,7 @@
   	})
     .state('app.staff.update', {
   		url: '/staff/:id',
-  		templateUrl: '/intranet-static/js/partials/staff-update.html',
+  		templateUrl: Constants.urls.public+'/js/partials/staff-update.html',
   		controller: 'StaffUpdateController',
       controllerAs: 'vm',
       authenticate : true,
@@ -186,7 +189,7 @@
   	})
     .state('app.documents.index', {
   		url: '/documents',
-  		templateUrl: '/intranet-static/js/partials/documents-index.html',
+  		templateUrl: Constants.urls.public+'/js/partials/documents-index.html',
   		controller: 'DocumentsIndexController',
       controllerAs: 'vm',
       authenticate : true,
@@ -198,7 +201,7 @@
   	})
     .state('app.documents.view', {
   		url: '/documents/:id',
-  		templateUrl: '/intranet-static/js/partials/documents-view.html',
+  		templateUrl: Constants.urls.public+'/js/partials/documents-view.html',
   		controller: 'DocumentsViewController',
       controllerAs: 'vm',
       authenticate : true,
@@ -211,7 +214,7 @@
   	})
     .state('app.documents.new', {
   		url: '/documents/new',
-  		templateUrl: '/intranet-static/js/partials/documents-new.html',
+  		templateUrl: Constants.urls.public+'/js/partials/documents-new.html',
   		controller: 'DocumentsNewController',
       controllerAs: 'vm',
       authenticate : true,

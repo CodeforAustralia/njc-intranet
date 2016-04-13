@@ -14,7 +14,7 @@
     $log.log(moment);
     $log.log(DutyWorker);
 
-    vm.duty_worker = !_.isUndefined(DutyWorker.data[0]) ? DutyWorker.data[0] : null;
+    vm.duty_worker = (!_.isUndefined(DutyWorker) && !_.isUndefined(DutyWorker.data)) ? DutyWorker.data[0] : {};
     vm.news = [
       {"posted": Date.now(), "subject":"News item 1", "permalink":"/news/1"},
       {"posted": Date.now(), "subject":"News item 2", "permalink":"/news/2"},
