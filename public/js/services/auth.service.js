@@ -4,7 +4,7 @@
 // Authentication service, returns a resource
 /*@ngInject*/
 angular.module('njcIntranetApp')
-	.service('AuthService', function($log, $http, $sanitize, AlertService){
+	.service('AuthService', function($log, $state, $http, $sanitize, AlertService){
 		var loggedIn = false;
 
 		return {
@@ -18,8 +18,10 @@ angular.module('njcIntranetApp')
 					password: $sanitize(password)
 				};
 
-				$http.post('/auth/login', credentials).then(function(){
+				$http.post('/intranet/auth/login', credentials).then(function(){
 					loggedIn = true;
+					$log.log("Go to dashboard");
+					$state.go('app.dashboard');
 				}, function(err){
 					$log.log(err);
 
@@ -30,7 +32,7 @@ angular.module('njcIntranetApp')
 			},
 
 			logout: function(){
-				return $http.get('/auth/logout').then(function(){
+				return $http.get('/intranet/auth/logout').then(function(){
 					loggedIn = false;
 				});
 			}

@@ -4,12 +4,16 @@
       <span class="fa fa-user njc-widget-icon-item"></span>
       &nbsp;<span class="njc-widget-icon-label">Duty worker</span>
     </div>
-    <div class="duty-worker-info njc-widget-info njc-widget-info-left">
+    <div ng-if="dutyWorker" class="duty-worker-info njc-widget-info njc-widget-info-left">
       <ul>
         <li>{{ dutyWorker.name}}</li>
         <li>ph: x{{ dutyWorker.contact.ext}}</li>
         <li ng-if="dutyWorker.contact.mobile">m: {{ dutyWorker.contact.mobile}}</li>
       </ul>
     </div>
+    <div ng-if="dutyWorker">
+      <p>No duty worker set for today :(</p>
+    </div>
+  </div>
   </div>
 </div>

@@ -7,7 +7,7 @@
       return {
         restrict: "EA", // element or attribute only
         replace: true, // replace the element
-        templateUrl: 'js/partials/weather.directive.html',
+        templateUrl: '/intranet-static/js/partials/weather.directive.html',
         scope: {
 
         },

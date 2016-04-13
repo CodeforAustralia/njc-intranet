@@ -7,7 +7,7 @@
       return {
         restrict: "EA", // element or attribute only
         replace: true, // replace the element
-        templateUrl: 'js/partials/duty-worker.directive.html',
+        templateUrl: '/intranet-static/js/partials/duty-worker.directive.html',
         scope: {
           dutyWorker: '='
         },

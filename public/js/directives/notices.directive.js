@@ -7,7 +7,7 @@
       return {
         restrict: "EA", // element or attribute only
         replace: true, // replace the element
-        templateUrl: 'js/partials/notices.directive.html',
+        templateUrl: '/intranet-static/js/partials/notices.directive.html',
         scope: {
           notices: '='
         },

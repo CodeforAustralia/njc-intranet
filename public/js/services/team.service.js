@@ -16,6 +16,7 @@
     return {
       all: function(){
         $log.log("Getting all the teams");
+        $log.log(teams);
         return {
           data: teams
         };

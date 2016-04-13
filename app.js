@@ -4,12 +4,15 @@ var express = require('express');
 var session = require('express-session');
 var flash = require('express-flash');
 var path = require('path');
-var favicon = require('serve-favicon');
+var fs = require('fs');
+//var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var mongoose = require('mongoose');
+var compression = require('compression');
+var morgan = require('morgan');
 var app = express();
 
 // config files
@@ -49,12 +52,16 @@ app.set('view engine', 'jade');
 ***/
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
-app.use(logger('dev'));
+//app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(flash());
-app.use(express.static(path.join(__dirname, 'public')));
+
+// create a write stream (in append mode)
+var accessLogStream = fs.createWriteStream(__dirname + '/access.log', {flags: 'a'});
+// setup the logger
+app.use(morgan('combined', {stream: accessLogStream}));
 
 // add passport for authentication
 var passport = require('passport');
@@ -65,6 +72,7 @@ if (_.isUndefined(config.passport_secret) || config.passport_secret === "<your-p
 app.use(session({ secret: config.passport_secret, resave: false, saveUninitialized: false}));
 app.use(passport.initialize());
 app.use(passport.session());
+
 passport.use(new LocalStrategy(authUser.authenticate()));
 passport.serializeUser(authUser.serializeUser());
 passport.deserializeUser(authUser.deserializeUser());
@@ -74,6 +82,8 @@ passport.deserializeUser(authUser.deserializeUser());
 * ASSETS
 ***/
 // set the static asset path
+app.use(compression()); //use compression
+app.use(express.static(path.join(__dirname, 'public')));
 app.use('/intranet-static', express.static('public'));
 
 /***

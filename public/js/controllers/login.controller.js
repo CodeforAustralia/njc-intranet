@@ -3,11 +3,11 @@
   // App bootstrapping + DI
   /*@ngInject*/
   angular.module('njcIntranetApp')
-    .controller('AuthController', AuthController);
+    .controller('LoginController', LoginController);
 
   /*@ngInject*/
-  function AuthController($scope, $log, $rootScope, $modal, AuthService){
-
+  function LoginController($scope, $log, $rootScope, $modal, AuthService){
+    $log.log("Starting the LoginController");
     var vm = this;
     //vm.model = new Entry(); // create a new instance of the entry model
     vm.model = {};

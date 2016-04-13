@@ -7,7 +7,7 @@
       return {
         restrict: "EA", // element or attribute only
         replace: true, // replace the element
-        templateUrl: 'js/partials/filter-tab.directive.html',
+        templateUrl: '/intranet-static/js/partials/filter-tab.directive.html',
         scope: {
           'tabs': '=',
           'active': '=',

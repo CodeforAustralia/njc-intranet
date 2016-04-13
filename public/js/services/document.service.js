@@ -9,11 +9,11 @@
     return {
       all: function(){
         $log.log("Getting all the documents");
-        return $http.get("api/documents");
+        return $http.get("/intranet/api/documents");
       },
       get: function(id){
         // by default just return the latest version of a document
-        return $http.get("api/documents");
+        return $http.get("/intranet/api/documents");
       }
     };
   }

@@ -34,7 +34,6 @@
   },
   "resolutions": {
     "moment": ">=2.8.0 <2.11.0",
-    "angular": "~1.4.7",
-    "angular-sanitize": "~1.4.8"
+    "angular": "~1.4.7"
   }
 }
