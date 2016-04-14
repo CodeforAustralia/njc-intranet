@@ -39,8 +39,8 @@
         if (toState.authenticate && !AuthService.isAuthenticated()){
           $log.log("Not Authenticated");
           // User isn’t authenticated
-          //$state.transitionTo("auth.login");
-          //event.preventDefault();
+          $state.transitionTo("auth.login");
+          event.preventDefault();
         }
       });
     });
@@ -101,10 +101,13 @@
         DutyWorker: function($log, StaffService){
           $log.log("Duty worker");
           return StaffService.dutyWorker();
+        },
+        Weather: function(WeatherService){
+          return WeatherService.today();
+        },
+        News: function(NewsService){
+          return NewsService.all();
         }
-      },
-      onEnter: function($log){
-        $log.log("Entered");
       }
   	})
     .state('app.dashboard.modal-update-status', {

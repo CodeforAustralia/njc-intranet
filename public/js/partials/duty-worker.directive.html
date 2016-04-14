@@ -4,17 +4,15 @@
       <span class="fa fa-user njc-widget-icon-item"></span>
       &nbsp;<span class="njc-widget-icon-label">Duty worker</span>
     </div>
-    <div ng-switch on="dutyWorker">
-      <div ng-switch-when="dutyWorker" class="duty-worker-info njc-widget-info njc-widget-info-left">
-        <ul>
-          <li>{{ dutyWorker.name}}</li>
-          <li>ph: x{{ dutyWorker.contact.ext}}</li>
-          <li ng-if="dutyWorker.contact.mobile">m: {{ dutyWorker.contact.mobile}}</li>
-        </ul>
-      </div>
-      <div ng-switch-default>
-        <p>No duty worker has been set for today. Is it you?</p>
-      </div>
+    <div ng-if="dutyWorker" class="duty-worker-info njc-widget-info njc-widget-info-left">
+      <ul>
+        <li>{{ dutyWorker.name}}</li>
+        <li ng-if="dutyWorker.contact.ext">ph: x{{ dutyWorker.contact.ext}}</li>
+        <li ng-if="dutyWorker.contact.mobile">m: +61{{ dutyWorker.contact.mobile}}</li>
+      </ul>
+    </div>
+    <div ng-if="!dutyWorker">
+      <p>No duty worker has been set for today. Is it you?</p>
     </div>
   </div>
 </div>

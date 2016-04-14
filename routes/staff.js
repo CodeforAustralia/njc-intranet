@@ -59,10 +59,12 @@ router.post('/', function(req, res, next){
 router.put('/:id', function(req, res, next){
   var id = req.params.id;
   var model = req.body;
+  console.log(model);
   var curr_duty_worker = {};
   var staff = {};
 
-  if (model.name && model.contact && model.organisation){
+  if (model.name && model.email && model.role){
+    console.log("Updated staff obj");
     staff = {
       name: model.name,
       contact: {
@@ -83,7 +85,7 @@ router.put('/:id', function(req, res, next){
   }
 
   if (model.status){
-    console.log("Status");
+    console.log("Status field");
     staff = {
       status: {
         in: model.status.in,
@@ -92,8 +94,17 @@ router.put('/:id', function(req, res, next){
     };
   }
 
+  if (!_.isUndefined(model.in) && !_.isUndefined(model.duty_worker)){
+    console.log("Status");
+    staff.status = {
+      in: model.in,
+      duty_worker: model.duty_worker,
+    };
+  }
+
   // if updating the duty worker, unset the previous one
-  if (staff.status.duty_worker){
+  if (staff.status){
+    console.log("Update status");
     resetDutyWorker()
     .then(function(data){
       console.log(data);
@@ -111,7 +122,12 @@ router.put('/:id', function(req, res, next){
 
 function updateById(id, staff, res){
   console.log("Updating");
+  console.log(staff);
   Staff.findByIdAndUpdate(id, {$set: staff}, function(err, data){
+    console.log(err);
+    console.log(data);
+    //console.log(id);
+    //console.log(staff);
     if (err) return res.json(err);
 
     res.json(staff);

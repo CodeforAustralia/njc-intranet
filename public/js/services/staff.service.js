@@ -24,14 +24,7 @@
       },
       dutyWorker: function(){
         return $http
-                .get(Constants.urls.api+"/staff?duty_worker=true")
-                .then(function(data){
-                  $log.log("Duty worker result: ");
-                  $log.log(data);
-                }, function(err){
-                  $log.log("Duty worker err: ");
-                  $log.log(err);
-                });
+                .get(Constants.urls.api+"/staff?duty_worker=true");
       }
     };
   }

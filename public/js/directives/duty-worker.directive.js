@@ -13,6 +13,7 @@
         },
         link: function(scope, elem, attrs){
           $log.log("Duty worker directive");
+          $log.log(scope);
           $log.log(scope.dutyWorker);
         }
       };

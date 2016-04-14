@@ -6,7 +6,7 @@
     .controller('DashboardController', DashboardController);
 
   /*@ngInject*/
-  function DashboardController($scope, $log, $rootScope, moment, DutyWorker, StaffService){
+  function DashboardController($scope, $log, $rootScope, moment, StaffService, DutyWorker, News, Weather){
     $log.log("Loading dashboard controller");
 
     var vm = this;
@@ -15,14 +15,10 @@
     $log.log(DutyWorker);
 
     vm.duty_worker = (!_.isUndefined(DutyWorker) && !_.isUndefined(DutyWorker.data)) ? DutyWorker.data[0] : {};
-    vm.news = [
-      {"posted": Date.now(), "subject":"News item 1", "permalink":"/news/1"},
-      {"posted": Date.now(), "subject":"News item 2", "permalink":"/news/2"},
-      {"posted": Date.now(), "subject":"News item 3", "permalink":"/news/3"},
-      {"posted": Date.now(), "subject":"News item 4", "permalink":"/news/4"},
-      {"posted": Date.now(), "subject":"News item 5", "permalink":"/news/5"},
-    ];
+    vm.news = News.data;
+    vm.weather = Weather.data;
     vm.now = getToday();
+
 
     $rootScope.$on('UPDATE_DUTY_WORKER', updateDutyWorker);
 
@@ -31,8 +27,10 @@
       StaffService
         .dutyWorker()
         .then(function(worker){
+          $log.log("Curr duty worker");
           $log.log(worker);
           vm.duty_worker = worker.data[0];
+          $log.log(vm.duty_worker);
         });
     }
 
