@@ -90,8 +90,8 @@ app.use('/intranet-static', express.static('public'));
 * ROUTE HANDLERS
 ***/
 app.use('/', routes);
-app.use('/auth', auth);
 app.use('/users', users);
+app.use('/api/auth', auth);
 app.use('/api/staff', staff);
 app.use('/api/documents', documents);
 app.use('/api/topics', topics);
