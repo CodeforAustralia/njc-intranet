@@ -7,13 +7,13 @@
   /*@ngInject*/
   function TeamService($log, $http){
     var teams = [
-      {'label':'All staff', 'value':'', 'active': 'active'},
-      {'label':'Client services', 'value':'Client services', 'active':''},
-      {'label':'Information team', 'value':'Information team', 'active':''},
-      {'label':'Registry','value':'Registry', 'active':''},
-      {'label':'Corrections and Legal Service','value':'Corrections and Legal Service','active':''},
-      {'label':'Police Prosecutor','value':'Police Prosecutor','active':''},
-      {'label':'Project innovation team','value':'Project innovation team','active':''}
+      {'label':'All staff', 'value':'', 'active': 'active', 'shortname': 'All Staff'},
+      {'label':'Client services', 'value':'Client services', 'active':'', 'shortname': 'Client services'},
+      {'label':'Information team', 'value':'Information team', 'active':'', 'shortname': 'Information team'},
+      {'label':'Registry','value':'Registry', 'active':'', 'shortname':'Registry'},
+      {'label':'Corrections and Legal Service','value':'Corrections and Legal Service','active':'', 'shortname': 'Corrections'},
+      {'label':'Police Prosecutor','value':'Police Prosecutor','active':'', 'shortname':'Police prosecutor'},
+      {'label':'Project innovation team','value':'Project innovation team','active':'', 'shortname':'Project innovations'}
     ];
 
     return {

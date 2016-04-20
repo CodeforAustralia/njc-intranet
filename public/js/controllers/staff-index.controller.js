@@ -21,7 +21,8 @@
     function updateStaffCounts(){
       vm.counts.total_staff = vm.staff.length;
       $log.log(_.find(vm.staff, {'organistation.team': vm.activeTab }));
-      vm.counts.filtered_staff = _.find(vm.staff, 'organistation.team', vm.activeTab).length;
+      var filtered = _.find(vm.staff, 'organistation.team', vm.activeTab);
+      vm.counts.filtered_staff = (filtered && filtered.length) ? filtered.length : 0;
     }
 
     function init(){

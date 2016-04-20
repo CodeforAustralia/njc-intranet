@@ -33,10 +33,14 @@
       $log.log("Constants");
       $log.log(Constants);
 
+      $log.log('location');
+      $log.log($location);
+      $log.log($location.$$host);
+
       $log.log("Running the app");
       $log.log("Check auth");
       $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
-        if (toState.authenticate && !AuthService.isAuthenticated()){
+        if (toState.authenticate && !AuthService.isAuthenticated() && $location.$$host != 'localhost'){
           $log.log("Not Authenticated");
           // User isn’t authenticated
           $state.transitionTo("auth.login");
