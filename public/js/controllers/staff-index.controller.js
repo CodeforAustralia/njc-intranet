@@ -14,10 +14,20 @@
     vm.staff = StaffList.data;
     vm.duty_worker = findDutyWorker(vm.staff);
     vm.teams = Teams.data;
+    vm.counts = {
+      total_staff: 0, filtered_staff: 0
+    };
+
+    function updateStaffCounts(){
+      vm.counts.total_staff = vm.staff.length;
+      $log.log(_.find(vm.staff, {'organistation.team': vm.activeTab }));
+      vm.counts.filtered_staff = _.find(vm.staff, 'organistation.team', vm.activeTab).length;
+    }
 
     function init(){
       $log.log("Loaded the staff index controller");
       $log.log(vm.staff.data);
+      updateStaffCounts();
     }
 
     function findDutyWorker(staff){
