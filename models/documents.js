@@ -17,6 +17,7 @@ var DocumentSchema = mongoose.Schema({
     local_path: String,
     version: {type: Number, default: 1},
   }],
+  current_version: {type: Number, default: 1}, // nversion number to be displayed
   related: []
 });
 

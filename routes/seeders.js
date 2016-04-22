@@ -6,7 +6,7 @@ var Staff = require('../models/staff');
 var Documents = require('../models/documents');
 
 //var StaffList = require('../models/seeds/staff-list.json'); - path to staff seeder if needed
-var DocumentsList = require('../models/seeds/documents-list.json'); // path to documents seed file
+//var DocumentsList = require('../models/seeds/documents-list.json'); // path to documents seed file
 
 /* Seed the documents from a json file */
 router.get('/documents', function(req, res, next){
