@@ -186,11 +186,11 @@
         }
       },
       resolve: {
-        Categories: function(CategoryService){
-          return CategoryService.all();
+        Categories: function(DocumentService){
+          return DocumentService.categories();
         },
-        Topics: function(TopicService){
-          return TopicService.all();
+        Types: function(DocumentService){
+          return DocumentService.types();
         }
       }
   	})

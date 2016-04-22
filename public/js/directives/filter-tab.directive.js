@@ -11,6 +11,7 @@
         scope: {
           'tabs': '=',
           'active': '=',
+          'key': '@',
           'default': "@"
         },
         link: function(scope, elem, attrs){
@@ -21,15 +22,16 @@
 
           // set the default tab
           scope.active = scope.default;
+          scope.key = scope.key;
 
           // handles updating the current active tab
           scope.updateActiveTab = function(tab){
+            var k = scope.key;
             var ak = _.findKey(scope.tabs, {"active":"active"});
-            var nk = _.findKey(scope.tabs, {"label": tab.label});
+            //var nk = _.findKey(scope.tabs, {k: tab[k]});
             scope.tabs[ak].active = "";
-            scope.tabs[nk].active = "active";
+            tab.active = "active";
             scope.active = tab.value;
-            $log.log(tab.value);
           };
         }
       };

@@ -6,7 +6,7 @@
     .controller('DocumentsIndexController', DocumentsIndexController);
 
   /*@ngInject*/
-  function DocumentsIndexController($scope, $log, $rootScope, moment, documentList, Categories, Topics){
+  function DocumentsIndexController($scope, $log, $rootScope, moment, documentList, Categories, Types){
     $log.log($scope);
 
     var vm = this;
@@ -14,31 +14,47 @@
 
     vm.activeTab = 'All documents';
     vm.categories = Categories.data;
-    vm.topics = Topics.data;
+    vm.types = Types.data;
 
     function init(){
       $log.log("Loaded the documents index controller");
       $log.log("content");
-      $log.log(vm.topics);
+      $log.log(vm.types);
       $log.log(vm.categories);
 
-      vm.content = [];
-      // group by topic
-      var groups = _.groupBy(documentList.data, function(item){
-        return item.metadata.topic;
+      _.each(vm.categories, function(category){
+        category.value = category.category;
+        category.active = "";
       });
 
+      vm.categories.unshift({'category':'All documents', 'value': "", 'active':'active'});
+
+      vm.content = [];
+      // Getting rid of groupings for now figure that out later
+      $log.log(documentList);
+      vm.content = documentList.data;
+      $log.log(vm.content);
+      /*// group by topic
+      var groups = _.groupBy(documentList.data, function(item){
+        $log.log(item);
+        return item.metadata.type;
+      });
+
+      $log.log("Groups");
+      $log.log(groups);
+
       _.forEach(groups, function(group, key){
+        $log.log("foreach category");
         $log.log(group);
         $log.log(key);
         // extract the category
-        var c = _.find(vm.topics, {'topic':key});
+        var c = _.find(vm.category, {'category':key});
         $log.log(c);
         vm.content.push({"title": key, "documents": group, "category": c.category});
       });
 
       $log.log("Cleaned up");
-      $log.log(vm.content);
+      $log.log(vm.content);*/
     }
 
     init();

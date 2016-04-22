@@ -5,16 +5,19 @@ var DocumentSchema = mongoose.Schema({
   title: String,
   description: String,
   extension: String,
+  local_file: Boolean,
   metadata: {
     category: String,
-    topic: String,
-  },
-  revision: [{
-    path: String,
-    version: {type: Number, default: 1},
+    type: {type: String},
     created_at: {type: Date, default: new Date()},
-    content_type: String
-  }]
+    updated_at: {type: Date, default: new Date()},
+  },
+  location: [{
+    url: String,
+    local_path: String,
+    version: {type: Number, default: 1},
+  }],
+  related: []
 });
 
 var Documents = mongoose.model('Documents', DocumentSchema);

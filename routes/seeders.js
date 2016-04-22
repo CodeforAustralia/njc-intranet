@@ -3,8 +3,61 @@ var router = express.Router();
 var fs = require('fs');
 var _ = require('lodash');
 var Staff = require('../models/staff');
+var Documents = require('../models/documents');
 
 //var StaffList = require('../models/seeds/staff-list.json'); - path to staff seeder if needed
+var DocumentsList = require('../models/seeds/documents-list.json'); // path to documents seed file
+
+/* Seed the documents from a json file */
+router.get('/documents', function(req, res, next){
+  var model = null;
+
+  _.each(DocumentsList.data, function(document, key){
+    //console.log(document);
+    Documents.findOne({'title': document.title}, function(err, result){
+      if (!result){
+        // no duplicates please
+        model = new Documents({
+          title: document.title,
+          description: document.description,
+          metadata: {
+            category: document.metadata.category,
+            type:  document.metadata.type,
+            created_at: "",
+            updated_at: "",
+          },
+          location: [{
+            url:  document.location.url,
+            local_path: document.location.local_path,
+          }],
+          related: []
+        });
+      // TODO: read the staff members work schedule
+      //if (_.isUndefined(staff.))
+
+        model.save(function(err){
+          if (err) throw Error(err);
+
+          if (key == DocumentsList.data.length-1){
+            console.log("Finishing");
+            sendJson(res, DocumentsList.data);
+          }
+        });
+      }
+    });
+
+  });
+
+});
+
+router.get('/documents/purge', function(req, res, next){
+  Documents.find({}).remove(function(err){
+    if (err) console.log(err);
+    res.send("Deleted all documents");
+  });
+});
+
+
 
 /* GET /staff - Seed the staff db */
 router.get('/staff', function(req, res, next){
