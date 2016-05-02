@@ -2,6 +2,9 @@
   "name": "njc-intranet-v2",
   "version": "0.0.0",
   "private": true,
+  "engines": {
+    "node":"5.8.0"
+  },
   "scripts": {
     "start": "mongod & PORT=4000 nodemon ./bin/www"
   },
