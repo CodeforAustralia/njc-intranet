@@ -1,5 +1,6 @@
 module.exports = function(app){
   'use strict';
+  console.log(app);
   // App bootstrapping + DI
   /*@ngInject*/
   app.config(function($urlRouterProvider){
@@ -28,25 +29,31 @@ module.exports = function(app){
     })
     .constant('_', window._)
     .config(stateConfig)
-    .run(function($log, $rootScope, $location, $state, AuthService, Constants){
-      $log.log("Constants");
-      $log.log(Constants);
+    //.run(function($log, $rootScope, $location, $state, AuthService, Constants){
+    .run(runApp);
 
-      $log.log('location');
-      $log.log($location);
-      $log.log($location.$$host);
+  /*@ngInject*/
+  function runApp($log, $rootScope, $location, $state, Constants, AuthService){
+    $log.log("AuthService");
+    $log.log(AuthService);
+    $log.log("Constants");
+    $log.log(Constants);
 
-      $log.log("Running the app");
-      $log.log("Check auth");
-      $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
-        if (toState.authenticate && !AuthService.isAuthenticated() && $location.$$host != 'localhost'){
-          $log.log("Not Authenticated");
-          // User isn’t authenticated
-          $state.transitionTo("auth.login");
-          event.preventDefault();
-        }
-      });
-    });
+    $log.log('location');
+    $log.log($location);
+    $log.log($location.$$host);
+
+    $log.log("Running the app");
+    $log.log("Check auth");
+    /*$rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+      if (toState.authenticate && !AuthService.isAuthenticated() && $location.$$host != 'localhost'){
+        $log.log("Not Authenticated");
+        // User isn’t authenticated
+        $state.transitionTo("auth.login");
+        event.preventDefault();
+      }
+    });*/
+  }
 
   function stateConfig($stateProvider, Constants){
     $stateProvider
@@ -56,7 +63,7 @@ module.exports = function(app){
     })
   	.state('auth.login', {
   		url: '/login',
-  		templateUrl: Constants.urls.public+'/js/partials/login.html',
+  		template: require('./general/login.html'),
   		controller: 'LoginController',
       controllerAs: 'vm',
       resolve: {
@@ -78,7 +85,7 @@ module.exports = function(app){
       }
   	})
     .state('app', {
-      templateUrl: Constants.urls.public+'/js/partials/layout.html',
+      template: require('./general/layout.html'),
       authenticate : true,
       resolve: {
         Teams: function($log, TeamService){
@@ -92,7 +99,7 @@ module.exports = function(app){
       authenticate : true,
       views: {
         "content": {
-          templateUrl: Constants.urls.public+'/js/partials/dashboard.html',
+          template: require('./dashboard/dashboard.html'),
           controller: 'DashboardController',
           controllerAs: 'vm',
         },
@@ -145,7 +152,7 @@ module.exports = function(app){
   	})
     .state('app.staff.index', {
   		url: '/staff',
-  		templateUrl: Constants.urls.public+'/js/partials/staff-index.html',
+  		template: require('./staff/staff-index.html'),
   		controller: 'StaffIndexController',
       controllerAs: 'vm',
       authenticate : true,
@@ -157,7 +164,7 @@ module.exports = function(app){
   	})
     .state('app.staff.new', {
   		url: '/staff/new',
-  		templateUrl: Constants.urls.public+'/js/partials/staff-new.html',
+  		template: require('./staff/staff-new.html'),
   		controller: 'StaffNewController',
       controllerAs: 'vm',
       authenticate : true,
@@ -166,7 +173,7 @@ module.exports = function(app){
   	})
     .state('app.staff.update', {
   		url: '/staff/:id',
-  		templateUrl: Constants.urls.public+'/js/partials/staff-update.html',
+  		template: require('./staff/staff-update.html'),
   		controller: 'StaffUpdateController',
       controllerAs: 'vm',
       authenticate : true,
@@ -195,7 +202,7 @@ module.exports = function(app){
   	})
     .state('app.documents.index', {
   		url: '/documents',
-  		templateUrl: Constants.urls.public+'/js/partials/documents-index.html',
+  		template: require('./documents/documents-index.html'),
   		controller: 'DocumentsIndexController',
       controllerAs: 'vm',
       authenticate : true,
@@ -207,7 +214,7 @@ module.exports = function(app){
   	})
     .state('app.documents.view', {
   		url: '/documents/:id',
-  		templateUrl: Constants.urls.public+'/js/partials/documents-view.html',
+  		template: require('./documents/documents-view.html'),
   		controller: 'DocumentsViewController',
       controllerAs: 'vm',
       authenticate : true,
@@ -220,7 +227,7 @@ module.exports = function(app){
   	})
     .state('app.documents.new', {
   		url: '/documents/new',
-  		templateUrl: Constants.urls.public+'/js/partials/documents-new.html',
+  		template: require('./documents/documents-new.html'),
   		controller: 'DocumentsNewController',
       controllerAs: 'vm',
       authenticate : true,

@@ -2,11 +2,7 @@ module.exports = function(app){
   'use strict';
   // App bootstrapping + DI
   /*@ngInject*/
-app
-    .controller('StaffIndexController', StaffIndexController);
-
-  /*@ngInject*/
-  function StaffIndexController($scope, $log, $rootScope, moment, StaffList, Teams){
+  app.controller('StaffIndexController', function($scope, $log, $rootScope, moment, StaffList, Teams){
     $log.log($scope);
 
     var vm = this;
@@ -39,6 +35,6 @@ app
     }
 
     init();
-  }
+  });
 
 };

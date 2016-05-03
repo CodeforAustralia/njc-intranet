@@ -2,10 +2,7 @@ module.exports = function(app){
   'use strict';
   // App bootstrapping + DI
   /*@ngInject*/
-  app.controller('DocumentsNewController', DocumentsNewController);
-
-  /*@ngInject*/
-  function DocumentsNewController($scope, $log, $rootScope, moment, FileUploader, toastr, Categories, Topics){
+  app.controller('DocumentsNewController', function($scope, $log, $rootScope, moment, FileUploader, toastr, Categories, Topics){
     $log.log($scope);
     var vm = this;
 
@@ -106,6 +103,6 @@ module.exports = function(app){
     }
 
     init();
-  }
+  });
 
 };

@@ -1,4 +1,4 @@
-'use strict';
+/*'use strict';
 
 angular.module('njcIntranetApp', [
   'ui.router',
@@ -11,4 +11,4 @@ angular.module('njcIntranetApp', [
   'toastr'
 ]);
 
-angular.module('njcIntranetApp.Constants', []);
+angular.module('njcIntranetApp.Constants', []);*/

@@ -1,10 +1,10 @@
 module.exports = function(app){
-  require('./login.controller');
-  require('./filter-tab.directive');
-  require('./notices.directive');
-  require('./auth.service');
-  require('./alert.service');
-  require('./category.service');
-  require('./team.service');
-  require('./topic.service');
+  require('./alert.service')(app);
+  require('./auth.service')(app);
+  require('./category.service')(app);
+  require('./team.service')(app);
+  require('./topic.service')(app);
+  require('./login.controller')(app);
+  require('./filter-tab.directive')(app);
+  require('./notices.directive')(app);  
 };

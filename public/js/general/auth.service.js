@@ -1,8 +1,8 @@
 module.exports = function(app){
 'use strict';
 
-// Authentication service, returns a resource
-/*@ngInject*/
+	// Authentication service, returns a resource
+	/*@ngInject*/
 	app.service('AuthService', function($log, $state, $http, $sanitize, AlertService, Constants){
 		var loggedIn = false;
 

@@ -1,10 +1,7 @@
 module.exports = function(app){
 
   /*@ngInject*/
-  app.service('WeatherService', WeatherService);
-
-  /*@ngInject*/
-  function WeatherService($log, $http, $q){
+  app.service('WeatherService', function($log, $http, $q){
     var weather = {};
 
     return {
@@ -15,6 +12,6 @@ module.exports = function(app){
         });
       }
     };
-  }
+  });
 
 };

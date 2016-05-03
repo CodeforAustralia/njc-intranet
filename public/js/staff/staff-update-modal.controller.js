@@ -2,11 +2,7 @@ module.exports = function(app){
   'use strict';
   // App bootstrapping + DI
   /*@ngInject*/
-app
-    .controller('StaffUpdateModalController', StaffUpdateModalController);
-
-  /*@ngInject*/
-  function StaffUpdateModalController($scope, $state, $log, $rootScope, moment, toastr, StaffService, StaffList, $modal, Constants){
+  app.controller('StaffUpdateModalController', function($scope, $state, $log, $rootScope, moment, toastr, StaffService, StaffList, $modal, Constants){
     $log.log($scope);
     var vm = this;
 
@@ -79,6 +75,6 @@ app
     }
 
     init();
-  }
+  });
 
 };

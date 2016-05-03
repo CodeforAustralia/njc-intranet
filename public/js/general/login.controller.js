@@ -2,10 +2,7 @@ module.exports = function(app){
   'use strict';
   // App bootstrapping + DI
   /*@ngInject*/
-  app.controller('LoginController', LoginController);
-
-  /*@ngInject*/
-  function LoginController($scope, $log, $rootScope, $modal, AuthService){
+  app.controller('LoginController', function($scope, $log, $rootScope, $modal, AuthService){
     $log.log("Starting the LoginController");
     var vm = this;
     //vm.model = new Entry(); // create a new instance of the entry model
@@ -42,6 +39,6 @@ module.exports = function(app){
     }
 
     init();
-  }
+  });
 
 };

@@ -6,7 +6,7 @@ module.exports = function(app){
       return {
         restrict: "EA", // element or attribute only
         replace: true, // replace the element
-        templateUrl: Constants.urls.public+'/js/partials/news-updates.directive.html',
+        template: require('./news-updates.directive.html'),
         scope: {
           news: '='
         },

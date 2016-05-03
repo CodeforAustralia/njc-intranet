@@ -1,10 +1,7 @@
 module.exports = function(app){
 
   /*@ngInject*/
-  app.service('TopicService', TopicService);
-
-  /*@ngInject*/
-  function TopicService($log, $http){
+  app.service('TopicService', function($log, $http){
     var topics = [
       {topic: "Client feedback", category: "HR"},
       {topic: "Leave", category: "HR"},
@@ -24,6 +21,6 @@ module.exports = function(app){
         };
       }
     };
-  }
+  });
 
 };

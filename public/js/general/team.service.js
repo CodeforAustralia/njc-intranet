@@ -1,10 +1,7 @@
 module.exports = function(app){
 
   /*@ngInject*/
-  app.service('TeamService', TeamService);
-
-  /*@ngInject*/
-  function TeamService($log, $http){
+  app.service('TeamService', function($log, $http){
     var teams = [
       {'label':'All staff', 'value':'', 'active': 'active', 'shortname': 'All Staff'},
       {'label':'Client services', 'value':'Client services', 'active':'', 'shortname': 'Client services'},
@@ -24,6 +21,6 @@ module.exports = function(app){
         };
       }
     };
-  }
+  });
 
 };

@@ -1,10 +1,7 @@
 module.exports = function(app){
 
   /*@ngInject*/
-  app.service('DocumentService', DocumentService);
-
-  /*@ngInject*/
-  function DocumentService($log, $http, Constants){
+  app.service('DocumentService', function($log, $http, Constants){
 
     var document_types = [{'type':'Policies'},{'type':'Procedures'},{'type':'Forms'},{'type':'Supporting documents'}];
     var document_categories = [{'category':'HR'}, {'category':'NJC Policies'}, {'category':'OHS'}, {'category':'Finance'}, {'category':'Administration'}];
@@ -29,6 +26,6 @@ module.exports = function(app){
         return $http.get(Constants.urls.api+"/documents");
       }
     };
-  }
+  });
 
 };

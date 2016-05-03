@@ -2,10 +2,7 @@ module.exports = function(app){
   'use strict';
   // App bootstrapping + DI
   /*@ngInject*/
-  app.controller('DashboardController', DashboardController);
-
-  /*@ngInject*/
-  function DashboardController($scope, $log, $rootScope, moment, StaffService, DutyWorker, News, Weather){
+  app.controller('DashboardController', function($scope, $log, $rootScope, moment, StaffService, DutyWorker, News, Weather){
     $log.log("Loading dashboard controller");
 
     var vm = this;
@@ -66,6 +63,6 @@ module.exports = function(app){
     }
 
     init();
-  }
+  });
 
 };

@@ -1,10 +1,8 @@
 module.exports = function(app){
 'use strict';
 
-  app.factory('AlertService', AlertService);
-
   /*@ngInject*/
-  function AlertService($rootScope, $log, $alert){
+  app.factory('AlertService', function($rootScope, $log, $alert){
     function showAlert(title, content, type, duration){
       $log.log("Showing the alert");
       var _duration = (typeof duration !== 'undefined') ? duration : 5;
@@ -22,6 +20,6 @@ module.exports = function(app){
         showAlert(title, content, 'danger');
       }
   	};
-  }
+  });
 
 };

@@ -1,10 +1,7 @@
 module.exports = function(app){
 
   /*@ngInject*/
-  app.service('NewsService', NewsService);
-
-  /*@ngInject*/
-  function NewsService($log, $http, $q){
+  app.service('NewsService', function($log, $http, $q){
     var news = [
       {"posted": Date.now(), "subject":"We’re going to be 10", "summary":"2016 is the Year of the NJC! We’re turning the big double digits. 10!\nBut how are we going to celebrate? Will we have streamers? Will there be a giant cake? What flavour? Who’ll jump out of it. Or on it? Tough questions. And only you can answer them.\nA ‘wish list’ of ideas is currently being drafted by Ann and she’s writing to you in the third person to ask you to put on your conical thinking cap and send her your ideas.", "permalink":"/news/1"},
       {"posted": Date.now(), "subject":"ADSL is now up and running again", "permalink":"/news/2"},
@@ -19,6 +16,6 @@ module.exports = function(app){
         });
       }
     };
-  }
+  });
 
 };

@@ -1,10 +1,7 @@
 module.exports = function(app){
 
   /*@ngInject*/
-  app.service('CategoryService', CategoryService);
-
-  /*@ngInject*/
-  function CategoryService($log, $http){
+  app.service('CategoryService', function($log, $http){
     var categories = [
       {'label':'All documents', 'value':'', 'active': 'active'},
       {'label':'Finance', 'value':'Finance', 'active':''},
@@ -20,6 +17,6 @@ module.exports = function(app){
         };
       }
     };
-  }
+  });
 
 };

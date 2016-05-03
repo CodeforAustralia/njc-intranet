@@ -1,11 +1,7 @@
 module.exports = function(app){
 
   /*@ngInject*/
-app
-    .service('StaffService', StaffService);
-
-  /*@ngInject*/
-  function StaffService($log, $http, Constants){
+  app.service('StaffService', function($log, $http, Constants){
     return {
       all: function(){
         $log.log("Getting all the staff");
@@ -27,6 +23,6 @@ app
                 .get(Constants.urls.api+"/staff?duty_worker=true");
       }
     };
-  }
+  });
 
 };
