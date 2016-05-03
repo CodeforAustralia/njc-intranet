@@ -1,9 +1,8 @@
-(function(){
+module.exports = function(app){
   'use strict';
   // App bootstrapping + DI
   /*@ngInject*/
-  angular.module('njcIntranetApp')
-    .config(function($urlRouterProvider){
+  app.config(function($urlRouterProvider){
       // route the default state to the app home
       $urlRouterProvider.when('', '/dashboard');
       $urlRouterProvider.when('/', '/dashboard');
@@ -231,4 +230,4 @@
   	});
   }
 
-})();
+};

@@ -1,7 +1,7 @@
 console.log(__dirname);
 
 module.exports = {
-  context: __dirname + '/public',
+  context: __dirname + '/public/js',
   entry: ['./index.js'],
   output: {
     path: __dirname + '/public/build',
