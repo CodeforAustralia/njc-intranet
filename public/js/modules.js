@@ -9,6 +9,4 @@ angular.module('njcIntranetApp', [
   'formly', 'formlyBootstrap',
   'angularFileUpload',
   'toastr'
-]);
-
-angular.module('njcIntranetApp.Constants', []);*/
+]);*/

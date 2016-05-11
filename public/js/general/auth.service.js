@@ -3,7 +3,7 @@ module.exports = function(app){
 
 	// Authentication service, returns a resource
 	/*@ngInject*/
-	app.service('AuthService', function($log, $state, $http, $sanitize, AlertService, Constants){
+	app.service('AuthService', function($log, $state, $http, $sanitize, AlertService){
 		var loggedIn = false;
 
 		return {
@@ -17,7 +17,7 @@ module.exports = function(app){
 					password: $sanitize(password)
 				};
 
-				$http.post(Constants.urls.api+'/auth/login', credentials).then(function(){
+				$http.post('/auth/login', credentials).then(function(){
 					loggedIn = true;
 					$log.log("Go to dashboard");
 					$state.go('app.dashboard');
@@ -31,7 +31,7 @@ module.exports = function(app){
 			},
 
 			logout: function(){
-				return $http.get(Constants.urls.api+'/auth/logout').then(function(){
+				return $http.get('/auth/logout').then(function(){
 					loggedIn = false;
 				});
 			}

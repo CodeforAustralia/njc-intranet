@@ -9,7 +9,8 @@ module.exports = function(app){
       {'label':'Registry','value':'Registry', 'active':'', 'shortname':'Registry'},
       {'label':'Corrections and Legal Service','value':'Corrections and Legal Service','active':'', 'shortname': 'Corrections'},
       {'label':'Police Prosecutor','value':'Police Prosecutor','active':'', 'shortname':'Police prosecutor'},
-      {'label':'Project innovation team','value':'Project innovation team','active':'', 'shortname':'Project innovations'}
+      {'label':'Project innovation team','value':'Project innovation team','active':'', 'shortname':'Project innovations'},
+      {'label':'Security','value':'Security','active':'', 'shortname':'Security'}
     ];
 
     return {

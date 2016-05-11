@@ -6,13 +6,15 @@ html
     link(rel='icon', href='/intranet-static/favicon.ico')
     link(rel="stylesheet", href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css')
     link(rel='stylesheet', href='/intranet-static/vendor/bootstrap/dist/css/bootstrap.min.css')
-    //link(rel='stylesheet', href='/intranet-static/vendor/angular-toastr/dist/angular-toastr.min.css')
+    link(rel='stylesheet', href='/intranet-static/vendor/angular-toastr/dist/angular-toastr.min.css')
 
     link(rel='stylesheet', href='/intranet-static/css/njc-base.css')
     link(rel="stylesheet/less", type="text/css", href='/intranet-static/less/app.less')
     script(type="text/javascript", src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.5.3/less.min.js")
-
-    script(type="text/javascript", src="/intranet-static/build/bundle.js")
+    if !env || env === 'development'
+      script(type="text/javascript", src="http://localhost:8080/Users/bardock/Sites/njc/intranet-v2/public/js/bundle.js")
+    else
+      script(type="text/javascript", src="/triage/static/build/bundle.js")
   body.njc.njc-intranet
     .wrapper(ng-app="njcIntranetApp", ng-cloak)
       block content

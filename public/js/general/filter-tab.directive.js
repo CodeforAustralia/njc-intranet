@@ -2,7 +2,7 @@ module.exports = function(app){
   'use strict';
   // App bootstrapping + DI
   /*@ngInject*/
-  app.directive('filterTabs', function($log, Constants){
+  app.directive('filterTabs', function($log){
       return {
         restrict: "EA", // element or attribute only
         replace: true, // replace the element

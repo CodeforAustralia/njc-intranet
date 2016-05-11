@@ -29,15 +29,13 @@ module.exports = function(app){
     })
     .constant('_', window._)
     .config(stateConfig)
-    //.run(function($log, $rootScope, $location, $state, AuthService, Constants){
+    //.run(function($log, $rootScope, $location, $state, AuthService){
     .run(runApp);
 
   /*@ngInject*/
-  function runApp($log, $rootScope, $location, $state, Constants, AuthService){
+  function runApp($log, $rootScope, $location, $state, AuthService){
     $log.log("AuthService");
     $log.log(AuthService);
-    $log.log("Constants");
-    $log.log(Constants);
 
     $log.log('location');
     $log.log($location);
@@ -55,7 +53,7 @@ module.exports = function(app){
     });*/
   }
 
-  function stateConfig($stateProvider, Constants){
+  function stateConfig($stateProvider){
     $stateProvider
     .state('auth', {
       abstract: true,

@@ -1,7 +1,7 @@
 module.exports = function(app){
 
   /*@ngInject*/
-  app.service('DocumentService', function($log, $http, Constants){
+  app.service('DocumentService', function($log, $http){
 
     var document_types = [{'type':'Policies'},{'type':'Procedures'},{'type':'Forms'},{'type':'Supporting documents'}];
     var document_categories = [{'category':'HR'}, {'category':'NJC Policies'}, {'category':'OHS'}, {'category':'Finance'}, {'category':'Administration'}];
@@ -9,7 +9,7 @@ module.exports = function(app){
     return {
       all: function(){
         $log.log("Getting all the documents");
-        return $http.get(Constants.urls.api+"/documents");
+        return $http.get("/api/documents");
       },
       types: function(){
         return new Promise(function(resolve, reject){
@@ -23,7 +23,7 @@ module.exports = function(app){
       },
       get: function(id){
         // by default just return the latest version of a document
-        return $http.get(Constants.urls.api+"/documents");
+        return $http.get("/api/documents");
       }
     };
   });

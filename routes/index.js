@@ -3,11 +3,13 @@ var passport = require('passport');
 var flash = require('express-flash');
 var router = express.Router();
 var helpers = require('../helpers');
-var config = require('../config.json');
+//var config = require('../config.json');
+var app = express();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'NJC Intranet', appConfig: config });
+  var env = app.get('env');
+  res.render('index', { title: 'NJC Intranet', env: env });
 });
 
 module.exports = router;

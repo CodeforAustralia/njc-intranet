@@ -2,6 +2,7 @@
 models/seeds
 config.json
 notes.md
+.env
 
 # General
 /bootstrap/compiled.php

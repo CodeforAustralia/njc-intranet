@@ -2,7 +2,7 @@ module.exports = function(app){
   'use strict';
   // App bootstrapping + DI
   /*@ngInject*/
-  app.directive('njcNotices', function($log, $interval, Constants){
+  app.directive('njcNotices', function($log, $interval){
       return {
         restrict: "EA", // element or attribute only
         replace: true, // replace the element

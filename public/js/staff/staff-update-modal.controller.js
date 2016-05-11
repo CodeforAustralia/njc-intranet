@@ -2,7 +2,7 @@ module.exports = function(app){
   'use strict';
   // App bootstrapping + DI
   /*@ngInject*/
-  app.controller('StaffUpdateModalController', function($scope, $state, $log, $rootScope, moment, toastr, StaffService, StaffList, $modal, Constants){
+  app.controller('StaffUpdateModalController', function($scope, $state, $log, $rootScope, moment, toastr, StaffService, StaffList, $modal){
     $log.log($scope);
     var vm = this;
 
@@ -10,7 +10,7 @@ module.exports = function(app){
 
     var modal = $modal({
       title: 'Update in/out status',
-      contentTemplate: Constants.urls.public+'/js/partials/staff-update-status.html',
+      contentTemplate: '/js/partials/staff-update-status.html',
       show: true,
       scope: $scope,
     });

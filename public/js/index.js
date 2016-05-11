@@ -25,8 +25,6 @@ var app = angular.module('njcIntranetApp', [
   'toastr'
 ]);
 
-//angular.module('njcIntranetApp.Constants', []);
-
 // load all our modules and DI the app module
 require('./app')(app);
 require('./general')(app);
