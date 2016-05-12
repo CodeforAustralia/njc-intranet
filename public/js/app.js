@@ -33,7 +33,7 @@ module.exports = function(app){
     .run(runApp);
 
   /*@ngInject*/
-  function runApp($log, $rootScope, $location, $state, AuthService){
+  function runApp($log, $rootScope, $location, $state, AuthService, ClientService){
     $log.log("AuthService");
     $log.log(AuthService);
 
@@ -43,14 +43,15 @@ module.exports = function(app){
 
     $log.log("Running the app");
     $log.log("Check auth");
-    /*$rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
-      if (toState.authenticate && !AuthService.isAuthenticated() && $location.$$host != 'localhost'){
+    $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+      $log.log(ClientService.isLoggedIn());
+      if (toState !== 'auth.login' && toState.authenticate && !ClientService.isLoggedIn() /*&& $location.$$host != 'localhost'*/){
         $log.log("Not Authenticated");
         // User isn’t authenticated
         $state.transitionTo("auth.login");
         event.preventDefault();
       }
-    });*/
+    });
   }
 
   function stateConfig($stateProvider){
@@ -115,6 +116,32 @@ module.exports = function(app){
         },
         News: function(NewsService){
           return NewsService.all();
+        },
+        SearchDocuments: function(SearchService){
+          return SearchService.documents();
+        },
+        SearchStaff: function(SearchService){
+          return SearchService.staff();
+        },
+        SearchData: function($log, SearchDocuments, SearchStaff){
+          // return an array of all the data
+          var data = _.concat(SearchDocuments.data, SearchStaff.data);
+          $log.log("Resolving search data");
+          $log.log(data);
+          // normalize the list for the search tool
+          var clean = _.map(data, function(item){
+            // check if it is a document or a staff memeber
+            $log.log(item);
+            if (item.title){
+              // document
+              return {'title': item.title, _id: item._id, 'type': 'document'};
+            }
+            else {
+              // staff
+              return {'title': item.name, _id: item._id, 'type': 'staff'};
+            }
+          });
+          return clean;
         }
       }
   	})
@@ -130,6 +157,22 @@ module.exports = function(app){
         "content": {},
         "modal@app": {
           controller: 'StaffUpdateModalController',
+          controllerAs: 'vm',
+        }
+      }
+    })
+    .state('app.dashboard.feedback', {
+      url: '/feedback',
+      authenticate : true,
+      resolve: {
+        StaffList: function(StaffService){
+          return StaffService.all();
+        }
+      },
+      views: {
+        "content": {},
+        "modal@app": {
+          controller: 'FeedbackFormController',
           controllerAs: 'vm',
         }
       }
@@ -181,6 +224,33 @@ module.exports = function(app){
         }
       }
   	})
+    .state('app.search', {
+      abstract: true,
+      authenticate : true,
+      views: {
+        "content": {
+          template: '<ui-view/>',
+        }
+      },
+      resolve: {
+      }
+  	})
+    .state('app.search.results', {
+  		url: '/search/:type/:id',
+  		template: require('./search/search-results.html'),
+  		controller: 'SearchResultsController',
+      controllerAs: 'vm',
+      authenticate : true,
+      resolve: {
+        Results: function($log, DocumentService, StaffService, $stateParams){
+          $log.log("resolving the search result");
+          if ($stateParams.type === 'staff')
+            return StaffService.get($stateParams.id);
+          else
+            return DocumentService.get($stateParams.id);
+        }
+      }
+  	})
     .state('app.documents', {
       abstract: true,
       authenticate : true,
@@ -223,6 +293,20 @@ module.exports = function(app){
         }
       }
   	})
+    .state('app.documents.edit', {
+  		url: '/documents/:id/edit',
+  		template: require('./documents/documents-edit.html'),
+  		controller: 'DocumentsEditController',
+      controllerAs: 'vm',
+      authenticate : true,
+      resolve: {
+        Document: function($log, $stateParams, DocumentService){
+          $log.log("Params");
+          $log.log($stateParams);
+          return DocumentService.get($stateParams.id);
+        }
+      }
+  	})
     .state('app.documents.new', {
   		url: '/documents/new',
   		template: require('./documents/documents-new.html'),
@@ -230,7 +314,6 @@ module.exports = function(app){
       controllerAs: 'vm',
       authenticate : true,
       resolve: {
-
       }
   	});
   }

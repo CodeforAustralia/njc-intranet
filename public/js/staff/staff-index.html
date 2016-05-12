@@ -13,7 +13,7 @@
   </div>
   <div class="row">
     <div class="col-xs-6">
-      <p>Showing {{ vm.counts.filtered_staff }} out of {{ vm.counts.total_staff }}</p>
+      <p>Showing {{ vm.filtered.length }} out of {{ vm.counts.total_staff }}</p>
     </div>
     <div class="col-xs-6 text-right">
       <button class="btn btn-primary" ui-sref="app.staff.new">
@@ -34,7 +34,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="staff-member" ng-repeat="staff_member in vm.staff | filter:vm.activeTab">
+        <tr class="staff-member" ng-repeat="staff_member in vm.filtered = (vm.staff | filter:vm.activeTab | filter:vm.query)">
           <!--<td class="staff-member-avatar text-center"><span class="fa fa-user fa-2x"></span></td>-->
           <td class="staff-member-details-staff">
             <span class="staff-member-details-name">{{ staff_member.name }}</span><br/>
@@ -58,6 +58,11 @@
             </button>
             &nbsp;
           </td>
+        </tr>
+      </tbody>
+      <tbody ng-if='vm.filtered.length === 0'>
+        <tr>
+          <td>Sorry! No documents found :(</p>
         </tr>
       </tbody>
     </table>

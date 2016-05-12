@@ -2,7 +2,7 @@ module.exports = function(app){
   'use strict';
   // App bootstrapping + DI
   /*@ngInject*/
-  app.controller('LoginController', function($scope, $log, $rootScope, $modal, AuthService){
+  app.controller('LoginController', function($scope, $log, $rootScope, $modal, $state, AuthService, AlertService, ClientService){
     $log.log("Starting the LoginController");
     var vm = this;
     //vm.model = new Entry(); // create a new instance of the entry model
@@ -31,7 +31,19 @@ module.exports = function(app){
     }];
 
     vm.submit = function(){
-      AuthService.attempt(vm.model.username, vm.model.password);
+      $log.log("Submitting login attempt");
+      AuthService
+        .attempt(vm.model.username, vm.model.password)
+        .then(function(resp){
+          // If login is successful, redirect to the users state
+          var client = resp.data.data;
+          $log.log("LOGGED IN SUCCESSFULLY");
+          AlertService.success("Successfully logged in");
+          ClientService.set(client);
+					$state.go('app.dashboard');
+        }, function(err){
+          AlertService.error("Error logging in!");
+        });
     };
 
     function init(){

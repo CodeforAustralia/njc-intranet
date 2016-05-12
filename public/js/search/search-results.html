@@ -1,0 +1,34 @@
+<section class="page search container-fluid" id="search-results">
+  <div class="row">
+    <div class="col-xs-12">
+      <button class="btn btn-secondary" ui-sref="app.dashboard">
+        <span class="fa fa-home"></span>&nbsp;Return home
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>Search Results</h2>
+    </div>
+    <div ng-if="vm.params.type==='document'" class="col-xs-12 results-document">
+      <h3>{{ vm.data.title }}</h3>
+      <h4>Category: {{ vm.data.metadata.category }}</h4>
+      <h4>Type: {{ vm.data.metadata.type }}</h4>
+      <p>{{ vm.data.description }}</p>
+      <button class="btn btn-default" href="{{}}">
+        View document
+      </button>
+    </div>
+    <div ng-if="vm.params.type==='staff'" class="col-xs-12 results-staff">
+      <h3>{{ vm.data.name }}</h3>
+      <h4>{{ vm.data.organisation.role }} | {{ vm.data.organisation.team }}</h4>
+      <ul class="staff-contact-card">
+        <li>Email: {{ vm.data.contact.email }}</li>
+        <li ng-show="vm.data.contact.phone">Phone: {{ vm.data.contact.phone }} </li>
+        <li ng-show="vm.data.contact.mobile">Mobile: {{ vm.data.contact.mobile }} </li>
+        <li ng-show="vm.data.contact.ext">Extension: {{ vm.data.contact.ext }} </li>
+      </ul>
+      <p>Status currently {{ vm.data.status.in ? "In" : "Out" }} </p>
+    </div>
+  </div>
+</section>

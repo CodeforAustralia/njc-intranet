@@ -1,12 +1,13 @@
 extends layout
 
 block content
-  .global-alert
-    .container
+  .global-alert(data-offset-top="0",bs-affix)
+    .container.fixed
       .row
         p.col-xs-12
+          span.fa.fa-warning &nbsp;
           strong BETA&nbsp;
-          | - We are still testing this, please <a ui-sref="evaluation">report any issues</a> you encounter
+          | - We are still testing this, please <a class="btn btn-primary" ui-sref="app.dashboard.feedback">submit any issues</a> you encounter
   header.global-header
     .container
       .row

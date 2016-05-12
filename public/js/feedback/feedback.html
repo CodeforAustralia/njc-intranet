@@ -1,0 +1,13 @@
+<section ng-cloak class="page evaluation-form" id="evaluation-form">
+  <form ng-if="!vm.submitted" method="post" enctype="multipart/form-data" ng-submit="vm.submit()">
+    <formly-form model="vm.model" fields="vm.fields">
+      <button class="btn btn-primary" type="submit">
+        <span class="fa fa-save"></span>&nbsp;Submit
+      </button>
+    </formly-form>
+  </form>
+  <div ng-if="vm.submitted">
+    <h2>Thanks!</h2>
+    <p>Thanks for your feedback!</p>
+  </div>
+</section>

@@ -7,6 +7,7 @@ module.exports = function(app){
 
     var vm = this;
 
+    vm.query = "";
     vm.staff = StaffList.data;
     vm.duty_worker = findDutyWorker(vm.staff);
     vm.teams = Teams.data;

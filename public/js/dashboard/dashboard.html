@@ -1,4 +1,11 @@
 <section ng-cloak class="page dashboard" id="dashboard">
+  <div class="row global-search">
+    <form class="form" role="form">
+      <div class="form-group">
+        <input type="text" class="form-control typeahead" ng-model="vm.search_query" data-animation="am-flip-x" bs-options="item.title for item in vm.options" placeholder="Search for staff members or documents" bs-typeahead>
+      </div>
+    </form>
+  </div>
   <div class="row widgets">
     <div class="col-sm-4 col-xs-12 vertical-center dashboard-widget update-in-out-status-widget">
       <njc-update-in-out-status></njc-update-in-out-status>

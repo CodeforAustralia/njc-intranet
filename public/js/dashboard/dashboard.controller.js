@@ -2,18 +2,36 @@ module.exports = function(app){
   'use strict';
   // App bootstrapping + DI
   /*@ngInject*/
-  app.controller('DashboardController', function($scope, $log, $rootScope, moment, StaffService, DutyWorker, News, Weather){
+  app.controller('DashboardController', function($scope, $log, $rootScope, moment, StaffService, DocumentService, DutyWorker, News, Weather, SearchData, $typeahead, $state){
     $log.log("Loading dashboard controller");
 
     var vm = this;
 
-    $log.log(moment);
-    $log.log(DutyWorker);
+    $log.log("Search data");
+    $log.log(SearchData);
+    vm.search_query = "";
+    vm.options = SearchData;
 
     vm.duty_worker = (!_.isUndefined(DutyWorker) && !_.isUndefined(DutyWorker.data)) ? DutyWorker.data[0] : {};
     vm.news = News.data;
     vm.weather = Weather.data;
     vm.now = getToday();
+
+    $scope.$on('$typeahead.select', function(event, value, index, elem){
+      console.log("SELECTED");
+      console.log(event); // event properties
+      console.log(value); // value of select
+      console.log(index); // index of selected value in dropdown
+      console.log(elem);  // properties of calling element ($id to get the id)
+
+      // show the search results
+      $state.go('app.search.results', {type: value.type, id: value._id});
+    });
+
+    vm.selected = function(event){
+      $log.log("SELECTED");
+      $log.log(event);
+    };
 
 
     $rootScope.$on('UPDATE_DUTY_WORKER', updateDutyWorker);

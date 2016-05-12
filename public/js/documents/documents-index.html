@@ -14,18 +14,26 @@
       </button>
     </div>
   </div>
-  <div class="row documents-listing">
-    <div class="col-xs-12 document-group" ng-repeat="item in vm.content | orderBy:'title' | filter:{metadata: {category: vm.activeTab}}">
-      <div class="document-group-content">
-        <p>
+  <div class="documents-listing">
+    <div class="row document-group" ng-repeat="item in filtered = (vm.content | orderBy:'title' | filter:{metadata: {category: vm.activeTab}} | filter:vm.query)">
+      <div class="document-group-content col-xs-12">
+        <p class="col-xs-8">
           <a href="{{ item.location.url ? item.location.url : item.location.local }}">
             {{ item.title }}
           </a>
           <br/>
           <span class="document-type">{{ item.metadata.type }}</span>
-        </br/>
+        </p>
+        <p class="col-xs-4 text-right">
+          <button ui-sref="app.documents.edit({id: item._id})" type="button" class="btn btn-secondary" name="button">
+            Edit&nbsp;<span class="fa fa-pencil"></span>
+          </button>
         </p>
       </div>
+    </div>
+    <div class="row" ng-if='filtered.length === 0'>
+      <br/>
+      <p class="col-xs-12">Sorry! No documents found :(</p>
     </div>
   </div>
 

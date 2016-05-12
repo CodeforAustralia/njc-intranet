@@ -8,6 +8,7 @@ module.exports = function(app){
     var vm = this;
     $log.log(documentList);
 
+    vm.query = ""; // used for the search filter
     vm.activeTab = 'All documents';
     vm.categories = Categories.data;
     vm.types = Types.data;

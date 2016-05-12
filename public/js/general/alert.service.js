@@ -16,6 +16,9 @@ module.exports = function(app){
       info: function(title, content){
         showAlert(title, content, 'info');
       },
+      warning: function(title, content){
+        showAlert(title, content, 'warning');
+      },
       error: function(title, content){
         showAlert(title, content, 'danger');
       }

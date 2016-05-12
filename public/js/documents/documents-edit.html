@@ -1,0 +1,23 @@
+<section ng-cloak class="page edit-document container" id="documents-new">
+  <div class="row">
+    <div class="col-xs-12">
+      <button class="btn btn-secondary" ui-sref="app.documents.index">
+        <span class="fa fa-home"></span>&nbsp;Back to documents
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>Edit document</h2>
+    </div>
+  </div>
+  <div class="row">
+    <form method="post" enctype="multipart/form-data" class="col-xs-6" ng-submit="vm.update()">
+      <formly-form model="vm.model" fields="vm.fields">
+        <button class="btn btn-primary" type="submit">
+          <span class="fa fa-save"></span>&nbsp;Save changes
+        </button>
+      </formly-form>
+    </form>
+  </div>
+</section>

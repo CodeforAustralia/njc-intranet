@@ -7,7 +7,7 @@ var mimetypes = require('mime-types');
 var Documents = require('../models/documents');
 
 /* GET a document by its id */
-router.get('/:id', function(req, res, next){
+router.get('/:id/file', function(req, res, next){
   var id = String(req.params.id);
   // find each person with a last name matching 'Ghost'
   var q = Documents.findOne({ _id: id });
@@ -33,6 +33,21 @@ router.get('/:id', function(req, res, next){
 });
 
 
+/* GET a single document */
+router.get('/:id', function(req, res, next){
+  // get the documents details
+  var q = Documents.findOne({_id: req.params.id});
+
+  q.exec(function(err, doc){
+    // 404 if we cant find it
+    if (err) return res.sendStatus(404);
+
+    // return it if we find it
+    return res.json(doc);
+  });
+});
+
+
 /* GET all the documents */
 router.get('/', function(req, res, next){
   // find each person with a last name matching 'Ghost'
@@ -42,6 +57,32 @@ router.get('/', function(req, res, next){
   q.exec(function (err, docs) {
     if (err) return handleError(err);
     res.json(docs);
+  });
+});
+
+/* PUT update a document */
+router.put("/:id", function(req, res, next){
+  // should create a new version when the url changes
+
+  // find each person with a last name matching 'Ghost'
+  var doc = {
+    title: req.body.title,
+    description: req.body.description,
+    local_file: req.body.local_file || null,
+    metadata: {
+      category: req.body.category,
+      type: req.body.type,
+      updated_at: new Date()
+    },
+    location: {url: req.body.url}
+  };
+
+  // execute the query at a later time
+  Documents.update({_id: req.params.id}, doc, function(err, d){
+    console.log("Updating");
+    if (err) return res.sendStatus(500);
+
+    res.json(doc);
   });
 });
 

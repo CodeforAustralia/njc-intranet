@@ -23,7 +23,10 @@ module.exports = function(app){
       },
       get: function(id){
         // by default just return the latest version of a document
-        return $http.get("/api/documents");
+        return $http.get("/api/documents/" + id);
+      },
+      update: function(id, model){
+        return $http.put("/api/documents/" + id, model);
       }
     };
   });

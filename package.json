@@ -7,7 +7,8 @@
   },
   "scripts": {
     "build": "webpack --display-modules --progress",
-    "start": "mongod & PORT=4000 nodemon ./bin/www"
+    "start": "mongod & PORT=4000 nodemon ./bin/www",
+    "dev": "nodemon && webpack-dev-server"
   },
   "dependencies": {
     "body-parser": "~1.12.4",
@@ -34,10 +35,12 @@
   },
   "devDependencies": {
     "angular": "^1.5.5",
+    "angular-base64": "^2.0.5",
     "angular-cache": "^4.6.0",
     "angular-file-upload": "^2.2.0",
     "angular-formly": "^8.2.0",
     "angular-formly-templates-bootstrap": "^6.4.0",
+    "angular-local-storage": "^0.2.7",
     "angular-moment": "^1.0.0-beta.6",
     "angular-sanitize": "^1.5.5",
     "angular-strap": "^2.3.8",
