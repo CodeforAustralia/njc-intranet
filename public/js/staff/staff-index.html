@@ -16,7 +16,7 @@
       <p>Showing {{ vm.filtered.length }} out of {{ vm.counts.total_staff }}</p>
     </div>
     <div class="col-xs-6 text-right">
-      <button class="btn btn-primary" ui-sref="app.staff.new">
+      <button class="btn btn-primary" ui-sref="app.staff.create">
         <span class="fa fa-upload"></span>&nbsp;Add a new staff member
       </button>
     </div>
@@ -53,7 +53,7 @@
             <span class="fa fa-circle"></span>
           </td>
           <td class="staff-member-update">
-            <button class="btn" type="button" ui-sref='app.staff.update({id:staff_member._id})'>
+            <button class="btn" type="button" ui-sref='app.staff.edit({id:staff_member._id})'>
               Update details&nbsp;<span class="fa fa-pencil"></span>
             </button>
             &nbsp;

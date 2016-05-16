@@ -37,5 +37,6 @@ require('./auth')(app);
 require('./dashboard')(app);
 require('./documents')(app);
 require('./feedback')(app);
+require('./news')(app);
 require('./staff')(app);
 require('./search')(app);

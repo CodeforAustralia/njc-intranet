@@ -19,8 +19,7 @@ module.exports = function(app){
         return $http.put("/api/staff/" + id, staff);
       },
       dutyWorker: function(){
-        return $http
-                .get("/api/staff?duty_worker=true");
+        return $http.get("/api/staff?duty_worker=true");
       }
     };
   });

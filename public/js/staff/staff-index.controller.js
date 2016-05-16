@@ -2,7 +2,7 @@ module.exports = function(app){
   'use strict';
   // App bootstrapping + DI
   /*@ngInject*/
-  app.controller('StaffIndexController', function($scope, $log, $rootScope, moment, StaffList, Teams){
+  app.controller('StaffIndexController', function($scope, $log, $rootScope, moment, StaffList){
     $log.log($scope);
 
     var vm = this;
@@ -10,7 +10,8 @@ module.exports = function(app){
     vm.query = "";
     vm.staff = StaffList.data;
     vm.duty_worker = findDutyWorker(vm.staff);
-    vm.teams = Teams.data;
+    //vm.teams = Teams.data;
+    vm.teams = [];
     vm.counts = {
       total_staff: 0, filtered_staff: 0
     };

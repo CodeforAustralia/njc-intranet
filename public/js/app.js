@@ -44,13 +44,13 @@ module.exports = function(app){
     $log.log("Running the app");
     $log.log("Check auth");
     $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
-      $log.log(ClientService.isLoggedIn());
-      if (toState !== 'auth.login' && toState.authenticate && !ClientService.isLoggedIn() /*&& $location.$$host != 'localhost'*/){
+      /*$log.log(ClientService.isLoggedIn());
+      if (toState !== 'auth.login' && toState.authenticate && !ClientService.isLoggedIn() /*&& $location.$$host != 'localhost'*//*){
         $log.log("Not Authenticated");
         // User isn’t authenticated
         $state.transitionTo("auth.login");
         event.preventDefault();
-      }
+      }*/
     });
   }
 
@@ -86,12 +86,12 @@ module.exports = function(app){
     .state('app', {
       template: require('./general/layout.html'),
       authenticate : true,
-      resolve: {
+      /*resolve: {
         Teams: function($log, TeamService){
           $log.log("Resolve teams");
           return TeamService.all();
         }
-      }
+      }*/
     })
     .state('app.dashboard', {
   		url: '/dashboard',
@@ -111,10 +111,12 @@ module.exports = function(app){
           $log.log("Duty worker");
           return StaffService.dutyWorker();
         },
-        Weather: function(WeatherService){
+        Weather: function($log, WeatherService){
+          $log.log("Weather");
           return WeatherService.today();
         },
-        News: function(NewsService){
+        News: function($log, NewsService){
+          $log.log("Getting news");
           return NewsService.all();
         },
         SearchDocuments: function(SearchService){
@@ -203,19 +205,19 @@ module.exports = function(app){
         }
       }
   	})
-    .state('app.staff.new', {
-  		url: '/staff/new',
-  		template: require('./staff/staff-new.html'),
-  		controller: 'StaffNewController',
+    .state('app.staff.create', {
+  		url: '/staff/create',
+  		template: require('./staff/staff-create.html'),
+  		controller: 'StaffCreateController',
       controllerAs: 'vm',
       authenticate : true,
       resolve: {
       }
   	})
-    .state('app.staff.update', {
-  		url: '/staff/:id',
-  		template: require('./staff/staff-update.html'),
-  		controller: 'StaffUpdateController',
+    .state('app.staff.edit', {
+  		url: '/staff/:id/edit',
+  		template: require('./staff/staff-edit.html'),
+  		controller: 'StaffEditController',
       controllerAs: 'vm',
       authenticate : true,
       resolve: {
@@ -311,6 +313,54 @@ module.exports = function(app){
   		url: '/documents/new',
   		template: require('./documents/documents-new.html'),
   		controller: 'DocumentsNewController',
+      controllerAs: 'vm',
+      authenticate : true,
+      resolve: {
+      }
+  	})
+    .state('app.news', {
+      abstract: true,
+      authenticate : true,
+      views: {
+        "content": {
+          template: '<ui-view/>',
+        }
+      },
+      resolve: {
+
+      }
+  	})
+    .state('app.news.index', {
+      url: '/news',
+      template: require('./news/news-index.html'),
+      controller: 'NewsIndexController',
+      controllerAs: 'vm',
+      authenticate : true,
+      resolve: {
+      }
+    })
+    .state('app.news.item', {
+      url: '/news/:id',
+      template: require('./news/news-item.html'),
+      controller: 'NewsItemController',
+      controllerAs: 'vm',
+      authenticate : true,
+      resolve: {
+      }
+    })
+    .state('app.news.edit', {
+      url: '/news/:id/edit',
+      template: require('./news/news-edit.html'),
+      controller: 'NewsEditController',
+      controllerAs: 'vm',
+      authenticate : true,
+      resolve: {
+      }
+    })
+    .state('app.news.create', {
+  		url: '/news/create',
+  		template: require('./news/news-create.html'),
+  		controller: 'NewsCreateController',
       controllerAs: 'vm',
       authenticate : true,
       resolve: {

@@ -36,10 +36,9 @@ module.exports = function(app){
         .attempt(vm.model.username, vm.model.password)
         .then(function(resp){
           // If login is successful, redirect to the users state
-          var client = resp.data.data;
           $log.log("LOGGED IN SUCCESSFULLY");
           AlertService.success("Successfully logged in");
-          ClientService.set(client);
+          ClientService.set(vm.model.username);
 					$state.go('app.dashboard');
         }, function(err){
           AlertService.error("Error logging in!");

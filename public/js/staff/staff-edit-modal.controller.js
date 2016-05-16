@@ -2,15 +2,15 @@ module.exports = function(app){
   'use strict';
   // App bootstrapping + DI
   /*@ngInject*/
-  app.controller('StaffUpdateModalController', function($scope, $state, $log, $rootScope, moment, toastr, StaffService, StaffList, $modal){
+  app.controller('StaffEditModalController', function($scope, $state, $log, $rootScope, moment, toastr, StaffService, StaffList, $modal){
     $log.log($scope);
     var vm = this;
 
-    $log.log('StaffUpdateModalController');
+    $log.log('StaffEditModalController');
 
     var modal = $modal({
       title: 'Update in/out status',
-      contentTemplate: '/js/partials/staff-update-status.html',
+      contentTemplate: '/js/partials/staff-edit-status.html',
       show: true,
       scope: $scope,
     });

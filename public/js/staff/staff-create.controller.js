@@ -2,7 +2,7 @@ module.exports = function(app){
   'use strict';
   // App bootstrapping + DI
   /*@ngInject*/
-  app.controller('StaffNewController', function($scope, $log, $rootScope, moment, toastr, StaffService, Teams){
+  app.controller('StaffCreateController', function($scope, $log, $rootScope, moment, toastr, StaffService, Teams){
     $log.log($scope);
     var vm = this;
 
