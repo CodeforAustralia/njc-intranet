@@ -7,13 +7,9 @@ module.exports = function(app){
     var client = null;
 
     function cacheClient(_client){
-      //SessionService.cache('client', _client);
-      var curr = { logged_in: true};
-      client = _client;
       $log.log("CACHE CLIENT");
-      $log.log(client);
-      //SessionService.cache('client', curr);
-      SessionService.cache('client', client);
+      client = _client; // set the client obj
+      SessionService.cache('client', _client);
     }
 
     function fetchClientFromCache(){
@@ -26,8 +22,10 @@ module.exports = function(app){
     return {
       isLoggedIn: function(){
         $log.log("is logged in");
-        $log.log(client);
-        return !_.isNull(client);
+        //$log.log(client);
+        var c = fetchClientFromCache();
+        $log.log(c);
+        return !_.isNull(c);
       },
       clear: function(){
         $log.log("Clearing the session");

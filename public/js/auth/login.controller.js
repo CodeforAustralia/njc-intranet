@@ -38,6 +38,7 @@ module.exports = function(app){
           // If login is successful, redirect to the users state
           $log.log("LOGGED IN SUCCESSFULLY");
           AlertService.success("Successfully logged in");
+          $log.log(vm.model);
           ClientService.set(vm.model.username);
 					$state.go('app.dashboard');
         }, function(err){

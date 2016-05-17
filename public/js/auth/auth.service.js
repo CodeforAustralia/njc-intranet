@@ -21,7 +21,7 @@ module.exports = function(app){
 			},
 
 			logout: function(){
-				return $http.get('/auth/logout').then(function(){
+				return $http.get('/api/auth/logout').then(function(){
 					loggedIn = false;
 				});
 			}

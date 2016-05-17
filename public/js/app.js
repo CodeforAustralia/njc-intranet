@@ -44,13 +44,13 @@ module.exports = function(app){
     $log.log("Running the app");
     $log.log("Check auth");
     $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
-      /*$log.log(ClientService.isLoggedIn());
-      if (toState !== 'auth.login' && toState.authenticate && !ClientService.isLoggedIn() /*&& $location.$$host != 'localhost'*//*){
+      $log.log(ClientService.isLoggedIn());
+      if (toState !== 'auth.login' && toState.authenticate && !ClientService.isLoggedIn() /*&& $location.$$host != 'localhost'*/){
         $log.log("Not Authenticated");
         // User isn’t authenticated
         $state.transitionTo("auth.login");
         event.preventDefault();
-      }*/
+      }
     });
   }
 
