@@ -8,7 +8,7 @@
   "scripts": {
     "build": "webpack --display-modules --progress",
     "start": "mongod & PORT=4000 nodemon ./bin/www",
-    "dev": "nodemon && webpack-dev-server"
+    "dev": "(nodemon) & webpack-dev-server"
   },
   "dependencies": {
     "body-parser": "~1.12.4",

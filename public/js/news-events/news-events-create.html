@@ -1,0 +1,23 @@
+<section ng-cloak class="page create-news-events container" id="news-events-create">
+  <div class="row">
+    <div class="col-xs-12">
+      <button class="btn btn-secondary" ui-sref="app.dashboard">
+        <span class="fa fa-home"></span>&nbsp;Return home
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>Add news or event</h2>
+    </div>
+  </div>
+  <div class="row">
+    <form method="post" enctype="multipart/form-data" class="col-xs-6" ng-submit="vm.submit()">
+      <formly-form model="vm.model" fields="vm.fields">
+        <button class="btn btn-primary" type="submit">
+          <span class="fa fa-save"></span>&nbsp;Add news or event
+        </button>
+      </formly-form>
+    </form>
+  </div>
+</section>

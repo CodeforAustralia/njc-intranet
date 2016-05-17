@@ -115,9 +115,9 @@ module.exports = function(app){
           $log.log("Weather");
           return WeatherService.today();
         },
-        News: function($log, NewsService){
+        News: function($log, NewsEventsService){
           $log.log("Getting news");
-          return NewsService.all();
+          return NewsEventsService.all();
         },
         SearchDocuments: function(SearchService){
           return SearchService.documents();
@@ -248,8 +248,11 @@ module.exports = function(app){
           $log.log("resolving the search result");
           if ($stateParams.type === 'staff')
             return StaffService.get($stateParams.id);
-          else
-            return DocumentService.get($stateParams.id);
+          else {
+            var doc =  DocumentService.get($stateParams.id);
+            $log.log(doc);
+            return doc;
+          }
         }
       }
   	})
@@ -331,41 +334,41 @@ module.exports = function(app){
       }
   	})
     .state('app.news.index', {
-      url: '/news',
-      template: require('./news/news-index.html'),
-      controller: 'NewsIndexController',
-      controllerAs: 'vm',
-      authenticate : true,
-      resolve: {
-      }
-    })
-    .state('app.news.item', {
-      url: '/news/:id',
-      template: require('./news/news-item.html'),
-      controller: 'NewsItemController',
+      url: '/news-events',
+      template: require('./news-events/news-events-index.html'),
+      controller: 'NewsEventsIndexController',
       controllerAs: 'vm',
       authenticate : true,
       resolve: {
       }
     })
     .state('app.news.edit', {
-      url: '/news/:id/edit',
-      template: require('./news/news-edit.html'),
-      controller: 'NewsEditController',
+      url: '/news-events/:id/edit',
+      template: require('./news-events/news-events-edit.html'),
+      controller: 'NewsEventsEditController',
       controllerAs: 'vm',
       authenticate : true,
       resolve: {
       }
     })
     .state('app.news.create', {
-  		url: '/news/create',
-  		template: require('./news/news-create.html'),
-  		controller: 'NewsCreateController',
+  		url: '/news-events/create',
+  		template: require('./news-events/news-events-create.html'),
+  		controller: 'NewsEventsCreateController',
       controllerAs: 'vm',
       authenticate : true,
       resolve: {
       }
-  	});
+  	})
+    .state('app.news.item', {
+      url: '/news-events/:id',
+      template: require('./news-events/news-events-item.html'),
+      controller: 'NewsEventsItemController',
+      controllerAs: 'vm',
+      authenticate : true,
+      resolve: {
+      }
+    });
   }
 
 };

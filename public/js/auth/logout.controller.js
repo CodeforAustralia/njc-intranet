@@ -6,15 +6,8 @@ module.exports = function(app){
 
     function init(){
       AlertService.warning("Logging out");
-
-      $auth
-        .logout()
-        .then(function(){
-          $log.log("logged out");
-      		AlertService.success("Successfully logged out");
-      		ClientService.clear();
-        });
-
+      ClientService.clear();
+      $state.go('auth.login');
     }
     init();
   });

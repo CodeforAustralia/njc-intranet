@@ -2,7 +2,7 @@ module.exports = function(app){
   'use strict';
   // App bootstrapping + DI
   /*@ngInject*/
-  app.controller('NewsEditController', function($scope, $log){
+  app.controller('NewsEventsEditController', function($scope, $log){
     $log.log($scope);
     var vm = this;
 

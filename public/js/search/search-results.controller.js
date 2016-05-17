@@ -7,8 +7,9 @@ module.exports = function(app){
 
     var vm = this;
 
+    $log.log(Results);
     vm.params = $stateParams;
-    vm.data = Results.data[0];
+    vm.data = (Results.data[0]) ? Results.data[0] : Results.data;
 
     function init(){
       $log.log("Loaded the search results controller");
