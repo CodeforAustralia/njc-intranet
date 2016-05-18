@@ -7,11 +7,11 @@
     </div>
     <div class="row news-updates-info njc-widget-info">
       <div ng-repeat="news_item in news" class="col-xs-12 news-updates-content">
-        <h3 class="news-updates-content-posted">{{ news_item.posted | date: "mediumDate" }}</h3>
-        <p class="news-updates-content-subject"><strong>{{ news_item.subject }}</strong></p>
+        <h3 class="news-updates-content-posted">Posted {{ news_item.meta.posted_at | date: "medium" }}</h3>
+        <p class="news-updates-content-subject"><strong>{{ news_item.title }}</strong></p>
         <p ng-if="news_item.summary" class="news-updates-content-subject">{{ news_item.summary }}</p>
         <p class="news-updates-content-more-info">
-          <a href="{{ news_item.permalink }}">more details&hellip;</a>
+          <a ui-sref="app.news.item({permalink: news_item.meta.permalink})">more details&hellip;</a>
         </p>
       </div>
     </div>

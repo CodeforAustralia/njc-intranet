@@ -3,10 +3,18 @@ module.exports = function(app){
   console.log(app);
   // App bootstrapping + DI
   /*@ngInject*/
-  app.config(function($urlRouterProvider){
+  app.config(function($urlRouterProvider, $datepickerProvider){
       // route the default state to the app home
       $urlRouterProvider.when('', '/dashboard');
       $urlRouterProvider.when('/', '/dashboard');
+
+      angular.extend($datepickerProvider.defaults, {
+        dateFormat: 'dd/MM/yyyy',
+        modelDateFormat: 'yyyy-MM-dd HH:mm:ss',
+        startWeek: 1,
+        minDate: new Date(),
+        autoclose: true,
+      });
     })
     .config(function (CacheFactoryProvider) {
       angular.extend(CacheFactoryProvider.defaults, { maxAge: 15 * 60 * 1000 });
@@ -115,7 +123,7 @@ module.exports = function(app){
           $log.log("Weather");
           return WeatherService.today();
         },
-        News: function($log, NewsEventsService){
+        NewsEvents: function($log, NewsEventsService){
           $log.log("Getting news");
           return NewsEventsService.all();
         },
@@ -361,12 +369,15 @@ module.exports = function(app){
       }
   	})
     .state('app.news.item', {
-      url: '/news-events/:id',
+      url: '/news-events/:permalink',
       template: require('./news-events/news-events-item.html'),
       controller: 'NewsEventsItemController',
       controllerAs: 'vm',
       authenticate : true,
       resolve: {
+        NewsEvent: function($stateParams, NewsEventsService){
+          return NewsEventsService.byPermalink($stateParams.permalink);
+        }
       }
     });
   }

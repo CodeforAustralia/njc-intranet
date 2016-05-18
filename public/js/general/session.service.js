@@ -15,7 +15,7 @@ module.exports = function(app){
 
     var retrieve = function(key){
       var data = localStorageService.get(key);
-      if (!_.isEmpty(data)){
+      if (!_.isEmpty(data) && !_.isUndefined(data) && !_.isNull(data)){
         return JSON.parse($base64.decode(data));
       }
       return null;

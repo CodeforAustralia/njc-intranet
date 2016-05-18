@@ -2,7 +2,7 @@ module.exports = function(app){
   'use strict';
   // App bootstrapping + DI
   /*@ngInject*/
-  app.controller('DashboardController', function($scope, $log, $rootScope, moment, StaffService, DocumentService, DutyWorker, News, Weather, SearchData, $typeahead, $state){
+  app.controller('DashboardController', function($scope, $log, $rootScope, moment, StaffService, DocumentService, DutyWorker, NewsEvents, Weather, SearchData, $typeahead, $state){
     $log.log("Loading dashboard controller");
 
     var vm = this;
@@ -13,9 +13,11 @@ module.exports = function(app){
     vm.options = SearchData;
 
     vm.duty_worker = (!_.isUndefined(DutyWorker) && !_.isUndefined(DutyWorker.data)) ? DutyWorker.data[0] : {};
-    vm.news = News.data;
+    vm.news_events = NewsEvents.data;
     vm.weather = Weather.data;
     vm.now = getToday();
+    $log.log("DASHBOARD");
+    $log.log(vm);
 
     $scope.$on('$typeahead.select', function(event, value, index, elem){
       console.log("SELECTED");

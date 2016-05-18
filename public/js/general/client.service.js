@@ -13,7 +13,7 @@ module.exports = function(app){
     }
 
     function fetchClientFromCache(){
-      client = SessionService.get('client');
+      client = SessionService.get('client') || null;
       $log.log("Fetching client from cache");
       $log.log(client);
       return client;
