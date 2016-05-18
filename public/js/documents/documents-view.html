@@ -1,31 +1,17 @@
-<section ng-cloak class="page documents container" id="documents-index">
+<section ng-cloak class="page documents container" id="document-view">
+  <!-- WHEN YOU VIEW A DOC, SHOULD SEE DETAILS INCLUDING LINK TO FILE G: / public -->
   <div class="row">
+    <pre>
+      {{ vm.document | json }}
+    </pre>
     <div class="col-xs-12">
-      <h2>Documents</h2>
+      <h2>{{ vm.document.metadata.type }} - {{ vm.document.title }}</h2>
     </div>
   </div>
-  <div class="row">
-    <div class="col-xs-9">
-      <filter-tabs tabs=vm.categories></filter-tabs>
-    </div>
-    <div class="col-xs-3 text-right">
-      <button class="btn btn-primary" ui-sref="app.documents.new">
-        <span class="fa fa-upload"></span>&nbsp;Add new document
-      </button>
-    </div>
-  </div>
-  <div class="row documents-listing">
-    <div class="col-xs-12 col-sm-4 document-group" ng-repeat="item in vm.content">
-      <div class="document-group-content">
-        <h3>{{ item.title }}</h3>
-        <ul class="document-group-list">
-          <li ng-repeat="doc in item.documents">
-            <span class="fa fa-rocket">{{ doc.type }}</span>
-            <a href="/documents/{{ doc._id }}">{{ doc.title }}</a><br/>
-            <span>{{ doc.summary }}</span>
-          </li>
-        </ul>
-      </div>
+  <div class="document-details">
+    <div class="row">
+      <p ng-if="vm.document.description" class="col-xs-12">{{ vm.document.description }}</p>
+      <p ng-if="!vm.document.description" class="col-xs-12">No description has been added for this file</p>
     </div>
   </div>
 </section>

@@ -2,62 +2,25 @@ module.exports = function(app){
   'use strict';
   // App bootstrapping + DI
   /*@ngInject*/
-  app.controller('DocumentsNewController', function($scope, $log, $rootScope, moment, FileUploader, toastr, Categories, Topics){
+  app.controller('DocumentsNewController', function($scope, $log, $rootScope, DocumentService, moment, toastr, Categories, Types){
     $log.log($scope);
     var vm = this;
 
-    vm.uploader = new FileUploader({
-      url: "/uploads",
-      formData: [],
-      removeAfterUpload: true
+    vm.types = _.map(Types.data, function(type){
+      return {name: type.type, value: type.type};
     });
 
-    vm.uploader.onBeforeUploadItem = function(item){
-      item.formData.push({
-        title: vm.document.title,
-        description: vm.document.description,
-        topic: vm.document.topics.topic,
-        category: vm.document.topics.category,
-      });
-    };
+    $log.log(Categories.data);
 
-    vm.uploader.onErrorItem = function(item, response, status){
-      console.log('onSuccessItem');
-      toastr.error("There was an error uploading your file, try again","Error");
-    };
+    vm.categories = _.map(Categories.data, function(category){
+      return {name: category.category, value: category.category};
+    });
 
-    vm.uploader.onCompleteAll = function(){
-      console.log("Uploaded!");
-      toastr.success("File uploaded!","Success");
-      vm.document = {};
-    };
+    $log.log(vm);
 
-    vm.categories = Categories.data;
-    vm.topics = Topics.data;
-    vm.document = { title: "", description: "", topics: "" };
+    vm.model = {};
 
     vm.fields = [
-      /*{
-        key: 'file',
-        type: 'input',
-        ngModelAttrs: {
-          "nvFileSelect": {
-            "attribute": "nv-file-select"
-          },
-          "fileUploader": {
-            "attribute": "uploader"
-          }
-        },
-        templateOptions: {
-          type: 'file',
-          label: 'File to be added',
-          placeholder: 'Select the file to be added',
-          required: true,
-          "nvFileSelect": "",
-          "fileUploader": "uploader"
-        }
-      },*/
-
       {
         key: 'title',
         type: 'input',
@@ -73,33 +36,60 @@ module.exports = function(app){
         templateOptions: {
           label: 'Short description of the document',
           placeholder: 'Enter a short description of the document',
-          required: true
         }
       },
       {
-        key: 'topics',
+        key: 'type',
         type: 'select',
         templateOptions: {
-          label: 'Select a topic area',
-          placeholder: 'Select a topic area',
+          label: 'What type of document is this?',
+          placeholder: 'Select a document type',
           required: true,
-          options: vm.topics,
-          ngOptions: 'option as option.topic group by option.category for option in to.options'
+          options: vm.types,
+
+        }
+      },
+      {
+        key: 'category',
+        type: 'select',
+        templateOptions: {
+          label: 'Select a document category',
+          placeholder: 'Select a document category',
+          required: true,
+          options: vm.categories,
+        }
+      },
+      {
+        key: 'local_file',
+        type: 'checkbox',
+        templateOptions: {
+          label: 'Is this file on the G drive?',
+          required: true,
+        }
+      },
+      {
+        key: 'location',
+        type: 'input',
+        templateOptions: {
+          label: 'Url',
+          placeholder: 'Add the url of the file'
         }
       }
     ];
 
     vm.submit = function(){
-      // submit the form
-      $log.log("Submitting the form");
-      $log.log(vm.document);
-      vm.uploader.uploadAll();
-      $log.log(vm.uploader);
+      $log.log("updating the document");
+      DocumentService
+        .create(vm.model)
+        .then(function(){
+          toastr.success("Created the new document");
+        }, function(){
+          toastr.error("There was a problem, please refresh and try again");
+        });
     };
 
     function init(){
       $log.log("Loaded the documents new controller");
-      $log.log(vm.document);
     }
 
     init();

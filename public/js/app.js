@@ -278,6 +278,11 @@ module.exports = function(app){
         },
         Types: function(DocumentService){
           return DocumentService.types();
+        },
+        Groups: function($log, DocumentService){
+          $log.log("Document groups");
+          $log.log(DocumentService.groups());
+          return DocumentService.groups();
         }
       }
   	})
@@ -291,6 +296,15 @@ module.exports = function(app){
         documentList: function(DocumentService){
           return DocumentService.all();
         }
+      }
+  	})
+    .state('app.documents.new', {
+  		url: '/documents/new',
+  		template: require('./documents/documents-new.html'),
+  		controller: 'DocumentsNewController',
+      controllerAs: 'vm',
+      authenticate : true,
+      resolve: {
       }
   	})
     .state('app.documents.view', {
@@ -318,15 +332,6 @@ module.exports = function(app){
           $log.log($stateParams);
           return DocumentService.get($stateParams.id);
         }
-      }
-  	})
-    .state('app.documents.new', {
-  		url: '/documents/new',
-  		template: require('./documents/documents-new.html'),
-  		controller: 'DocumentsNewController',
-      controllerAs: 'vm',
-      authenticate : true,
-      resolve: {
       }
   	})
     .state('app.news', {

@@ -21,6 +21,9 @@ module.exports = function(app){
           return resolve({data: document_categories});
         });
       },
+      groups: function(){
+        return $http.get('/api/document-groups');
+      },
       get: function(id){
         // by default just return the latest version of a document
         return $http.get("/api/documents/" + id);

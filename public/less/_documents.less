@@ -1,5 +1,5 @@
 .documents-listing {}
-  
+
 .document-group {
   margin:1em 0;
   background:transparent;
@@ -16,4 +16,26 @@
   li {
     margin-bottom:1em;
   }
+}
+
+.document-group-title {
+  margin:0;
+  padding:@gutter;
+  background:@dark-grey;
+  color:@white;
+
+  .document-group-title-text {
+    margin:0;
+  }
+}
+
+.document-group-content {
+  font-size:small;
+  //border:dotted @dark-grey 0.125em;
+  .document-group-item{
+    margin:0;
+    background:@white;
+  }
+  ul {margin:0;padding:0;}
+  li {list-style-type:none;}
 }

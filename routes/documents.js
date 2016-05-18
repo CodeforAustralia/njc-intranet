@@ -1,10 +1,11 @@
+var _ = require('lodash');
 var express = require('express');
 var router = express.Router();
 var multer = require('multer');
 var fs = require('fs');
 var mimetypes = require('mime-types');
-
 var Documents = require('../models/documents');
+var Groups = require('../models/document-groups');
 
 /* GET a document by its id */
 router.get('/:id/file', function(req, res, next){
@@ -56,13 +57,18 @@ router.get('/', function(req, res, next){
   // execute the query at a later time
   q.exec(function (err, docs) {
     if (err) return handleError(err);
-    res.json(docs);
+
+    groupDocuments(docs)
+    .then(function(results){
+      res.json(results);
+    });
   });
 });
 
 /* PUT update a document */
 router.put("/:id", function(req, res, next){
   // should create a new version when the url changes
+  var id = req.params.id;
 
   // find each person with a last name matching 'Ghost'
   var doc = {
@@ -77,13 +83,97 @@ router.put("/:id", function(req, res, next){
     location: {url: req.body.url}
   };
 
-  // execute the query at a later time
-  Documents.update({_id: req.params.id}, doc, function(err, d){
-    console.log("Updating");
-    if (err) return res.sendStatus(500);
-
-    res.json(doc);
-  });
+  // get the group from the params and either find the id, or create a new one
+  findOrCreateGroup(req.body.group)
+    .then(function(group){
+      // uhhh - shouldnt nest promises
+      console.log("Group for the doc fetched");
+      console.log(id);
+      console.log(doc);
+      console.log(group);
+      updateDocument(id, doc, group)
+      .then(function(doc){
+        // send the response
+        console.log("Sending the response");
+        console.log(doc);
+        return res.json(doc);
+      });
+    })
+    .catch(function(err){
+      throw Error(err);
+    });
 });
+
+function updateDocument(id, doc, group){
+  console.log("Updating the doc");
+  console.log(doc);
+  return new Promise(function(resolve, reject){
+    // execute the query at a later time
+    doc.metadata.group = group._id; // set the group id, update the document now
+    Documents.update({_id: id}, doc, function(err, res){
+      console.log("Updating");
+      if (err) reject(err);
+      // update the group assignment
+      resolve(doc);
+    });
+  });
+}
+
+function getDocumentGroups(){
+  // get all the groups into a key value pair
+  return new Promise(function(resolve, reject){
+    Groups.find({}, function(err, g){
+      if (err) reject(err);
+      var group_names = [];
+
+      _(g)
+        .sortBy(['title'])
+        .map(function(group){
+          console.log(group);
+          group_names[group._id] = group.title;
+        })
+        .value();
+
+      resolve(group_names);
+    });
+  });
+}
+
+// group the array of documents passed in by their group name
+function groupDocuments(docs){
+  return new Promise(function(resolve, reject){
+    getDocumentGroups()
+    .then(function(groupnames){
+      var gs = _.groupBy(docs, function(item){
+        return groupnames[item.metadata.group] || '';
+      });
+
+      resolve(gs);
+    })
+    .catch(function(err){
+      throw new Error(err);
+    });
+  });
+}
+
+// find the group for the document or create a new one
+function findOrCreateGroup(title){
+  return new Promise(function(resolve, reject){
+    console.log("Creating / fetching the group " + title);
+    if (!title) title = null; // set it to null
+    Groups.findOne({title: title}, function(err, res){
+      if (err) reject(err);
+
+      if (res) resolve(res);
+      else {
+        var g = new Groups({ title: title });
+        g.save(function(err, new_group){
+          if (err) reject(err);
+          resolve(new_group);
+        });
+      }
+    });
+  });
+}
 
 module.exports = router;

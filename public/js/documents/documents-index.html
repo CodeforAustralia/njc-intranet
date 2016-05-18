@@ -4,7 +4,7 @@
       <h2>Documents</h2>
     </div>
   </div>
-  <div class="row">
+  <!--<div class="row">
     <div class="col-xs-9">
       <filter-tabs tabs="vm.categories" key="category" active="vm.activeTab" default=""></filter-tabs>
     </div>
@@ -13,9 +13,60 @@
         <span class="fa fa-upload"></span>&nbsp;Add new document
       </button>
     </div>
+  </div>-->
+  <div class="row">
+    <form class="form col-xs-12" role="form">
+      <div class="form-group">
+        <input type="text" class="form-control" ng-model="vm.query" data-animation="am-flip-x" placeholder="Search for a document" />
+      </div>
+    </form>
   </div>
   <div class="documents-listing">
-    <div class="row document-group" ng-repeat="item in filtered = (vm.content | orderBy:'title' | filter:{metadata: {category: vm.activeTab}} | filter:vm.query)">
+    <div class="row document-group" ng-repeat="(group, documents) in filtered = (vm.content.sorted)">
+      <div class="document-group-title">
+        <h4 class="document-group-title-text">{{ group }}</h4>
+      </div>
+      <div class="document-group-content">
+        <ul>
+          <li class="document-group-item row" ng-repeat="doc in documents | filter:vm.query">
+            <p class="col-xs-8">
+              <span class="fa fa-file"></span>&nbsp;
+              <!--<a ui-sref="app.documents.view({id: doc._id})">{{ doc.title }}</a>-->
+              <a ng-if="doc.location.url" href="{{ doc.location.url}}">{{ doc.title }}</a>
+              <span ng-if="!doc.location.url">{{ doc.title }}</span>
+            </p>
+            <p class="col-xs-4 text-right">
+              <button ui-sref="app.documents.edit({id: doc._id})" type="button" class="btn btn-secondary" name="button">
+                Edit&nbsp;<span class="fa fa-pencil"></span>
+              </button>
+            </p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row document-group">
+      <div class="document-group-title">
+        <h4 class="document-group-title-text">Other documents</h4>
+      </div>
+      <div class="document-group-content">
+        <ul class="row">
+          <li class="document-group-item" ng-repeat="doc in filtered = (vm.content.unsorted | filter:vm.query)">
+            <p class="col-xs-8">
+              <span class="fa fa-file"></span>&nbsp;
+              <!--<a ui-sref="app.documents.view({id: doc._id})">{{ doc.title }}</a>-->
+              <a ng-if="doc.location.url" href="{{ doc.location.url}}">{{ doc.title }}</a>
+              <span ng-if="!doc.location.url">{{ doc.title }}</span>
+            </p>
+            <p class="col-xs-4 text-right">
+              <button ui-sref="app.documents.edit({id: doc._id})" type="button" class="btn btn-secondary" name="button">
+                Edit&nbsp;<span class="fa fa-pencil"></span>
+              </button>
+            </p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!--<div class="row document-group" ng-repeat="item in filtered = (vm.content | orderBy:'title' | filter:{metadata: {category: vm.activeTab}} | filter:vm.query)">
       <div class="document-group-content col-xs-12">
         <p class="col-xs-8">
           <a href="{{ item.location.url ? item.location.url : item.location.local }}">
@@ -34,7 +85,7 @@
     <div class="row" ng-if='filtered.length === 0'>
       <br/>
       <p class="col-xs-12">Sorry! No documents found :(</p>
-    </div>
+    </div>-->
   </div>
 
   <!--<div class="row documents-listing">

@@ -1,12 +1,21 @@
 # TODO
+
+## 30/05/16
+* docs to go on google drive + in folders
+* seperate user / admin login
+* retrieve data from backup?
+* news / events email out to group
+  - calendar
+
 * Fix the contact.phone field when updating staff
+
 * Add list of docs diane sent, modify doc add / edit form -> only allow links to G: / http://
+  - need to add topics and categories, topics should be grouped into categories like hr etc
+* feedback / info form jumps back to the dashboard
 
 ## 10/5/16
-* persist login
 * Check out the updating status from the staff list
   - add staff member photos
-* Add feedback
 * Documents interface play around with having it all grouped togethor
   - di to send through the org chart for me to add
 * Dropdown on the status screen was a bit invisible
@@ -17,6 +26,8 @@
   - add a field for the 'primary contact for the email'
 
 ### Done
+* Add feedback
 * edit docs
+* persist login
 * search bar for staff and documents
 * add security as a team

@@ -2,22 +2,24 @@ module.exports = function(app){
   'use strict';
   // App bootstrapping + DI
   /*@ngInject*/
-  app.controller('DocumentsViewController', function($scope, $log, $rootScope, moment, documentList, Categories){
+  app.controller('DocumentsViewController', function($scope, $log, $rootScope, moment, documentItem, Categories){
     $log.log($scope);
 
     var vm = this;
-    $log.log(documentList);
+    $log.log(documentItem);
 
     vm.categories = Categories.data;
-    vm.content = [
+    /*vm.content = [
       {'title':'Leave', 'documents': [{'title':'Leave form'}, {'title':'Leave procedures'}, {'title':'Leave policy'}]},
       {'title':'Feedback', 'documents': [{'title':'Feedback form'}, {'title':'Feedback procedures'}, {'title':'Feedback policy'}]},
       {'title':'Feedback', 'documents': [{'title':'Feedback form'}, {'title':'Feedback procedures'}, {'title':'Feedback policy'}]},
       {'title':'Feedback', 'documents': [{'title':'Feedback form'}, {'title':'Feedback procedures'}, {'title':'Feedback policy'}]}
-    ];
+    ];*/
+
+    vm.document = documentItem.data;
 
     function init(){
-      $log.log("Loaded the documents index controller");
+      $log.log("Loaded the documents view controller");
     }
 
     init();

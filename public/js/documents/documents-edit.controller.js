@@ -16,6 +16,12 @@ module.exports = function(app){
       return {name: category.category, value: category.category};
     });
 
+    vm.groups = [
+      {'name': 'Feedback', value: 'Feedback'},
+      {'name': 'First aid', value: 'First aid'},
+      {'name': 'Higher duties', value: 'Higher duties'},
+    ];
+
     vm.document = Document.data;
 
     $log.log(vm);
@@ -60,6 +66,16 @@ module.exports = function(app){
         }
       },
       {
+        key: 'group',
+        type: 'select',
+        templateOptions: {
+          label: 'Select a document group',
+          placeholder: 'Select a document group',
+          required: false,
+          options: vm.groups,
+        }
+      },
+      {
         key: 'category',
         type: 'select',
         templateOptions: {
@@ -74,7 +90,7 @@ module.exports = function(app){
         type: 'checkbox',
         templateOptions: {
           label: 'Is this file on the G drive?',
-          required: true,
+          required: false,
         }
       },
       {
@@ -89,6 +105,8 @@ module.exports = function(app){
 
     vm.update = function(){
       $log.log("updating the document");
+      vm.model.local_file = vm.model.local_file || false;
+
       DocumentService
         .update(vm.document._id, vm.model)
         .then(function(){
