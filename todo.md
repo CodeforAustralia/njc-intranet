@@ -6,6 +6,7 @@
 * retrieve data from backup?
 * news / events email out to group
   - calendar
+* Move config to env configs - particularly passport....
 
 * Fix the contact.phone field when updating staff
 
