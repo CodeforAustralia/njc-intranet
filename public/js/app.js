@@ -135,7 +135,17 @@ module.exports = function(app){
         },
         SearchData: function($log, SearchDocuments, SearchStaff){
           // return an array of all the data
-          var data = _.concat(SearchDocuments.data, SearchStaff.data);
+          $log.log(_.flatten(SearchDocuments.data));
+          var docs = [];
+          _.each(SearchDocuments.data, function(list){
+            return docs.push(list);
+          });
+          docs = _.flatten(docs);
+          var data = _.concat(docs, SearchStaff.data);
+          $log.log("******DOCS******");
+          $log.log(SearchDocuments.data);
+          $log.log("******STAFF******");
+          $log.log(SearchStaff.data);
           $log.log("Resolving search data");
           $log.log(data);
           // normalize the list for the search tool
@@ -151,11 +161,14 @@ module.exports = function(app){
               return {'title': item.name, _id: item._id, 'type': 'staff'};
             }
           });
+
+          $log.log("******CLEANED******");
+          $log.log(clean);
           return clean;
         }
       }
   	})
-    .state('app.dashboard.modal-update-status', {
+    .state('app.dashboard.modal-edit-status', {
   		url: '/status',
       authenticate : true,
       resolve: {
@@ -166,7 +179,7 @@ module.exports = function(app){
       views: {
         "content": {},
         "modal@app": {
-          controller: 'StaffUpdateModalController',
+          controller: 'StaffEditModalController',
           controllerAs: 'vm',
         }
       }
@@ -298,10 +311,10 @@ module.exports = function(app){
         }
       }
   	})
-    .state('app.documents.new', {
-  		url: '/documents/new',
-  		template: require('./documents/documents-new.html'),
-  		controller: 'DocumentsNewController',
+    .state('app.documents.create', {
+  		url: '/documents/create',
+  		template: require('./documents/documents-create.html'),
+  		controller: 'DocumentsCreateController',
       controllerAs: 'vm',
       authenticate : true,
       resolve: {
@@ -353,6 +366,9 @@ module.exports = function(app){
       controllerAs: 'vm',
       authenticate : true,
       resolve: {
+        newsEventsList: function($log, NewsEventsService){
+          return NewsEventsService.all();
+        }
       }
     })
     .state('app.news.edit', {
@@ -373,10 +389,10 @@ module.exports = function(app){
       resolve: {
       }
   	})
-    .state('app.news.item', {
+    .state('app.news.view', {
       url: '/news-events/:permalink',
-      template: require('./news-events/news-events-item.html'),
-      controller: 'NewsEventsItemController',
+      template: require('./news-events/news-events-view.html'),
+      controller: 'NewsEventsViewController',
       controllerAs: 'vm',
       authenticate : true,
       resolve: {

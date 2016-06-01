@@ -2,7 +2,7 @@
 module.exports = function(app){
   require('./document.service')(app);
   require('./documents-index.controller')(app);
-  require('./documents-new.controller')(app);
+  require('./documents-create.controller')(app);
   require('./documents-edit.controller')(app);
   require('./documents-view.controller')(app);
 };

@@ -1,0 +1,26 @@
+<section class="page search view-news-events container" id="search-results">
+  <div class="row page-action">
+    <div class="col-xs-12">
+      <button class="btn btn-secondary" ui-sref="app.news.index">
+        <span class="fa fa-home"></span>&nbsp;Return to news and events
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="news-event-date">
+        <p class="posted-at">{{ vm.item.meta.posted_at | date:"dd MMM, yyyy"}}</p>
+      </div>
+      <div class="news-event-content">
+        <div class="news-event-title">
+          <h2>{{ vm.item.title }}</h2>
+        </div>
+        <div class="news-event-item-details">
+          <p>{{ vm.item.description }}</p>
+          <br />
+          <p ng-if='vm.item.url'>More information: <a href="{{ vm.item.url }}">{{ vm.item.url }}</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

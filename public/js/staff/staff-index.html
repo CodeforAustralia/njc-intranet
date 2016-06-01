@@ -12,13 +12,15 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-6">
-      <p>Showing {{ vm.filtered.length }} out of {{ vm.counts.total_staff }}</p>
-    </div>
-    <div class="col-xs-6 text-right">
+    <div class="col-xs-12">
       <button class="btn btn-primary" ui-sref="app.staff.create">
         <span class="fa fa-upload"></span>&nbsp;Add a new staff member
       </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <p>Showing {{ vm.filtered.length }} out of {{ vm.counts.total_staff }}</p>
     </div>
   </div>
   <div class="staff-listing">

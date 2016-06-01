@@ -1,0 +1,32 @@
+<section ng-cloak class="page index-news-events container" id="news-events-index">
+  <!-- SEARCH BAR -->
+  <div class="row page-action">
+    <div class="col-xs-12">
+      <button class="btn btn-primary" ui-sref="app.news.create">
+        <span class="fa fa-upload"></span>&nbsp;Add an item
+      </button>
+    </div>
+  </div>
+  <!--<div ng-if="vm.list.length < 1" class="news-event-list">
+    <p>No items added yet!</p>
+  </div>-->
+  <!--<div ng-if="vm.list.length > 0" class="news-event-list">-->
+  <div class="news-event-list">
+    <div class="row" ng-repeat="(date,items) in vm.list">
+      <div class="col-xs-12">
+        <div class="news-event-date">
+          <p>{{ date | date: "dd MMM, yyyy" }}</p>
+        </div>
+      </div>
+      <div class="col-xs-12" ng-repeat="item in items">
+        <div class="news-event-item">
+          <h2>{{ item.title }}</h2>
+          <p>{{ item.summary }}</p>
+          <p>
+            <button class="btn btn-action" ui-sref="app.news.view({permalink:item.meta.permalink})">Read more</button>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

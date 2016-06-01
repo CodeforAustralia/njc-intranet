@@ -2,7 +2,7 @@ module.exports = function(app){
   'use strict';
   // App bootstrapping + DI
   /*@ngInject*/
-  app.controller('DocumentsNewController', function($scope, $log, $rootScope, DocumentService, moment, toastr, Categories, Types){
+  app.controller('DocumentsCreateController', function($scope, $log, $rootScope, DocumentService, moment, toastr, Categories, Types){
     $log.log($scope);
     var vm = this;
 
@@ -64,7 +64,7 @@ module.exports = function(app){
         type: 'checkbox',
         templateOptions: {
           label: 'Is this file on the G drive?',
-          required: true,
+          required: false,
         }
       },
       {

@@ -10,7 +10,7 @@ module.exports = function(app){
 
     var modal = $modal({
       title: 'Update in/out status',
-      contentTemplate: '/js/partials/staff-edit-status.html',
+      template: require('./staff-edit-status.html'),
       show: true,
       scope: $scope,
     });

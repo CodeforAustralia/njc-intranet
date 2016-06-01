@@ -32,8 +32,23 @@ module.exports = function(app){
 
       vm.content = [];
       // Getting rid of groupings for now figure that out later
+      $log.log("DOC LIST");
       $log.log(documentList);
-      vm.content = {'sorted': {}, 'unsorted': []};
+
+      var docs = [];
+      _.each(documentList.data, function(list){
+        return docs.push(list);
+      });
+
+      docs = _.flatten(docs);
+      $log.log(docs);
+
+      vm.content = _.groupBy(docs, function(doc){
+        return doc.metadata.category;
+      });
+      $log.log(vm.content);
+
+      /*vm.content = {'sorted': {}, 'unsorted': []};
       $log.log(vm.content);
 
       // set up the sorted and unsorted lists
@@ -44,7 +59,7 @@ module.exports = function(app){
         else {
           vm.content.unsorted = _.sortBy(list, ['title']);
         }
-      });
+      });*/
 
       $log.log(vm.content);
     }

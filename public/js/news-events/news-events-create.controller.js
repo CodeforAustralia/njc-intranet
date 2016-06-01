@@ -2,13 +2,15 @@ module.exports = function(app){
   'use strict';
   // App bootstrapping + DI
   /*@ngInject*/
-  app.controller('NewsEventsCreateController', function($scope, $log, NewsEventsService, toastr){
+  app.controller('NewsEventsCreateController', function($scope, $log, NewsEventsService, EmailListService, toastr){
     $log.log($scope);
     var vm = this;
 
     function init(){
       $log.log("Loaded the news events create controller");
     }
+
+    vm.emailLists = EmailListService.all().data;
 
     vm.submit = function(){
       NewsEventsService
@@ -94,8 +96,17 @@ module.exports = function(app){
         templateOptions: {
           label: 'Contact email'
         },
-        hideExpression: 'model.type != "event"'  
-      }
+        hideExpression: 'model.type != "event"'
+      },
+      {
+        key: 'share',
+        type: 'select',
+        templateOptions: {
+          label: 'Share this with...',
+          required: false,
+          options: vm.emailLists
+        }
+      },
     ];
 
     init();

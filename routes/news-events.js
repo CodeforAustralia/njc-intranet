@@ -10,6 +10,10 @@ var Events = require('../models/events');
 function getNews(params, done){
   return News.find(params, function(err, res){
     if (err) done(err);
+
+    for (var i=0;i<res.length;i++)
+      res[i].type = 'news';
+
     done(null, res);
   });
 }
@@ -17,6 +21,15 @@ function getNews(params, done){
 function getEvents(params, done){
   return Events.find(params, function(err, res){
     if (err) done(err);
+
+    // set the type in the moongoose model before it returns them
+
+    for (var i=0;i<res.length;i++)
+      res[i].type = 'event';
+
+    console.log("SET TYPE");
+    console.log(res);
+
     done(null, res);
   });
 }
@@ -67,7 +80,7 @@ router.get('/', function(req, res, next){
     if (err) throw Error(err);
 
     // merge the arrays of results and sort them by date posted
-    console.log(_.flatten(results));
+    //console.log(_.flatten(results));
     results = _.sortBy(_.flatten(results), function(o){ return -o.meta.posted_at; });
     res.send(results);
   });
@@ -103,9 +116,16 @@ router.post('/', function(req, res, next){
   model.save(function(err, result){
     console.log(err);
     if (err) res.sendStatus(500);
+
+    if (data.share && data.share !== ''){ shareItemWithGroup(result.meta.permalink, data.share); }
+
     res.json(model);
   });
   // generate permalink on save in the schema
 });
+
+function shareItemWithGroup(permalink, group){
+  console.log("Sharing the: " + permalink + " with the group: " + group);
+}
 
 module.exports = router;

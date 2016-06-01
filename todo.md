@@ -1,5 +1,7 @@
 # TODO
 
+## Done
+
 ## 30/05/16
 * docs to go on google drive + in folders
 * seperate user / admin login
@@ -7,12 +9,12 @@
 * news / events email out to group
   - calendar
 * Move config to env configs - particularly passport....
-
 * Fix the contact.phone field when updating staff
-
 * Add list of docs diane sent, modify doc add / edit form -> only allow links to G: / http://
   - need to add topics and categories, topics should be grouped into categories like hr etc
 * feedback / info form jumps back to the dashboard
+* WYSIWYG Editor for news / events
+* Email list for News / events
 
 ## 10/5/16
 * Check out the updating status from the staff list

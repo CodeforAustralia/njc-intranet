@@ -22,7 +22,7 @@
     </form>
   </div>
   <div class="documents-listing">
-    <div class="row document-group" ng-repeat="(group, documents) in filtered = (vm.content)">
+    <div class="row document-group" ng-repeat="(group, documents) in filtered = (vm.content.sorted)">
       <div class="document-group-title">
         <h4 class="document-group-title-text">{{ group }}</h4>
       </div>
