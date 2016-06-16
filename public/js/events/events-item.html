@@ -1,0 +1,46 @@
+<section ng-cloak class="events page">
+  <global-header hide-search=true></global-header>
+  <main>
+    <div class="container">
+      <div class="row page-nav">
+        <div class="col-xs-12">
+          <button class="btn btn-default" ui-sref="events.index">
+            Return to event list
+          </button>
+          <button class="btn btn-default">
+            Add an event
+          </button>
+        </div>
+      </div>
+      <div class="row page-title">
+        <div class="col-xs-12">
+          <h1>Event</h1>
+        </div>
+      </div>
+      <div class="page-content">
+        <div class="row events-item">
+          <div class="col-xs-12">
+            <div class="events-item-header">
+              <p>Posted on: {{ vm.event.meta.posted_at | date: "dd MMM, yyyy" }}</p>
+              <h2>{{ vm.event.title }}</h2>
+            </div>
+            <div class="events-item-content">
+              <p>{{ vm.event.description }}</p>
+              <div class="page-content-callout">
+                <ul>
+                  <li>Date: {{ vm.event.date | date: "dd MMM, yyyy" }}</li>
+                  <li>Location: {{ vm.event.location || "No location specified" }}</li>
+                </ul>
+              </div>
+            </div>
+            <div class="events-item-footer">
+              <a ng-if="vm.event.url" class="btn btn-default" href="{{vm.event.url}}">
+                More information
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</section>

@@ -3,12 +3,10 @@ module.exports = function(app){
 
 	// Authentication service, returns a resource
 	/*@ngInject*/
-	app.service('AuthService', function($log, $http, $sanitize, AlertService){
-		var loggedIn = false;
-
+	app.service('AuthService', function($log, $http, $q, $sanitize, AlertService, TokenService){
 		return {
 			isAuthenticated: function(){
-				return loggedIn;
+				return TokenService.isAuthenticated();
 			},
 
 			attempt: function(username, password){
@@ -17,13 +15,12 @@ module.exports = function(app){
 					password: $sanitize(password)
 				};
 
-				return $http.post('/api/auth/login', credentials);
+				return $http.post('/api/authenticate/token', credentials);
 			},
 
 			logout: function(){
-				return $http.get('/api/auth/logout').then(function(){
-					loggedIn = false;
-				});
+				// resolve the token
+				return $q.resolve(TokenService.clear());
 			}
 		};
 	});

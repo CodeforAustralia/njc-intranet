@@ -1,72 +1,37 @@
-<section class="page staff container-fluid" id="staff-index">
-  <div class="row">
-    <div class="col-xs-12">
-      <h2>Staff</h2>
+<section ng-cloak class="page staff">
+  <global-header hide-search=true></global-header>
+  <main>
+    <div class="container">
+      <div class="row page-nav">
+        <div class="col-xs-12">
+          <button class="btn btn-default" ui-sref="dashboard">
+            Return to dashboard
+          </button>
+          <button class="btn btn-default" ui-sref="staff.create">
+            Add staff member
+          </button>
+        </div>
+      </div>
+      <div class="row page-title">
+        <div class="col-xs-12">
+          <h1>Staff</h1>
+        </div>
+      </div>
+      <section class="page-content">
+        <div class="row">
+          <div class="col-xs-12">
+            <duty-worker-card class="cards" worker="vm.dutyWorker[0]"></duty-worker-card>
+          </div>
+        </div>
+        <div class="row">
+          <form class="form col-xs-12" role="form">
+            <div class="form-group">
+              <input type="text" class="form-control" ng-model="vm.query" data-animation="am-flip-x" placeholder="Search for a staff member" />
+            </div>
+          </form>
+        </div>
+        <staff-list staff="vm.staff" search="vm.query"></staff-list>
+      </section>
     </div>
-  </div>
-  <div class="row duty-worker">
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <filter-tabs tabs="vm.teams" active="vm.activeTab" default="" key="label"></filter-tabs>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <button class="btn btn-primary" ui-sref="app.staff.create">
-        <span class="fa fa-upload"></span>&nbsp;Add a new staff member
-      </button>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <p>Showing {{ vm.filtered.length }} out of {{ vm.counts.total_staff }}</p>
-    </div>
-  </div>
-  <div class="staff-listing">
-    <table class="table table-condensed">
-      <thead>
-        <tr>
-          <!--<th>&nbsp;</th>-->
-          <th>Name / Role</th>
-          <th>Team</th>
-          <th>Duty Worker</th>
-          <th>In/Out</th>
-          <th>Update</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="staff-member" ng-repeat="staff_member in vm.filtered = (vm.staff | filter:vm.activeTab | filter:vm.query)">
-          <!--<td class="staff-member-avatar text-center"><span class="fa fa-user fa-2x"></span></td>-->
-          <td class="staff-member-details-staff">
-            <span class="staff-member-details-name">{{ staff_member.name }}</span><br/>
-            <span class="staff-member-details-role">{{ staff_member.organisation.role }}</span>
-          </td>
-          <td class="staff-member-details-team">{{ staff_member.organisation.team }}</td>
-          <td class="staff-member-details-duty-worker">
-            <span ng-if="staff_member.status.duty_worker" class="fa fa-check"></span>
-          </td>
-          <td class="staff-member-status staff-member-status-in" ng-if="staff_member.status.in">
-            <span class="staff-member-status-text">In</span>&nbsp;
-            <span class="fa fa-circle"></span>
-          </td>
-          <td class="staff-member-status staff-member-status-out" ng-if="!staff_member.status.in">
-            <span class="staff-member-status-text">Out</span>&nbsp;
-            <span class="fa fa-circle"></span>
-          </td>
-          <td class="staff-member-update">
-            <button class="btn" type="button" ui-sref='app.staff.edit({id:staff_member._id})'>
-              Update details&nbsp;<span class="fa fa-pencil"></span>
-            </button>
-            &nbsp;
-          </td>
-        </tr>
-      </tbody>
-      <tbody ng-if='vm.filtered.length === 0'>
-        <tr>
-          <td>Sorry! No documents found :(</p>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  </main>
 </section>

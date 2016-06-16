@@ -2,7 +2,7 @@ module.exports = function(app){
   'use strict';
   // App bootstrapping + DI
   /*@ngInject*/
-  app.controller('DocumentsEditController', function($scope, $log, $rootScope, DocumentService, Document, moment, toastr, Categories, Types){
+  app.controller('DocumentsEditController', function($scope, $log, $rootScope, DocumentsService, Document, moment, toastr, Categories, Types){
     $log.log($scope);
     var vm = this;
 
@@ -65,7 +65,7 @@ module.exports = function(app){
 
         }
       },
-      {
+      /*{
         key: 'group',
         type: 'select',
         templateOptions: {
@@ -74,7 +74,7 @@ module.exports = function(app){
           required: false,
           options: vm.groups,
         }
-      },
+      },*/
       {
         key: 'category',
         type: 'select',
@@ -85,14 +85,14 @@ module.exports = function(app){
           options: vm.categories,
         }
       },
-      {
+      /*{
         key: 'local_file',
         type: 'checkbox',
         templateOptions: {
           label: 'Is this file on the G drive?',
           required: false,
         }
-      },
+      },*/
       {
         key: 'location',
         type: 'input',
@@ -107,7 +107,7 @@ module.exports = function(app){
       $log.log("updating the document");
       vm.model.local_file = vm.model.local_file || false;
 
-      DocumentService
+      DocumentsService
         .update(vm.document._id, vm.model)
         .then(function(){
           toastr.success("Updated the document details");

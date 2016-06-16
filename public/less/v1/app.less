@@ -1,0 +1,70 @@
+@import "_variables.less";
+@import "_utils.less";
+@import "_overrides.less";
+@import "_components.less";
+@import "_nav.less";
+@import "_dash.less";
+@import "_documents.less";
+@import "_news.less";
+@import "_staff.less";
+@import "_dashboard.less";
+
+.njc-intranet {
+  background:@grey;
+  font-family:helvetica, verdana, sans-serif;
+  font-weight:100;
+
+  header {
+    background:@white;
+    .checkbox {display:inline-block;margin-right:0.75em;}
+    .action {margin-top:1em;}
+    .form-control {border: solid 1px @light-grey;}
+    //padding-bottom:2em;
+  }
+
+  main {
+    padding-top:0;
+    padding-bottom:0;
+  }
+
+  .btn, .form-control {
+    border-radius:0;
+    outline:none;
+    border:none;
+  }
+
+  .btn-primary {
+    color:@white;
+    background:@green;
+    &:hover, &:active, &:focus {color:@white;border:none;outline:none;background:@green;}
+  }
+
+  .btn-secondary {
+    color:@white;
+    background:@dark-grey;
+    font-size:smaller;
+    &:hover, &:active, &:focus {color:@white;border:none;outline:none;}
+  }
+
+  .btn-cta {
+    background:@white;
+  }
+
+  .document-tile {
+    background:@white;
+    border:none;
+    //padding:1em;
+    //height:4em;
+    cursor:pointer;
+    margin-bottom:2em;
+    .document-tile-title { margin-top:0.5em;}
+  }
+
+  .alert {
+    border-radius:0;
+  }
+
+  .filter-tab {
+    margin-bottom:1em;
+  }
+}

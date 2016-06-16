@@ -1,9 +1,32 @@
-<section ng-cloak class="page edit-staff-status" id="staff-edit">
-  <form method="post" enctype="multipart/form-data" ng-submit="vm.updateStatus()">
-    <formly-form model="vm.model.status" fields="vm.fields.status">
-      <button class="btn btn-primary" type="submit">
-        <span class="fa fa-save"></span>&nbsp;Update status
-      </button>
-    </formly-form>
-  </form>
+<section ng-cloak class="page staff">
+  <global-header hide-search=true></global-header>
+  <main>
+    <div class="container">
+      <div class="row page-nav">
+        <div class="col-xs-12">
+          <button class="btn btn-default" ui-sref="dashboard">
+            Return to dashboard
+          </button>
+        </div>
+      </div>
+      <div class="row page-title">
+        <div class="col-xs-12">
+          <h1>Update status</h1>
+        </div>
+      </div>
+      <div class="page-content">
+        <div class="row">
+          <div class="col-xs-12 col-sm-4">
+            <form method="post" enctype="multipart/form-data" ng-submit="vm.updateStatus()">
+              <formly-form model="vm.model" fields="vm.fields">
+                <button class="btn btn-primary" type="submit">
+                  <span class="fa fa-save"></span>&nbsp;Update status
+                </button>
+              </formly-form>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 </section>

@@ -3,18 +3,23 @@ module.exports = function(app){
   console.log(app);
   // App bootstrapping + DI
   /*@ngInject*/
-  app.config(function($urlRouterProvider, $datepickerProvider){
+  app.config(function($urlRouterProvider, $datepickerProvider, $httpProvider){
       // route the default state to the app home
       $urlRouterProvider.when('', '/dashboard');
       $urlRouterProvider.when('/', '/dashboard');
 
-      angular.extend($datepickerProvider.defaults, {
+      console.log("CONFIG INTERCEPTOR");
+      //console.log(AuthInterceptorProvider);
+
+      // add the http interceptor
+      $httpProvider.interceptors.push('AuthInterceptor');
+      /*angular.extend($datepickerProvider.defaults, {
         dateFormat: 'dd/MM/yyyy',
         modelDateFormat: 'yyyy-MM-dd HH:mm:ss',
         startWeek: 1,
         minDate: new Date(),
         autoclose: true,
-      });
+      });*/
     })
     .config(function (CacheFactoryProvider) {
       angular.extend(CacheFactoryProvider.defaults, { maxAge: 15 * 60 * 1000 });
@@ -22,7 +27,7 @@ module.exports = function(app){
     .controller('AppController', function ($log, $scope, $rootScope) {
       var main = this;
 
-      $rootScope.user = {
+      /*$rootScope.user = {
         name: ""
       };
 
@@ -33,10 +38,10 @@ module.exports = function(app){
         $rootScope.$broadcast('UPDATE_DUTY_WORKER');
       });
 
-      $log.log("AppController loading");
+      $log.log("AppController loading");*/
     })
     .constant('_', window._)
-    .config(stateConfig)
+    //.config(stateConfig)
     //.run(function($log, $rootScope, $location, $state, AuthService){
     .run(runApp);
 
@@ -52,8 +57,8 @@ module.exports = function(app){
     $log.log("Running the app");
     $log.log("Check auth");
     $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
-      $log.log(ClientService.isLoggedIn());
-      if (toState !== 'auth.login' && toState.authenticate && !ClientService.isLoggedIn() /*&& $location.$$host != 'localhost'*/){
+      //$log.log(ClientService.isLoggedIn());
+      if (toState !== 'auth.login' && toState.authenticate && !AuthService.isAuthenticated()){
         $log.log("Not Authenticated");
         // User isn’t authenticated
         $state.transitionTo("auth.login");
@@ -62,7 +67,7 @@ module.exports = function(app){
     });
   }
 
-  function stateConfig($stateProvider){
+  /*function stateConfig($stateProvider){
     $stateProvider
     .state('auth', {
       abstract: true,
@@ -94,12 +99,6 @@ module.exports = function(app){
     .state('app', {
       template: require('./general/layout.html'),
       authenticate : true,
-      /*resolve: {
-        Teams: function($log, TeamService){
-          $log.log("Resolve teams");
-          return TeamService.all();
-        }
-      }*/
     })
     .state('app.dashboard', {
   		url: '/dashboard',
@@ -123,9 +122,9 @@ module.exports = function(app){
           $log.log("Weather");
           return WeatherService.today();
         },
-        NewsEvents: function($log, NewsEventsService){
+        News: function($log, NewsService){
           $log.log("Getting news");
-          return NewsEventsService.all();
+          return NewsService.all();
         },
         SearchDocuments: function(SearchService){
           return SearchService.documents();
@@ -161,7 +160,6 @@ module.exports = function(app){
               return {'title': item.name, _id: item._id, 'type': 'staff'};
             }
           });
-
           $log.log("******CLEANED******");
           $log.log(clean);
           return clean;
@@ -356,6 +354,29 @@ module.exports = function(app){
         }
       },
       resolve: {
+      }
+  	})
+    .state('app.news.index', {
+      url: '/news-events',
+      template: require('./news-events/news-events-index.html'),
+      controller: 'NewsEventsIndexController',
+      controllerAs: 'vm',
+      authenticate : true,
+      resolve: {
+        newsEventsList: function($log, NewsEventsService){
+          return NewsEventsService.all();
+        }
+      }
+  	})
+    .state('app.news', {
+      abstract: true,
+      authenticate : true,
+      views: {
+        "content": {
+          template: '<ui-view/>',
+        }
+      },
+      resolve: {
 
       }
   	})
@@ -401,6 +422,6 @@ module.exports = function(app){
         }
       }
     });
-  }
+  }*/
 
 };

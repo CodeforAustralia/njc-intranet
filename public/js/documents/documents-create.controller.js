@@ -2,7 +2,7 @@ module.exports = function(app){
   'use strict';
   // App bootstrapping + DI
   /*@ngInject*/
-  app.controller('DocumentsCreateController', function($scope, $log, $rootScope, DocumentService, moment, toastr, Categories, Types){
+  app.controller('DocumentsCreateController', function($scope, $log, $rootScope, DocumentsService, moment, toastr, Categories, Types){
     $log.log($scope);
     var vm = this;
 
@@ -59,14 +59,14 @@ module.exports = function(app){
           options: vm.categories,
         }
       },
-      {
+      /*{
         key: 'local_file',
         type: 'checkbox',
         templateOptions: {
           label: 'Is this file on the G drive?',
           required: false,
         }
-      },
+      },*/
       {
         key: 'location',
         type: 'input',
@@ -79,7 +79,7 @@ module.exports = function(app){
 
     vm.submit = function(){
       $log.log("updating the document");
-      DocumentService
+      DocumentsService
         .create(vm.model)
         .then(function(){
           toastr.success("Created the new document");

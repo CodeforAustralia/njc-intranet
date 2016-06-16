@@ -1,0 +1,24 @@
+<div class="component duty-worker">
+  <div class="row">
+    <div ng-if="!worker" class="card-item-summary">
+      <div class="card-item-content">
+        <div class="col-xs-12">
+          <p>No duty worker set</p>
+          <button class="btn btn-secondary" ui-sref="staff.edit-status">Set duty worker</button>
+        </div>
+      </div>
+    </div>
+    <div ng-if="worker" class="card-item-summary">
+      <div class="col-xs-12">
+        <h4 class="card-item-title-sub">Duty worker - {{ worker.name }}</h4>
+        <div class="card-item-content">
+          <ul>
+            <li>Email: <a href="mailto:{{ worker.contact.email }}">{{ worker.contact.email }}</a></li>
+            <li ng-if="worker.contact.ext">Phone Extension: x{{ worker.contact.ext }}</li>
+            <li ng-if="worker.contact.mobile">Mobile: {{ worker.contact.mobile }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

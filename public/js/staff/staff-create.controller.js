@@ -80,7 +80,24 @@ module.exports = function(app){
           placeholder: 'Enter a mobile number for the staff member',
           required: false
         }
+      },
+      {
+        key: 'profile',
+        type: 'input',
+        templateOptions: {
+          type: 'file',
+          label: 'Profile photo',
+          placeholder: 'Profile photo',
+          required: false,
+          'accept':"image/*",
+          'base-sixty-four-input': 'base-sixty-four-input',
+        },
+        ngModelAttrs: {
+          'base-sixty-four-input': {attribute: 'base-sixty-four-input'},
+          'accept': {attribute: 'accept'},
+        },
       }
+
     ];
 
     vm.submit = function(){

@@ -2,14 +2,15 @@ module.exports = function(app){
   'use strict';
   // App bootstrapping + DI
   /*@ngInject*/
-  app.controller('StaffIndexController', function($scope, $log, $rootScope, moment, StaffList){
+  app.controller('StaffIndexController', function($scope, $log, $rootScope, moment, StaffList, DutyWorker, $location){
     $log.log($scope);
 
     var vm = this;
 
-    vm.query = "";
+    var params = $location.search();
+    vm.query = params.q || "";
     vm.staff = StaffList.data;
-    vm.duty_worker = findDutyWorker(vm.staff);
+    vm.dutyWorker = DutyWorker.data;
     //vm.teams = Teams.data;
     vm.teams = [];
     vm.counts = {
@@ -27,13 +28,6 @@ module.exports = function(app){
       $log.log("Loaded the staff index controller");
       $log.log(vm.staff.data);
       updateStaffCounts();
-    }
-
-    function findDutyWorker(staff){
-      $log.log("Duty Worker");
-      var dw = _.find(staff, {'duty_worker': true});
-      $log.log(dw);
-      return dw;
     }
 
     init();

@@ -176,4 +176,21 @@ function findOrCreateGroup(title){
   });
 }
 
+function updateDocument(id, doc, group){
+  console.log("Updating the doc");
+  console.log(doc);
+  return new Promise(function(resolve, reject){
+    // execute the query at a later time
+    doc.metadata.group = group._id; // set the group id, update the document now
+    Documents.update({_id: id}, doc, function(err, res){
+      console.log("Updating");
+      if (err) reject(err);
+      // update the group assignment
+
+      console.log(res);
+      resolve(doc);
+    });
+  });
+}
+
 module.exports = router;

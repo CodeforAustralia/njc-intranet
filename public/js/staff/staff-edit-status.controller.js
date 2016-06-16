@@ -2,17 +2,21 @@ module.exports = function(app){
   'use strict';
   // App bootstrapping + DI
   /*@ngInject*/
-  app.controller('StaffStatusUpdateController', function($scope, $log, $rootScope, moment, toastr, StaffService, $modal, StaffList){
+  app.controller('StaffEditStatusController', function($scope, $log, $rootScope, moment, toastr, StaffService, $modal, StaffList){
     $log.log($scope);
     var vm = this;
 
+    vm.model = {};
     $log.log("STAFF LIST");
     $log.log(StaffList);
 
-    vm.staff_list = StaffList.data;
+    vm.staff_list = _.map(StaffList.data, function(s){
+      return {name: s.name, value: s._id, in: s.status.in, duty_worker: s.status.duty_worker };
+    });
 
-    vm.fields = {};
-    vm.fields.status = [
+    $log.log(vm.staff_list);
+
+    vm.fields = [
       {
         key: 'staff_member',
         type: 'select',
@@ -55,9 +59,10 @@ module.exports = function(app){
 
     vm.updateStatus = function(){
       $log.log("Update status");
-      $log.log(vm.model.status);
+      $log.log(vm.model);
       //var model = _.extend(vm.model.details, vm.model.status);
-      StaffService.update(vm.staff._id, model).then(function(){
+      StaffService.updateStatus(vm.model).then(function(){
+        vm.model = {};
         toastr.success("Updated status!","Success");
       }, function(){
         toastr.error("There was an error updating the status, please refresh and try again","Error");

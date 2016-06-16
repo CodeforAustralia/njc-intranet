@@ -1,0 +1,40 @@
+<section ng-cloak class="news page">
+  <global-header hide-search=true></global-header>
+  <main>
+    <div class="container">
+      <div class="page-nav row">
+        <div class="col-xs-12">
+          <button class="btn btn-default" ui-sref="news.index">
+            Return to news list
+          </button>
+          <button class="btn btn-default">
+            Add news item
+          </button>
+        </div>
+      </div>
+      <div class="row page-title">
+        <div class="col-xs-12">
+          <h1>News</h1>
+        </div>
+      </div>
+      <div class="page-content">
+        <div class="row news-item">
+          <div class="col-xs-12">
+            <div class="news-item-header">
+              <p>Posted on: {{ vm.news.meta.posted_at | date: "dd MMM, yyyy" }}</p>
+              <h2>{{ vm.news.title }}</h2>
+            </div>
+            <div class="news-item-content">
+              <p>{{ vm.news.description }}</p>
+            </div>
+            <div class="news-item-footer">
+              <a ng-if="vm.news.url" class="btn btn-default" href="{{vm.news.url}}">
+                More information
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</section>

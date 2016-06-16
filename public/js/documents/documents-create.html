@@ -1,29 +1,34 @@
-<section ng-cloak class="page new-document container" id="documents-new">
-  <div class="row">
-    <div class="col-xs-12">
-      <button class="btn btn-secondary" ui-sref="app.staff.index">
-        <span class="fa fa-home"></span>&nbsp;Return home
-      </button>
+<section ng-cloak class="page documents">
+  <global-header hide-search=true></global-header>
+  <main>
+    <div class="container">
+      <div class="row page-nav">
+        <div class="col-xs-12">
+          <button class="btn btn-default" ui-sref="documents.index">
+            Return to documents
+          </button>
+        </div>
+      </div>
+      <div class="row page-title">
+        <div class="col-xs-12">
+          <h1>Add new document</h1>
+        </div>
+      </div>
+      <div class="row">
+        <form method="post" enctype="multipart/form-data" class="col-xs-12 col-sm-6" ng-submit="vm.submit()">
+          <formly-form model="vm.document" fields="vm.fields">
+            <!--<div class="form-group">
+              <input type="file" nv-file-select uploader="vm.uploader" filters="{doc|docx|pdf|ppt|txt}"/><br/>
+            </div>-->
+            <!--<div class="form-group" ng-repeat="item in vm.uploader.queue">
+              File to upload: <span ng-bind="item.file.name"></span>
+            </div>-->
+            <button class="btn btn-primary" type="submit">
+              <span class="fa fa-save"></span>&nbsp;Add document
+            </button>
+          </formly-form>
+        </form>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <h2>Add new document</h2>
-    </div>
-  </div>
-  <div class="row">
-    <form method="post" enctype="multipart/form-data" class="col-xs-6" ng-submit="vm.submit()">
-      <formly-form model="vm.document" fields="vm.fields">
-        <!--<div class="form-group">
-          <input type="file" nv-file-select uploader="vm.uploader" filters="{doc|docx|pdf|ppt|txt}"/><br/>
-        </div>-->
-        <!--<div class="form-group" ng-repeat="item in vm.uploader.queue">
-          File to upload: <span ng-bind="item.file.name"></span>
-        </div>-->
-        <button class="btn btn-primary" type="submit">
-          <span class="fa fa-save"></span>&nbsp;Add document
-        </button>
-      </formly-form>
-    </form>
-  </div>
+  </main>
 </section>

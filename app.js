@@ -15,6 +15,8 @@ var passport = require('passport');
 var mongoose = require('mongoose');
 var compression = require('compression');
 var morgan = require('morgan');
+var bearerToken = require('express-bearer-token');
+var jwt = require('jsonwebtoken'); //create, sign, and verify authentication tokens
 var app = express();
 
 // models
@@ -23,6 +25,7 @@ var authUser = require('./models/authUser');
 // routes
 var routes = require('./routes/index');
 var auth = require('./routes/auth');
+var token_auth = require('./routes/token-auth');
 var users = require('./routes/users');
 var documents = require('./routes/documents');
 var document_groups = require('./routes/document-groups');
@@ -88,12 +91,52 @@ app.use(compression()); //use compression
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/intranet-static', express.static('public'));
 
-/***
-* ROUTE HANDLERS
-***/
+/**** ROUTE HANDLERS ***/
+/**************************
+*  UNAUTHENTICATED ROUTES *
+***************************/
 app.use('/', routes);
+app.use('/api/authenticate', token_auth); // token based auth route
+app.use('/api/auth', auth); // session based auth route
+
+/**************************
+*   AUTHENTICATED ROUTES  *
+***************************/
+// grab our Authorization token
+app.use(bearerToken());
+
+// routes after this middleware require token auth
+app.use(function(req, res, next){
+  // check the header, or url, or post params for the token
+  var token = req.token;
+  if (token){
+
+    // decode and verify the token
+    jwt.verify(token, config.TOKEN_SECRET, function(err, decoded_token){
+      if (err){
+        return res.json({
+          success: false,
+          message: "Failed to authenticate token"
+        });
+      }
+      else {
+        // add the token to the req and move on to the next middleware
+        req.decoded_token = decoded_token;
+        next();
+      }
+    });
+  }
+  else {
+    // we require a token, so return a 403 if there isnt one
+    return res.status(403).send({
+      success: false,
+      message: 'No token provided'
+    });
+  }
+});
+
+// routes
 app.use('/users', users);
-app.use('/api/auth', auth);
 app.use('/api/staff', staff);
 app.use('/api/news-events', news_events);
 app.use('/api/feedback', feedback);
@@ -103,6 +146,10 @@ app.use('/api/topics', topics);
 app.use('/api/categories', categories);
 app.use('/uploads', uploads);
 app.use('/seeders', seeders);
+
+//app.use('/api', function(req, res){
+//  res.send("/api route");
+//});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -134,7 +181,7 @@ if (app.get('env') === 'development') {
 }
 else {
   // connect to remote mongodb
-  mongoose.connect(process.env.MONGOLAB_URI); // connect to monoglabs
+  mongoose.connect(process.env.MONGO_URL); // connect to monoglabs
   db = mongoose.connection;
 
   db.on('error', console.error.bind(console, 'connection error:'));

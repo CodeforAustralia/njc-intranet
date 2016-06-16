@@ -1,0 +1,25 @@
+<section ng-cloak class="news page">
+  <global-header hide-search=true></global-header>
+  <main>
+    <div class="container">
+      <div class="row page-nav">
+        <div class="col-xs-12">
+          <button class="btn btn-default" ui-sref="dashboard">
+            Return to dashboard
+          </button>
+          <button class="btn btn-default" ui-sref="news.create">
+            Add news item
+          </button>
+        </div>
+      </div>
+      <div class="row page-title">
+        <div class="col-xs-12">
+          <h1>News listing</h1>
+        </div>
+      </div>
+      <section class="page-content">
+        <news-list class="list" news='vm.news'></news-list>
+      </section>
+    </div>
+  </main>
+</section>

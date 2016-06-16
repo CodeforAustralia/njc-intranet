@@ -23,7 +23,8 @@
     "api-check": "~7.5.5",
     "SpinKit": "spinkit#~1.2.5",
     "angular-spinkit": "~0.3.3",
-    "angular-toastr": "^1.7.0"
+    "angular-toastr": "^1.7.0",
+    "material-calendar": "^0.2.14"
   },
   "resolutions": {
     "angular": "1.4.9"

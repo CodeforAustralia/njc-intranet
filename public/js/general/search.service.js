@@ -1,13 +1,19 @@
 module.exports = function(app){
 
   /*@ngInject*/
-  app.service('SearchService', function($log, $http, DocumentService, StaffService){
+  app.service('SearchService', function($log, $http, DocumentsService, StaffService, NewsService, EventsService){
     return {
       documents: function(){
-        return DocumentService.all();
+        return DocumentsService.all();
       },
       staff: function(){
         return StaffService.all();
+      },
+      news: function(){
+        return NewsService.all();
+      },
+      events: function(){
+        return EventsService.all();
       }
     };
   });

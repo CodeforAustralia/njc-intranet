@@ -1,0 +1,21 @@
+<section ng-cloak class="events-cards component">
+  <div ng-if="events.length < 1" class="row">
+    <div class="col-xs-12">
+      <h3>No matching events</h3>
+    </div>
+  </div>
+  <div ng-if="events.length > 0" ng-repeat="item in events" class="row">
+    <div class="col-xs-12">
+      <div class="card-item-summary">
+        <div class="card-item-title col-xs-9">
+          <p class="card-item-header-title-sub">
+            <strong>{{ item.date | date: "dd MMM, yyyy" }}</strong><br/>{{ item.title }}
+          </p>
+        </div>
+        <div class="card-item-footer col-xs-3 text-right">
+          <button class="btn btn-secondary" ui-sref="events.item({permalink: item.meta.permalink })">View</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

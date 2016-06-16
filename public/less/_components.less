@@ -1,12 +1,129 @@
-.component {margin:0;}
+// PAGES
+.page {
+  font-size:1em;
+}
 
-.filter-tab {
-  margin:0;padding:0;
-  .filter-tab-item {
-    margin-right:1em;
-    list-style-type: none;
-    display:inline-block;
-    a {padding:0.5em 1em;cursor:pointer;}
+.page-nav, .page-content {
+  margin-top:1em;
+}
+
+.page-title {
+  .generic-title;
+}
+
+.page-content {
+  .page-content-header-meta {
+    font-size:1em;
+    font-weight:100;
+    text-transform: uppercase;
   }
-  .active {background:@dark-grey;color:@white;}
+
+  .page-content-header-title {
+    font-size:2em;
+    font-weight:bold;
+  }
+
+  ul {
+    list-style:square;
+    margin:0.5em 0;
+    padding:0 1em;
+  }
+}
+
+.page-content-callout {
+  padding:1em;
+  background:@grey;
+}
+
+// cards
+.cards {
+  font-size:10pt;
+  border:none;
+  margin:1em 0;
+  background:@light-grey;
+  padding:1em;
+}
+
+.cards-compact {
+  border:none;
+  background:@grey;
+  margin:0;
+  margin-bottom:0.25em;
+  padding:0.5em;
+  .card-item-header-title {
+    font-size:1em;
+    font-weight:bold;
+    text-transform: uppercase;
+    margin:0;
+  }
+
+  .card-item-header-title-sub {
+    font-size:1em;
+    margin:0;
+  }
+}
+
+// Lists
+.list {
+  .list-item-summary {
+    //background:@grey;
+    border-top:dotted 0.125em @grey;
+    margin-bottom:1em;
+    padding:1em 0;
+  }
+
+  .list-item-header {
+    .list-item-header-meta {font-size:0.75em;font-weight:100;}
+    .list-item-header-title {font-size:1.25em;font-weight:bold;}
+  }
+
+  .list-item-content {
+    font-size:1em;
+  }
+}
+
+// avatar
+.avatar {
+  .avatar-image, .avatar-text, .avatar-placeholder {
+    display:inline-block;
+  }
+}
+
+.avatar-placeholder {
+  vertical-align:top;
+  padding-top:1.5em;
+}
+
+.avatar-image, .avatar-placeholder {
+  margin-right:0.5em;
+  border-radius:0;
+  border:none;
+  height:5em;
+  width:5em;
+}
+
+// Buttons
+.btn, .form-control {
+  border-radius:0;
+  outline:none;
+  border:none;
+  border:solid 1px @mid-grey;
+}
+
+.btn {
+  border:none;
+}
+
+.btn-primary {
+  background:@green-2;
+  color:@white;
+}
+
+.btn-default {
+  background:@grey;
+}
+
+.btn-secondary {
+  background:@white;
+  border:solid 1px @dark-grey;
 }

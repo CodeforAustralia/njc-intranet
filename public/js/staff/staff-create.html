@@ -1,23 +1,30 @@
-<section ng-cloak class="page create-staff container" id="staff-create">
-  <div class="row">
-    <div class="col-xs-12">
-      <button class="btn btn-secondary" ui-sref="app.staff.index">
-        <span class="fa fa-home"></span>&nbsp;Return home
-      </button>
+<section ng-cloak class="page staff">
+  <global-header hide-search=true></global-header>
+  <main>
+    <div class="container">
+      <div class="row page-nav">
+        <div class="col-xs-12">
+          <button class="btn btn-default" ui-sref="staff.index">
+            Return to staff list
+          </button>
+        </div>
+      </div>
+      <div class="row page-title">
+        <div class="col-xs-12">
+          <h1>Add new staff</h1>
+        </div>
+      </div>
+      <div class="page-content">
+        <div class="row">
+          <form method="post" enctype="multipart/form-data" class="col-xs-12 col-sm-6" ng-submit="vm.submit()">
+            <formly-form model="vm.model" fields="vm.fields">
+              <button class="btn btn-primary" type="submit">
+                <span class="fa fa-save"></span>&nbsp;Add staff member
+              </button>
+            </formly-form>
+          </form>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <h2>Add new staff</h2>
-    </div>
-  </div>
-  <div class="row">
-    <form method="post" enctype="multipart/form-data" class="col-xs-6" ng-submit="vm.submit()">
-      <formly-form model="vm.model" fields="vm.fields">
-        <button class="btn btn-primary" type="submit">
-          <span class="fa fa-save"></span>&nbsp;Add staff member
-        </button>
-      </formly-form>
-    </form>
-  </div>
+  </main>
 </section>

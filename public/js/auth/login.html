@@ -1,45 +1,27 @@
-<header class="page-header">
-    <div class="page-header-content">
-	    <div class="container">
-			<h1>{{ pageTitle }}</h1>
-		</div>
-	</div>
-</header>
-<section class="main">
+<section ng-cloak class="page logged-out">
+  <global-header hide-search=true></global-header>
+  <main>
     <div class="container">
-    <sa-flash></sa-flash>
-		<form ng-if="!isLoggedIn" class="form" role="form" name="loginForm" ng-submit="login(loginForm.$valid)" novalidate>
-			<!--<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{ alert.msg }}</alert>
-			<alert ng-model="flash" type="flash.type" close="closeAlert($index)">{{ flash.message }}</alert>-->
-			<fieldset>
-				<div class="form-group row" ng-class="{'has-error has-feedback':loginForm.email.$dirty && loginForm.email.$invalid, 'has-success has-feedback':loginForm.email.$valid}">
-					<div class="col-sm-6 col-xs-12 row">
-						<input class="form-control" name="email" type="email" placeholder="Email" ng-model="model.email" required />
-						<span ng-show="loginForm.email.$dirty && loginForm.email.$invalid" class="fa fa-exclamation-triangle warning form-control-feedback" aria-hidden="true"></span>
-						<span ng-show="loginForm.email.$dirty && loginForm.email.$valid" class="fa fa-check form-control-feedback" aria-hidden="true"></span>
-					</div>
-					<div class="col-sm-6 col-xs-12 has-error has-feedback" ng-messages="loginForm.email.$error">
-					  <div ng-show="loginForm.email.$dirty && loginForm.email.$invalid" ng-messages="loginForm.email.$error">
-					    <div ng-message="required">Email field is required</div>
-					    <div ng-message="email">A valid email address is required</div>
-					  </div>
-					</div>
-				</div>
-				<div class="form-group row" ng-class="{'has-error has-feedback':loginForm.password.$dirty && loginForm.password.$invalid, 'has-success has-feedback':loginForm.password.$valid}">
-					<div class="col-sm-6 col-xs-12 row">
-						<input class="form-control" name="password"  type="password" placeholder="Password" ng-model="model.password" required minlength="6" />
-						<span ng-show="loginForm.password.$dirty && loginForm.password.$invalid" class="fa fa-exclamation-triangle warning form-control-feedback" aria-hidden="true"></span>
-						<span ng-show="loginForm.password.$dirty && loginForm.password.$valid" class="fa fa-check form-control-feedback" aria-hidden="true"></span>
-					</div>
-					<div class="col-sm-6 col-xs-12 has-error has-feedback" ng-messages="loginForm.password.$error">
-					  <div ng-show="loginForm.password.$dirty && loginForm.password.$invalid" ng-messages="loginForm.password.$error">
-					    <div ng-message="required">A password is required</div>
-					  </div>
-					</div>
-				</div>
-			</fieldset>
-			<button type="submit" ng-disabled="loginForm.$invalid" class="btn btn-primary">Login</button>
-			&nbsp;<a href="">Forgotten your password?</a>
-		</form>
-	</div>
+      <div class="row page-title">
+        <div class="col-xs-12">
+          <h1>Login</h1>
+        </div>
+      </div>
+      <div class="row page-alerts">
+        <div id="alerts-container" class="col-xs-12"></div>
+      </div>
+      <div class="row page-content">
+        <div class="col-xs-12 col-sm-6">
+          <form class="data-form" name="vm.form" novalidate ng-submit="vm.submit()">
+            <formly-form model="vm.model" fields="vm.fields" form="vm.form">
+             <button type="submit" class="btn btn-primary" ng-disabled="vm.form.$invalid">
+               <span class="fa fa-user"></span>&nbsp;Login
+             </button>
+            </formly-form>
+          </form>
+        </div>
+      </div>
+	   </div>
+    </div>
+  </main>
 </section>

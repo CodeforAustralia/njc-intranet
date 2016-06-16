@@ -2,80 +2,58 @@ module.exports = function(app){
   'use strict';
   // App bootstrapping + DI
   /*@ngInject*/
-  app.controller('DashboardController', function($scope, $log, $rootScope, moment, StaffService, DocumentService, DutyWorker, NewsEvents, Weather, SearchData, $typeahead, $state){
+  app.controller('DashboardController', function($scope, $log, Events, News, DutyWorker, SearchData){
     $log.log("Loading dashboard controller");
 
     var vm = this;
 
-    $log.log("Search data");
-    $log.log(SearchData);
-    vm.search_query = "";
-    vm.options = SearchData;
+    vm.selectedDay = "";
+    vm.news = News.data;
+    vm.filteredEvents = Events.data;
+    vm.dutyWorker = DutyWorker.data;
 
-    vm.duty_worker = (!_.isUndefined(DutyWorker) && !_.isUndefined(DutyWorker.data)) ? DutyWorker.data[0] : {};
-    vm.news_events = NewsEvents.data;
-    vm.weather = Weather.data;
-    vm.now = getToday();
-    $log.log("DASHBOARD");
+    vm.searchQuery = "";
+    vm.searchData = SearchData;
     $log.log(vm);
 
-    $scope.$on('$typeahead.select', function(event, value, index, elem){
-      console.log("SELECTED");
-      console.log(event); // event properties
-      console.log(value); // value of select
-      console.log(index); // index of selected value in dropdown
-      console.log(elem);  // properties of calling element ($id to get the id)
+    vm.filterEventsList = function(e){
+      $log.log(e);
 
-      // show the search results
-      $state.go('app.search.results', {type: value.type, id: value._id});
-    });
-
-    vm.selected = function(event){
-      $log.log("SELECTED");
-      $log.log(event);
+      if (e.year && e.month){
+        $log.log("Filtering by the current month");
+        vm.filteredEvents = _.filter(Events.data, function(o){
+          return inMonth(e, o.date);
+        });
+      }
+      else {
+        $log.log("Filtering by the current day");
+        vm.filteredEvents = _.filter(Events.data, function(o){
+          return onDay(e, o.date);
+        });
+      }
     };
 
-
-    $rootScope.$on('UPDATE_DUTY_WORKER', updateDutyWorker);
-
-    function updateDutyWorker(){
-      $log.log("Update the duty worker");
-      StaffService
-        .dutyWorker()
-        .then(function(worker){
-          $log.log("Curr duty worker");
-          $log.log(worker);
-          vm.duty_worker = worker.data[0];
-          $log.log(vm.duty_worker);
-        });
+    function onDay(target, date){
+      // check if date is in the target month
+      var d = new Date(date);
+      var td = new Date(target);
+      if (
+        d.getFullYear() === td.getFullYear() &&
+        d.getMonth() === td.getMonth() &&
+        d.getDate() === td.getDate()
+      )
+        return true;
+      return false;
     }
 
-    /*vm.announcements = [
-      {'title': 'Announcement 1', 'summary': 'Lorem ipsum dolor sit amet, posse scaevola ei pri, nec ne aperiam oblique. In nam epicuri menandri, eu nibh gubergren urbanitas sea, per no ubique fuisset insolens. Zril reformidans te cum, pri commune definiebas cu. Ei lorem virtute nec. Alii ipsum convenire ne pro, cu has error docendi deseruisse, brute tantas pertinacia has te.'},
-      {'title': 'Announcement 2', 'summary': 'Blandit torquatos adversarium eum cu, usu id scaevola expetenda, his ad debet fabulas complectitur. Pro ex cetero splendide. Sit an eius partem, et ius amet choro mentitum. Cum et nullam invenire. Prima discere id vis, quo tale assum iusto ei.'},
-      {'title': 'Announcement 3', 'summary': 'Ei alia alterum legimus vel. Sed lorem suavitate id. Vis et quem esse nonumes, qui quando disputando conclusionemque te. Decore nemore duo cu. Qui an appareat oporteat. Mea et facilisi convenire reformidans.'}
-    ];
-
-    vm.duty_worker = {
-      name: 'Ezekiel Kigbo',
-      email: 'ezekiel@codeforaustralia.org',
-      phone: '0400111222'
-    };
-
-    vm.current_user = {
-      status: 'Out',
-    };
-
-    $log.log(vm.now);*/
-
-    function getToday(){
-      var now = new moment();
-      //console.log(now);
-      return {
-        day_of_the_week: now.format('dddd'),
-        time: now.format('hh:mm A'),
-        date: now.format('MMMM D, YYYY'),
-      };
+    function inMonth(target, date){
+      // check if date is in the target month
+      var d = new Date(date);
+      $log.log(target);
+      $log.log(d);
+      if ((d.getMonth() + 1) === target.month && (d.getFullYear()) === target.year)
+        return true;
+      return false;
     }
 
     function init(){

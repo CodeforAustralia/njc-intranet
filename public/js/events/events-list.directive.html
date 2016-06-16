@@ -1,0 +1,25 @@
+<section ng-cloak class="events-list component">
+  <div ng-if="events.length < 1" class="row">
+    <div class="col-xs-12">
+      <h3>No events added yet!</h3>
+    </div>
+  </div>
+  <div ng-if="events.length > 0" ng-repeat="item in events" class="row">
+    <div class="col-xs-12">
+      <div class="list-item-summary">
+        <div class="list-item-header">
+          <p class="list-item-header-meta">{{ item.date | date: "dd MMM, yyyy" }}</p>
+          <h2 class="list-item-header-title">{{ item.title }}</h2>
+        </div>
+        <div class="list-item-content">
+          <p>{{ item.summary }}</p>
+        </div>
+        <div class="list-item-footer">
+          <button class="btn btn-default" ui-sref="events.item({permalink: item.meta.permalink })">
+            View item
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

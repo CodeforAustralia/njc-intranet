@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 
 var StaffSchema = mongoose.Schema({
   name: String,
+  avatar: String,
   contact: {
     email: String,
     phone: {type: Number, default: ""},

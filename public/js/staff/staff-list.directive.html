@@ -1,0 +1,50 @@
+<section ng-cloak class="staff-list page">
+  <table class="table table-condensed">
+    <thead>
+      <tr>
+        <!--<th>&nbsp;</th>-->
+        <th>Name / Role</th>
+        <th>In/Out</th>
+        <th>Edit</th>
+      </tr>
+    </thead>
+    <tbody ng-if='staff.length > 0'>
+      <tr class="staff-member" ng-repeat="staff_member in filtered = (staff | filter:tabs | filter:search)">
+        <!--<td class="staff-member-avatar text-center"><span class="fa fa-user fa-2x"></span></td>-->
+        <td class="staff-member-details-staff">
+          <div class="avatar">
+            <div ng-if="staff_member.avatar" class="avatar-image" style="background-image:url(data:image/png;base64,{{ staff_member.avatar }});background-size:cover;background-position:center center;"/>
+            <div ng-if="!staff_member.avatar" class="avatar-placeholder text-center">
+              <span class="fa fa-user fa-2x"></span>
+            </div>
+            <div class="avatar-text">
+              <span class="staff-member-details-name">{{ staff_member.name }}</span><br/>
+              <span ng-if="staff_member.organisation.role" class="staff-member-details-role">{{ staff_member.organisation.role }}</span><br ng-if="staff_member.organisation.role" />
+              <span ng-if="staff_member.organisation.team" class="staff-member-details-team">{{ staff_member.organisation.team }}</span><br ng-if="staff_member.organisation.team" />
+              <span class="staff-member-details-extension">Extension: {{ staff_member.contact.ext }}</span>
+            </div>
+          </div>
+        </td>
+        <td class="staff-member-status staff-member-status-in" ng-if="staff_member.status.in">
+          <span class="staff-member-status-text">In</span>&nbsp;
+          <span class="fa fa-circle"></span>
+        </td>
+        <td class="staff-member-status staff-member-status-out" ng-if="!staff_member.status.in">
+          <span class="staff-member-status-text">Out</span>&nbsp;
+          <span class="fa fa-circle"></span>
+        </td>
+        <td class="staff-member-edit">
+          <button class="btn btn-default" type="button" ui-sref='staff.edit({id:staff_member._id})'>
+            Edit&nbsp;<span class="fa fa-pencil"></span>
+          </button>
+          &nbsp;
+        </td>
+      </tr>
+    </tbody>
+    <tbody ng-if='staff.length === 0'>
+      <tr>
+        <td>Sorry! No staff found :(</p>
+      </tr>
+    </tbody>
+  </table>
+</section>

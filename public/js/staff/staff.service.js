@@ -18,6 +18,10 @@ module.exports = function(app){
         $log.log(staff);
         return $http.put("/api/staff/" + id, staff);
       },
+      updateStatus: function(status){
+        $log.log(status);
+        return $http.put("/api/staff/" + status.staff_member, _.omit(status, 'staff_member'));
+      },
       dutyWorker: function(){
         return $http.get("/api/staff?duty_worker=true");
       }

@@ -21,7 +21,6 @@ function getNews(params, done){
 function getEvents(params, done){
   return Events.find(params, function(err, res){
     if (err) done(err);
-
     // set the type in the moongoose model before it returns them
 
     for (var i=0;i<res.length;i++)
@@ -50,6 +49,7 @@ function createEventItem(data){
     description: data.description,
     url: data.url || "",
     date: data.date,
+    location: data.location,
     contact_person: {
       name: data.contact_name || "",
       email: data.contact_email || ""
@@ -71,19 +71,43 @@ router.get('/', function(req, res, next){
   // return all news and events items togethor
   // use different icons in the UI?
   // merge the results, sorted by meta.posted_at date
-  async.parallel([
-    function(callback){
-      getNews({}, callback);
-    }, function(callback){
-      getEvents({}, callback);
-    }], function(err, results){
-    if (err) throw Error(err);
 
-    // merge the arrays of results and sort them by date posted
-    //console.log(_.flatten(results));
-    results = _.sortBy(_.flatten(results), function(o){ return -o.meta.posted_at; });
-    res.send(results);
-  });
+  console.log(req.query);
+  var params = {
+    limit: req.query.limit || null
+  };
+
+  console.log("Params");
+  console.log(params);
+
+  if (req.query.type === 'news'){
+    News.find(params, function(err, results){
+      if (err) throw Error(err);
+      res.send(results);
+    });
+  }
+  else if (req.query.type === 'events'){
+    Events.find(params, function(err, results){
+      if (err) throw Error(err);
+      res.send(results);
+    });
+  }
+  else {
+    // return both
+    async.parallel([
+      function(callback){
+        getNews({}, callback);
+      }, function(callback){
+        getEvents({}, callback);
+      }], function(err, results){
+      if (err) throw Error(err);
+
+      // merge the arrays of results and sort them by date posted
+      //console.log(_.flatten(results));
+      results = _.sortBy(_.flatten(results), function(o){ return -o.meta.posted_at; });
+      res.send(results);
+    });
+  }
 });
 
 /* GET all the news / event item */
@@ -103,7 +127,6 @@ router.get('/:permalink', function(req, res, next){
     res.send(results[0] || {});
   });
 });
-
 
 /* POST add a new news / event */
 router.post('/', function(req, res, next){

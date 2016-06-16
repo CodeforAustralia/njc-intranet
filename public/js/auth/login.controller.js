@@ -40,7 +40,7 @@ module.exports = function(app){
           AlertService.success("Successfully logged in");
           $log.log(vm.model);
           ClientService.set(vm.model.username);
-					$state.go('app.dashboard');
+					$state.go('dashboard');
         }, function(err){
           AlertService.error("Error logging in!");
         });

@@ -2,8 +2,8 @@ module.exports = function(app){
   'use strict';
   // App bootstrapping + DI
   /*@ngInject*/
-  app.controller('FeedbackFormController', function($scope, $log, $rootScope, $state, $modal, StaffList, FeedbackService, toastr){
-    $log.log("Starting the EvaluationFormController");
+  app.controller('FeedbackCreateController', function($scope, $log, $rootScope, $state, $modal, StaffList, FeedbackService, toastr){
+    $log.log("Starting the FeedbackCreateController");
     var vm = this;
 
     vm.staff_members = _.map(StaffList.data, function(staff_member){
@@ -12,7 +12,7 @@ module.exports = function(app){
 
     vm.types = [{'value':'bug', 'name':'Bug / Somethings broken'}, {'value':'enhancement', 'name':'Enhancement / New idea'}, {'value':'feedback', 'name':'Feedback'}, {'value':'not-sure', 'name':'Not sure, but i want to tell you!'}];
 
-    var modal = $modal({
+    /*var modal = $modal({
       title: 'Send your feedback',
       contentTemplate: '/js/feedback/feedback.html',
       show: true,
@@ -24,7 +24,7 @@ module.exports = function(app){
     $scope.$on('modal.hide',function(){
       $log.log("HIDING");
       $state.go('app.dashboard');
-    });
+    });*/
 
     //vm.model = new Entry(); // create a new instance of the entry model
     vm.model = {};

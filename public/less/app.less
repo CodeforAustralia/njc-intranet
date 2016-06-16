@@ -1,5 +1,21 @@
-@import "_variables.less";
+// general / global styles
 @import "_utils.less";
+@import "_variables.less";
+@import "_components.less";
+@import "_layout.less";
+// individual modules
+@import "_dashboard.less";
+@import "_news.less";
+@import "_events.less";
+@import "_documents.less";
+@import "_staff.less";
+
+body {
+  font-size:12pt;
+  font-family:helvetica, verdana, sans-serif;
+  font-weight:100;
+}
+/*@import "_utils.less";
 @import "_overrides.less";
 @import "_components.less";
 @import "_nav.less";
@@ -7,9 +23,9 @@
 @import "_documents.less";
 @import "_news.less";
 @import "_staff.less";
-@import "_dashboard.less";
+@import "_dashboard.less";*/
 
-.njc-intranet {
+/*.njc-intranet {
   background:@grey;
   font-family:helvetica, verdana, sans-serif;
   font-weight:100;
@@ -67,4 +83,4 @@
   .filter-tab {
     margin-bottom:1em;
   }
-}
+}*/

@@ -1,0 +1,48 @@
+<div class="global-header">
+  <div data-offset-top="0" bs-affix="bs-affix" class="global-alert">
+    <div class="container fixed">
+      <div class="row">
+        <p class="col-xs-12"><span class="fa fa-warning">&nbsp;</span><strong>BETA&nbsp;</strong>- We are still testing this, please <a class="btn btn-primary" ui-sref="feedback.create">submit any issues</a> you encounter</p>
+      </div>
+    </div>
+  </div>
+  <header>
+    <div class="container">
+      <div class="row">
+        <div class="header-logo col-xs-12 col-sm-4">
+          <h1>
+            <a ui-sref='dashboard'>NJC Intranet</a>
+          </h1>
+        </div>
+        <div class="header-nav col-xs-12 col-sm-8 text-right">
+          <nav ng-if="is_authenticated">
+            <ul>
+              <li>
+                <a ui-sref="documents.index">Documents</a>
+              </li>
+              <li>
+                <a ui-sref="staff.index">Staff / Status board</a>
+              </li>
+              <li>
+                <a ui-sref="news.index">News</a>
+              </li>
+              <li>
+                <a ui-sref="events.index">Events</a>
+              </li>
+              <li>
+                <a ui-sref="auth.logout">Logout</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div ng-if="!hideSearch" class="row">
+        <form class="col-xs-12">
+          <div class="form-group">
+            <input class="form-control typeahead" ng-model="searchQuery" type="input" placeholder="Search for documents, staff members, news and events" data-animation="am-flip-x" bs-options="item.title for item in data" bs-typeahead />
+          </div>
+        </form>
+      </div>
+    </div>
+  </header>
+</div>

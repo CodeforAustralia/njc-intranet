@@ -35,6 +35,7 @@ router.post('/', function(req, res, next){
 
   var staff = new Staff({
     name: model.name,
+    avatar: model.profile.base64 || null,
     contact: {
       ext: model.ext || null,
       email: model.email || null,
@@ -82,6 +83,8 @@ router.put('/:id', function(req, res, next){
         duty_worker: model.duty_worker,
       }
     };
+
+    if (model.profile.base64) staff.avatar = model.profile.base64;
   }
 
   if (model.status){

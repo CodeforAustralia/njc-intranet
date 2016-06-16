@@ -23,7 +23,8 @@ module.exports = function(app){
         ext: vm.staff.contact.ext || "",
         phone: vm.staff.contact.phone || "",
         mobile: vm.staff.contact.mobile || "",
-        team: vm.staff.organisation.team || ""
+        team: vm.staff.organisation.team || "",
+        profile: {base64: vm.staff.avatar || ""}
       },
       status: vm.staff.status
     };
@@ -117,6 +118,22 @@ module.exports = function(app){
           label: 'Mobile number',
           placeholder: 'Enter a mobile number for the staff member',
           required: false
+        }
+      },
+      {
+        key: 'profile',
+        type: 'input',
+        templateOptions: {
+          type: 'file',
+          label: 'Profile photo',
+          placeholder: 'Profile photo',
+          required: false,
+          'accept':"image/*",
+          'base-sixty-four-input': 'base-sixty-four-input',
+        },
+        ngModelAttrs: {
+          'base-sixty-four-input': {attribute: 'base-sixty-four-input'},
+          'accept': {attribute: 'accept'},
         }
       }
     ];

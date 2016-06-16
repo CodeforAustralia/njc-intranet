@@ -1,0 +1,29 @@
+<div class="component duty-worker">
+  <div class="row">
+    <div ng-if="!worker">
+      <div class="col-xs-12">
+        <p>No duty worker set!</p>
+      </div>
+    </div>
+    <div ng-if="worker" class="component-content">
+      <div class="col-xs-4 col-sm-3">
+        <div class="col-xs-12">          
+          <div class="avatar">
+            <div ng-if="worker.avatar" class="avatar-image" style="background-image:url(data:image/png;base64,{{ worker.avatar }});background-size:cover;background-position:center center;"/>
+            <div ng-if="!worker.avatar" class="avatar-placeholder text-center">
+              <span class="fa fa-user fa-2x"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-8 col-sm-9">
+        <h3>{{ worker.name }}</h3>
+        <ul>
+          <li>Email: <a href="mailto:{{ worker.contact.email }}">{{ worker.contact.email }}</a></li>
+          <li ng-if="worker.contact.ext">Phone Extension: x{{ worker.contact.ext }}</li>
+          <li ng-if="worker.contact.mobile">Mobile: {{ worker.contact.mobile }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

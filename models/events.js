@@ -8,6 +8,7 @@ var EventSchema = mongoose.Schema({
   description: String,
   url: String, // url to external / more info
   date: Date, // date of the event
+  location: String,
   contact_person: { // who to contact for more infomation
     name: String,
     email: String

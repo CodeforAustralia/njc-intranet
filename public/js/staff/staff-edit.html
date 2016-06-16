@@ -1,37 +1,49 @@
-<section ng-cloak class="page edit-staff container" id="staff-edit">
-  <div class="row">
-    <div class="col-xs-12">
-      <button class="btn btn-secondary" ui-sref="app.staff.index">
-        <span class="fa fa-home"></span>&nbsp;Return home
-      </button>
+<section ng-cloak class="page staff">
+  <global-header hide-search=true></global-header>
+  <main>
+    <div class="container">
+      <div class="row page-nav">
+        <div class="col-xs-12">
+          <button class="btn btn-default" ui-sref="staff.index">
+            Return to staff list
+          </button>
+        </div>
+      </div>
+      <div class="row page-title">
+        <div class="col-xs-12">
+          <h1>Edit staff member</h1>
+        </div>
+      </div>
+      <div class="page-content">
+        <div class="row">
+          <div class="col-xs-12">
+            <h3>In/Out for {{ vm.staff.name }}</h3>
+          </div>
+        </div>
+        <div class="row">
+          <form method="post" enctype="multipart/form-data" class="col-xs-12 col-sm-6" ng-submit="vm.updateStatus()">
+            <formly-form model="vm.model.status" fields="vm.fields.status">
+              <button class="btn btn-primary" type="submit">
+                <span class="fa fa-save"></span>&nbsp;Update {{ vm.staff.name }}'s status
+              </button>
+            </formly-form>
+          </form>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <h3>Details {{ vm.staff.name }}</h3>
+          </div>
+        </div>
+        <div class="row">
+          <form method="post" enctype="multipart/form-data" class="col-xs-6" ng-submit="vm.updateDetails()">
+            <formly-form model="vm.model.details" fields="vm.fields.details">
+              <button class="btn btn-primary" type="submit">
+                <span class="fa fa-save"></span>&nbsp;Update details
+              </button>
+            </formly-form>
+          </form>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <h2>In/Out for {{ vm.staff.name }}</h2>
-    </div>
-  </div>
-  <div class="row">
-    <form method="post" enctype="multipart/form-data" class="col-xs-6" ng-submit="vm.updateStatus()">
-      <formly-form model="vm.model.status" fields="vm.fields.status">
-        <button class="btn btn-primary" type="submit">
-          <span class="fa fa-save"></span>&nbsp;Update {{ vm.staff.name }}'s status
-        </button>
-      </formly-form>
-    </form>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <h2>Details {{ vm.staff.name }}</h2>
-    </div>
-  </div>
-  <div class="row">
-    <form method="post" enctype="multipart/form-data" class="col-xs-6" ng-submit="vm.updateDetails()">
-      <formly-form model="vm.model.details" fields="vm.fields.details">
-        <button class="btn btn-primary" type="submit">
-          <span class="fa fa-save"></span>&nbsp;Update details
-        </button>
-      </formly-form>
-    </form>
-  </div>
+  </main>
 </section>

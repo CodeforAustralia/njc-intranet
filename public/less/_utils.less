@@ -17,3 +17,18 @@
 .vertical-center {
   &:extend(.vertical-centre);
 }
+
+@title-size:1.5em;
+.generic-title {
+  margin-top:1em;
+  margin-bottom:1em;
+  h1 {
+    font-size:@title-size;
+    font-weight:bold;
+    margin:0;
+  }
+  text-transform: uppercase;
+  border-left:solid @title-size/2;
+  padding-left:0;
+  margin-left:0;
+}

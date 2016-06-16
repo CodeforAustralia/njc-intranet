@@ -1,0 +1,25 @@
+<section ng-cloak class="events page">
+  <global-header hide-search=true></global-header>
+  <main>
+    <div class="container">
+      <div class="row page-nav">
+        <div class="col-xs-12">
+          <button class="btn btn-default" ui-sref="dashboard">
+            Return to dashboard
+          </button>
+          <button class="btn btn-default" ui-sref="events.create">
+            Add an event
+          </button>
+        </div>
+      </div>
+      <div class="row page-title">
+        <div class="col-xs-12">
+          <h1>Event listing</h1>
+        </div>
+      </div>
+      <section class="page-content">
+        <events-list class="list" events='vm.events'></events-list>
+      </section>
+    </div>
+  </main>
+</section>
