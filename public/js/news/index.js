@@ -33,6 +33,7 @@ module.exports = function(app){
       .state('news.create', {
         url: '/news/create',
         authenticate : true,
+        admin: true,        
         template: require('../general/news-events-create.html'),
     		controller: 'NewsEventsCreateController',
         controllerAs: 'vm',

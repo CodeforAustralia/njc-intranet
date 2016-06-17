@@ -18,7 +18,7 @@ module.exports = function(app){
 
     $log.log(vm);
 
-    vm.model = {};
+    vm.document = {};
 
     vm.fields = [
       {
@@ -74,13 +74,23 @@ module.exports = function(app){
           label: 'Url',
           placeholder: 'Add the url of the file'
         }
-      }
+      },
+      {
+        key: 'show_online',
+        type: 'checkbox',
+        templateOptions: {
+          label: 'Should this document be visible online?',
+          required: false,
+        }
+      },
     ];
 
     vm.submit = function(){
-      $log.log("updating the document");
+      $log.log("Creating the document");
+      $log.log(vm.document);
+      vm.document.show_online = vm.document.show_online || false;
       DocumentsService
-        .create(vm.model)
+        .create(vm.document)
         .then(function(){
           toastr.success("Created the new document");
         }, function(){

@@ -2,10 +2,13 @@ module.exports = function(app){
   'use strict';
   // App bootstrapping + DI
   /*@ngInject*/
-  app.controller('StaffIndexController', function($scope, $log, $rootScope, moment, StaffList, DutyWorker, $location){
+  app.controller('StaffIndexController', function($scope, $log, moment, StaffList, DutyWorker, $location, ClientService){
     $log.log($scope);
 
     var vm = this;
+
+    $log.log("is admin?");
+    vm.is_admin = ClientService.isAdmin();
 
     var params = $location.search();
     vm.query = params.q || "";
@@ -27,7 +30,7 @@ module.exports = function(app){
     function init(){
       $log.log("Loaded the staff index controller");
       $log.log(vm.staff.data);
-      updateStaffCounts();
+      //updateStaffCounts();
     }
 
     init();

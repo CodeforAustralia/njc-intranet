@@ -32,8 +32,10 @@ module.exports = function(app){
       type: vm.document.metadata.type,
       category: vm.document.metadata.category,
       local_file: vm.document.local_file,
-      url: vm.document.location.url,
-      local_path: vm.document.location.local_path,
+      location: vm.document.location.url,
+      //local_path: vm.document.location.local_path,
+      //url: vm.document.location.local_path,
+      show_online: vm.document.metadata.show_online,
     };
 
     vm.fields = [
@@ -100,12 +102,21 @@ module.exports = function(app){
           label: 'Url',
           placeholder: 'Add the url of the file'
         }
-      }
+      },
+      {
+        key: 'show_online',
+        type: 'checkbox',
+        templateOptions: {
+          label: 'Should this document be visible online?',
+          required: false,
+        }
+      },
     ];
 
     vm.update = function(){
       $log.log("updating the document");
-      vm.model.local_file = vm.model.local_file || false;
+      //vm.model.local_file = vm.model.local_file || false;
+      vm.model.show_online = vm.model.show_online || false;
 
       DocumentsService
         .update(vm.document._id, vm.model)

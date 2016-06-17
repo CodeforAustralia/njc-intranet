@@ -7,7 +7,7 @@
           <button class="btn btn-default" ui-sref="dashboard">
             Return to dashboard
           </button>
-          <button class="btn btn-default" ui-sref="staff.create">
+          <button ng-if="vm.is_admin" class="btn btn-default" ui-sref="staff.create">
             Add staff member
           </button>
         </div>
@@ -30,7 +30,7 @@
             </div>
           </form>
         </div>
-        <staff-list staff="vm.staff" search="vm.query"></staff-list>
+        <staff-list staff="vm.staff" search="vm.query" can-edit="vm.is_admin"></staff-list>
       </section>
     </div>
   </main>

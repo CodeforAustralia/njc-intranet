@@ -7,7 +7,7 @@
           <button class="btn btn-default" ui-sref="dashboard">
             Return to dashboard
           </button>
-          <button class="btn btn-default" ui-sref="documents.create">
+          <button ng-if="vm.is_admin" class="btn btn-default" ui-sref="documents.create">
             Add document
           </button>
         </div>
@@ -25,7 +25,7 @@
             </div>
           </form>
         </div>
-        <documents-list class="col-xs-12" search="vm.query" documents="vm.content"></documents-list>
+        <documents-list class="col-xs-12" search="vm.query" documents="vm.content" can-edit="vm.is_admin"></documents-list>
       </section>
     </div>
   </main>

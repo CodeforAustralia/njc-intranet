@@ -1,13 +1,13 @@
 {
   "name": "njc-intranet-v2",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "engines": {
     "node": "5.8.0"
   },
   "scripts": {
     "start": "node ./bin/www",
-    "postinstall": "bower install && webpack",
+    "postinstall": "bower install && webpack --optimize-minimize",
     "build": "webpack --display-modules --progress",
     "dev": "(npm start &) && (webpack-dev-server --display-modules --progress &)"
   },
@@ -42,7 +42,6 @@
     "dotenv": "^2.0.0",
     "express": "~4.12.4",
     "express-bearer-token": "^2.1.0",
-    "express-flash": "0.0.2",
     "express-session": "^1.13.0",
     "jade": "^1.11.0",
     "jquery": "^2.2.3",

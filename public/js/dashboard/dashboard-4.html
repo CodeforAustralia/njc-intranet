@@ -1,0 +1,91 @@
+<section ng-cloak class="dashboard page">
+  <global-header data='vm.searchData' query='vm.searchQuery'></global-header>
+  <main>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <banner-image image-url="'/imgs/tram.jpg'"></banner-image>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-6">
+          <div class="dashboard-component duty-worker-component">
+            <div class="row dashboard-component-title">
+              <div class="col-xs-12">
+                <h1>Duty Worker</h1>
+              </div>
+            </div>
+            <duty-worker worker="vm.dutyWorker[0]"></duty-worker>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+          <div class="dashboard-component in-out-component">
+            <!--<inout-board-status></inout-board-status>-->
+            <div class="row dashboard-component-title">
+              <div class="col-xs-12">
+                <h1>In / Out board</h1>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12">
+                <p>Are you at the NJC today?</p>
+                <button class="btn btn-large btn-primary" ui-sref="staff.edit-status">
+                  Update your status
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+
+        <div class="col-xs-12 col-sm-6">
+          <div class="row dashboard-component-title events-component">
+            <div class="col-xs-12">
+              <h1>Events</h1>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <!--<events-calendar events="vm.events"></events-calendar>-->
+              <calendar-md
+                calendar-direction="vertical"
+                on-prev-month="vm.filterEventsList"
+                on-next-month="vm.filterEventsList"
+                on-day-click="vm.filterEventsList"
+                title-format="'MMMM y'"
+                ng-model='vm.selectedDay'
+                week-starts-on="firstDayOfWeek"
+                tooltips="tooltips"
+                day-format="dayFormat"
+                day-label-format="'EEE'"
+                day-label-tooltip-format="'EEEE'"
+                day-tooltip-format="'fullDate'"
+                day-content="setDayContent"
+                disable-future-selection="false">
+              </calendar-md>
+            </div>
+            <div class="col-xs-12">
+              <events-cards class="cards cards-compact" events="vm.filteredEvents"></events-cards>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6">
+          <div class="row dashboard-component-title news-component">
+            <div class="col-xs-12">
+              <h1>News</h1>
+            </div>
+          </div>
+          <div class="row">
+            <!-- Fetch the 3 latest -->
+            <div class="col-xs-12">
+              <news-list class="list" news="vm.news"></news-list>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+</section>

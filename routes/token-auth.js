@@ -1,7 +1,6 @@
 var express = require('express');
 var passport = require('passport');
 var jwt = require('jsonwebtoken'); //create, sign, and verify authentication tokens
-var flash = require('express-flash');
 var router = express.Router();
 var helpers = require('../helpers');
 var AuthUser = require('../models/authUser');
@@ -11,24 +10,27 @@ var config = process.env;
 router.post('/token',
   passport.authenticate('local'),
   function(req, res, next) {
-    console.log(req);
-    //console.log(res);
+
+    // get the user naem
     var user = {
-      //username: res.user.username,
-      username: req.body.username,
-      admin: false
+      username: req.body.username
     };
+    
     // passport handles errors in its middleware
     // generate a token and send it back
     var token = jwt.sign(user, config.TOKEN_SECRET, {
       expiresIn: "24h"
     });
 
-    //res.json(user);
-    res.json({
-      success: true,
-      message: "authenticated",
-      token: token
+    AuthUser.find({'username':user.username}, function(err, u){
+      if (err) return res.status(500);
+
+      res.json({
+        success: true,
+        message: "authenticated",
+        token: token,
+        user: u
+      });
     });
   });
 

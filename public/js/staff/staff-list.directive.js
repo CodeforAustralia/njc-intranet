@@ -9,11 +9,12 @@ module.exports = function(app){
       template: require('./staff-list.directive.html'),
       scope: {
         staff: '=',
-        search: '='
+        search: '=',
+        canEdit: '='
       },
       link: function(scope, elem, attrs){
         $log.log("Staff list directive");
-
+        $log.log(scope);
       }
     };
   });

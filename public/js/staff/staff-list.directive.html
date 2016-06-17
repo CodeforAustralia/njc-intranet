@@ -5,7 +5,7 @@
         <!--<th>&nbsp;</th>-->
         <th>Name / Role</th>
         <th>In/Out</th>
-        <th>Edit</th>
+        <th ng-if="canEdit">Edit</th>
       </tr>
     </thead>
     <tbody ng-if='staff.length > 0'>
@@ -33,7 +33,7 @@
           <span class="staff-member-status-text">Out</span>&nbsp;
           <span class="fa fa-circle"></span>
         </td>
-        <td class="staff-member-edit">
+        <td ng-if="canEdit" class="staff-member-edit">
           <button class="btn btn-default" type="button" ui-sref='staff.edit({id:staff_member._id})'>
             Edit&nbsp;<span class="fa fa-pencil"></span>
           </button>

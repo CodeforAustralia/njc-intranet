@@ -1,6 +1,5 @@
 var express = require('express');
 var passport = require('passport');
-var flash = require('express-flash');
 var router = express.Router();
 var helpers = require('../helpers');
 var AuthUser = require('../models/authUser');
@@ -20,11 +19,10 @@ router.post('/seeder', function(req, res, err){
 
   AuthUser.register(new AuthUser({ username : req.body.username }), req.body.password, function(err, user) {
       if (err) {
-          return res.json({"error": err});
+        return res.json({"error": err});
       }
 
       res.json(user);
-      res.send("done");
   });
 
 });

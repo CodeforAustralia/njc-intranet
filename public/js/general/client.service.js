@@ -2,7 +2,7 @@ module.exports = function(app){
 'use strict';
 
   /*@ngInject*/
-  app.factory('ClientService', function($log, $state, SessionService, AuthService){
+  app.factory('ClientService', function($log, SessionService){
 
     var client = null;
 
@@ -36,9 +36,15 @@ module.exports = function(app){
         $log.log("CACHING THE CLIENT");
         cacheClient(_client);
       },
+      isAdmin: function(){
+        $log.log("Is the client an admin?");
+        var client = this.get();
+        if (!client) return false;
+        return client.is_admin;
+      },
   		fetch: fetchClientFromCache,
       get: function(){
-        return client;
+        return client || fetchClientFromCache();
       }
     };
 

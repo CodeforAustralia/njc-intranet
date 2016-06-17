@@ -2,7 +2,7 @@ module.exports = function(app){
 'use strict';
 
   /*@ngInject*/
-  app.factory('AuthInterceptor', function($log, $window, TokenService){
+  app.factory('AuthInterceptor', function($log, $window, TokenService, $q){
     $log.log("INTERCEPTOR");
     $log.log(this);
     return {
@@ -47,6 +47,8 @@ module.exports = function(app){
           $log.log("Not authorized");
           $window.location.href = "/#/login";
         }
+
+        return $q.reject(response);
       }
     };
   });

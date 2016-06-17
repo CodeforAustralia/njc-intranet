@@ -5,20 +5,22 @@
 ### DONE
 * Add the extension number
 * Staff List: can we rename this to Staff /Status Board
+* Live flag for documents (to hide them)
+* Kim has a dropbox account already 🤘🏽 - dropbox integration
+* Seperate user account
+* Mock up 2 new homepages with the tram image + different position
 
 ### TODO - HIGH
 * It takes way too long to switch between screens eg: documents back to home page, updating details then back to home page - I found I could take a nap in between hahah
+* transition animations
 * Any opportunity to put notes on the status board - eg: return date, contact details, etc
-* Mock up 2 new homepages with the tram image + different position
-* Live flag for documents (to hide them)
-* Kim has a dropbox account already 🤘🏽 - dropbox integration
 
 ### TODO - Possibly
 * I also need capacity, to delete/make changes to staff details on the board or make them inactive
 
 ### Feature - Required
 * Edit / delete staff
-* Kiosk / menu -
+* Kiosk / menu - add as news items
 
 ## Done
 

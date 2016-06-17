@@ -1,5 +1,6 @@
 module.exports = function(app){
   require('./news-events-create.controller')(app);
+  require('./banner-image.directive')(app);
   require('./duty-worker.directive')(app);
   require('./duty-worker-card.directive')(app);
   require('./global-header.directive')(app);

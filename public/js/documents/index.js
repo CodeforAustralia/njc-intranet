@@ -46,6 +46,7 @@ module.exports = function(app){
       .state('documents.create', {
         url: '/documents/create',
         authenticate : true,
+        admin: true,
         template: require('./documents-create.html'),
     		controller: 'DocumentsCreateController',
         controllerAs: 'vm',
@@ -55,6 +56,7 @@ module.exports = function(app){
       .state('documents.edit', {
         url: '/documents/:id/edit',
         authenticate : true,
+        admin: true,        
         template: require('./documents-edit.html'),
     		controller: 'DocumentsEditController',
         controllerAs: 'vm',

@@ -7,7 +7,7 @@
           <button class="btn btn-default" ui-sref="dashboard">
             Return to dashboard
           </button>
-          <button class="btn btn-default" ui-sref="news.create">
+          <button ng-if="vm.is_admin" class="btn btn-default" ui-sref="news.create">
             Add news item
           </button>
         </div>

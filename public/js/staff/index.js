@@ -40,6 +40,7 @@ module.exports = function(app){
       .state('staff.create', {
         url: '/staff/create',
         authenticate : true,
+        admin: true,
         template: require('./staff-create.html'),
     		controller: 'StaffCreateController',
         controllerAs: 'vm',
@@ -62,6 +63,7 @@ module.exports = function(app){
       .state('staff.edit', {
         url: '/staff/:id/edit',
         authenticate : true,
+        admin: true,        
         template: require('./staff-edit.html'),
     		controller: 'StaffEditController',
         controllerAs: 'vm',

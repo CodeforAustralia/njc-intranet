@@ -24,21 +24,10 @@ module.exports = function(app){
     .config(function (CacheFactoryProvider) {
       angular.extend(CacheFactoryProvider.defaults, { maxAge: 15 * 60 * 1000 });
     })
-    .controller('AppController', function ($log, $scope, $rootScope) {
+    .controller('AppController', function ($log, $scope, $rootScope, ClientService) {
       var main = this;
 
-      /*$rootScope.user = {
-        name: ""
-      };
-
-      $rootScope.duty_worker = {};
-
-      $rootScope.$on('UPDATE_DUTY_WORKER', function(){
-        $log.log("Caught - UPDATE_DUTY_WORKER");
-        $rootScope.$broadcast('UPDATE_DUTY_WORKER');
-      });
-
-      $log.log("AppController loading");*/
+      $log.log("AppController");
     })
     .constant('_', window._)
     //.config(stateConfig)
@@ -56,10 +45,30 @@ module.exports = function(app){
 
     $log.log("Running the app");
     $log.log("Check auth");
+    // check if the current client is an admin
+    /*$rootScope.isAdmin = function(){
+      // assume the user is not an admin unless they explicitly are
+
+    };
+
+    // get the current client
+    $rootScope.client = function(){
+      return ClientService.get();
+    };
+
+    $log.log($rootScope.isAdmin);*/
+
     $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
       //$log.log(ClientService.isLoggedIn());
       if (toState !== 'auth.login' && toState.authenticate && !AuthService.isAuthenticated()){
         $log.log("Not Authenticated");
+        // User isn’t authenticated
+        $state.transitionTo("auth.login");
+        event.preventDefault();
+      }
+
+      // check that the state isnt for admin only
+      if (toState.admin && !ClientService.isAdmin()){
         // User isn’t authenticated
         $state.transitionTo("auth.login");
         event.preventDefault();

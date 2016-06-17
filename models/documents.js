@@ -12,17 +12,23 @@ var DocumentSchema = mongoose.Schema({
       type: mongoose.Schema.ObjectId,
       ref: Groups
     },
+    show_online: {type: Boolean, default: false},
     category: String,
     topic: String,
     type: {type: String},
     updated_at: {type: Date, default: new Date()}, // last time the file was updated
   },
-  location: [{
+  location: {
+    url: String,
+    created_at: {type: Date, default: new Date()},
+    version: {type: Number, default: 1},
+  },  
+  /*location: [{
     url: String,
     created_at: {type: Date, default: new Date()},
     version: {type: Number, default: 1},
   }],
-  current_version: {type: Number, default: 1}, // nversion number to be displayed
+  current_version: {type: Number, default: 1}, // nversion number to be displayed*/
   //related: []
 });
 

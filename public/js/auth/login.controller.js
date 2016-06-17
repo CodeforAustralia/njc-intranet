@@ -37,11 +37,15 @@ module.exports = function(app){
         .then(function(resp){
           // If login is successful, redirect to the users state
           $log.log("LOGGED IN SUCCESSFULLY");
+          $log.log(resp);
+          var user = resp.data.user[0];
           AlertService.success("Successfully logged in");
-          $log.log(vm.model);
-          ClientService.set(vm.model.username);
+          // cache the client in localstorage / sessions / cookies
+          ClientService.set({'username': vm.model.username, 'is_admin': user.is_admin});
 					$state.go('dashboard');
         }, function(err){
+          $log.log("Error");
+          $log.log(err);
           AlertService.error("Error logging in!");
         });
     };

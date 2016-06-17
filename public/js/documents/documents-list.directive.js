@@ -9,7 +9,8 @@ module.exports = function(app){
       template: require('./documents-list.directive.html'),
       scope: {
         documents: '=',
-        search: '='
+        search: '=',
+        canEdit: '='
       },
       link: function(scope, elem, attrs){
         $log.log("Documents list directive");

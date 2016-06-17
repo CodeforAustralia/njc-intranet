@@ -4,12 +4,9 @@ var config = process.env;
 var _ = require('lodash');
 var express = require('express');
 var session = require('express-session');
-var flash = require('express-flash');
 var path = require('path');
 var fs = require('fs');
-//var favicon = require('serve-favicon');
 var logger = require('morgan');
-var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var mongoose = require('mongoose');
@@ -26,15 +23,12 @@ var authUser = require('./models/authUser');
 var routes = require('./routes/index');
 var auth = require('./routes/auth');
 var token_auth = require('./routes/token-auth');
-var users = require('./routes/users');
 var documents = require('./routes/documents');
 var document_groups = require('./routes/document-groups');
 var feedback = require('./routes/feedback');
 var staff = require('./routes/staff');
-var topics = require('./routes/topics');
 var news_events = require('./routes/news-events');
 var categories = require('./routes/categories');
-var uploads = require('./routes/uploads');
 var seeders = require('./routes/seeders');
 
 
@@ -49,6 +43,7 @@ var db;
 var dbName = "njc_intranet";
 
 // view engine setup
+app.set('view cache', true);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
@@ -56,12 +51,8 @@ app.set('view engine', 'jade');
 * MIDDLE WARE
 ***/
 // uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
-//app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(flash());
 
 // create a write stream (in append mode)
 var accessLogStream = fs.createWriteStream(__dirname + '/access.log', {flags: 'a'});
@@ -88,8 +79,8 @@ passport.deserializeUser(authUser.deserializeUser());
 ***/
 // set the static asset path
 app.use(compression()); //use compression
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/intranet-static', express.static('public'));
+app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600 }));
+app.use('/intranet-static', express.static('public', { maxAge: 31557600 }));
 
 /**** ROUTE HANDLERS ***/
 /**************************
@@ -136,20 +127,13 @@ app.use(function(req, res, next){
 });
 
 // routes
-app.use('/users', users);
 app.use('/api/staff', staff);
 app.use('/api/news-events', news_events);
 app.use('/api/feedback', feedback);
 app.use('/api/documents', documents);
 app.use('/api/document-groups', document_groups);
-app.use('/api/topics', topics);
 app.use('/api/categories', categories);
-app.use('/uploads', uploads);
 app.use('/seeders', seeders);
-
-//app.use('/api', function(req, res){
-//  res.send("/api route");
-//});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

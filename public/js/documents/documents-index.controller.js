@@ -2,12 +2,15 @@ module.exports = function(app){
   'use strict';
   // App bootstrapping + DI
   /*@ngInject*/
-  app.controller('DocumentsIndexController', function($scope, $log, $rootScope, moment, DocumentsList, Categories, $location){
+  app.controller('DocumentsIndexController', function($scope, $log, moment, DocumentsList, Categories, $location, ClientService){
     $log.log($scope);
 
     var vm = null;
     vm = this;
     $log.log(DocumentsList);
+    $log.log("is admin?");
+    vm.is_admin = ClientService.isAdmin();
+    $log.log(vm);
 
     var params = $location.search();
     vm.query = params.q || "";

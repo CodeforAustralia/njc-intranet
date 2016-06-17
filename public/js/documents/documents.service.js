@@ -24,6 +24,9 @@ module.exports = function(app){
       groups: function(){
         return $http.get('/api/document-groups');
       },
+      create: function(model){
+        return $http.post("/api/documents", model);
+      },
       get: function(id){
         // by default just return the latest version of a document
         return $http.get("/api/documents/" + id);

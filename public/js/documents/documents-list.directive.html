@@ -6,14 +6,30 @@
       </div>
       <div class="document-group-content col-xs-12">
         <ul>
-          <li class="document-group-item row" ng-repeat="doc in group.documents | filter:search">
-            <p class="col-xs-8">
+          <li class="document-group-item row" ng-repeat="doc in group.documents | filter:search" ng-if="!canEdit && doc.metadata.show_online">
+            <p class="col-xs-12">
               <span class="fa fa-file"></span>&nbsp;
               <!--<a ui-sref="app.documents.view({id: doc._id})">{{ doc.title }}</a>-->
               <a ng-if="doc.location.url" href="{{ doc.location.url}}">{{ doc.title }}</a>
               <span ng-if="!doc.location.url">{{ doc.title }}</span>
             </p>
-            <p class="col-xs-4 text-right">
+          </li>
+          <li class="document-group-item row" ng-repeat="doc in group.documents | filter:search" ng-if="canEdit">
+            <p class="col-xs-6">
+              <span class="fa fa-file"></span>&nbsp;
+              <!--<a ui-sref="app.documents.view({id: doc._id})">{{ doc.title }}</a>-->
+              <a ng-if="doc.location.url" href="{{ doc.location.url}}">{{ doc.title }}</a>
+              <span ng-if="!doc.location.url">{{ doc.title }}</span>
+            </p>
+            <p class="col-xs-3 text-right document-status document-status-online" ng-if="doc.metadata.show_online">
+              <span class="document-status-text">Available online</span>&nbsp;
+              <span class="fa fa-circle"></span>
+            </p>
+            <p class="col-xs-3 text-right document-status document-status-offline" ng-if="!doc.metadata.show_online">
+              <span class="document-status-text">Currently Hidden</span>&nbsp;
+              <span class="fa fa-circle"></span>
+            </p>
+            <p ng-if="canEdit" class="col-xs-3 text-right">
               <button ui-sref="documents.edit({id: doc._id})" class="btn btn-default" name="button">
                 Edit&nbsp;<span class="fa fa-pencil"></span>
               </button>
