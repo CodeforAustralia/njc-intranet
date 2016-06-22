@@ -48,7 +48,6 @@ router.get('/:id', function(req, res, next){
   });
 });
 
-
 /* GET all the documents */
 router.get('/', function(req, res, next){
   // find each person with a last name matching 'Ghost'
@@ -58,10 +57,13 @@ router.get('/', function(req, res, next){
   q.exec(function (err, docs) {
     if (err) return handleError(err);
 
-    groupDocuments(docs)
-    .then(function(results){
-      res.json(results);
-    });
+    docs = cleanupDocLocations(docs);
+    console.log(docs);
+
+    //groupDocuments(docs)
+    //.then(function(results){
+    res.json(docs);
+    //});
   });
 });
 
@@ -157,6 +159,16 @@ router.put("/:id", function(req, res, next){
     });*/
 });
 
+function cleanupDocLocations(arr){
+  // fixes the dropbox links, turns them into direct links
+  return _.map(arr, function(item){
+    if (typeof item.location.url !== 'undefined' && item.location.url.indexOf("?dl=0") > -1 && item.location.url.indexOf("www.dropbox.com") > -1){
+      item.location.url = item.location.url.replace('?dl=0', '?dl=1');
+    }
+    return item;
+  });
+}
+
 function createDocument(doc){
   //console.log("Updating the doc");
   //console.log(doc);
@@ -235,7 +247,7 @@ function groupDocuments(docs){
 // find the group for the document or create a new one
 function findOrCreateGroup(title){
   return new Promise(function(resolve, reject){
-    console.log("Creating / fetching the group " + title);
+    //console.log("Creating / fetching the group " + title);
     if (!title) title = null; // set it to null
     Groups.findOne({title: title}, function(err, res){
       if (err) reject(err);

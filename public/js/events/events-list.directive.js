@@ -12,7 +12,7 @@ module.exports = function(app){
       },
       link: function(scope, elem, attrs){
         $log.log("Events list directive");
-
+        scope.events = _.orderBy(scope.events, ['meta.posted_at'], ['desc']);
       }
     };
   });

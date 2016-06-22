@@ -13,7 +13,7 @@ module.exports = function(app){
     vm.dutyWorker = DutyWorker.data;
 
     vm.searchQuery = "";
-    vm.searchData = SearchData;
+    vm.searchData = SearchData.data;
     $log.log(vm);
 
     vm.filterEventsList = function(e){

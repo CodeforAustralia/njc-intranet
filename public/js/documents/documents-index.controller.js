@@ -38,14 +38,9 @@ module.exports = function(app){
       $log.log("DOC LIST");
       $log.log(DocumentsList);
 
-      var docs = [];
-      _.each(DocumentsList.data, function(list){
-        return docs.push(list);
-      });
-
-      docs = _.flatten(docs);
+      var docs = DocumentsList.data;
       $log.log(docs);
-
+      
       var grouped = _.groupBy(docs, function(doc){
         return doc.metadata.category;
       });

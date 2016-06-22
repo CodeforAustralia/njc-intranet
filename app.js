@@ -27,6 +27,7 @@ var documents = require('./routes/documents');
 var document_groups = require('./routes/document-groups');
 var feedback = require('./routes/feedback');
 var staff = require('./routes/staff');
+var search_data = require('./routes/search');
 var news_events = require('./routes/news-events');
 var categories = require('./routes/categories');
 var seeders = require('./routes/seeders');
@@ -90,15 +91,22 @@ app.use('/', routes);
 app.use('/api/authenticate', token_auth); // token based auth route
 app.use('/api/auth', auth); // session based auth route
 
+
 /**************************
 *   AUTHENTICATED ROUTES  *
 ***************************/
 // grab our Authorization token
-app.use(bearerToken());
+app.use(bearerToken({
+  bodyKey: 'access_token',
+  queryKey: 'access_token',
+  headerKey: 'Bearer',
+  reqKey: 'token'
+}));
 
 // routes after this middleware require token auth
 app.use(function(req, res, next){
   // check the header, or url, or post params for the token
+  console.log(req.headers);
   var token = req.token;
   if (token){
 
@@ -121,18 +129,22 @@ app.use(function(req, res, next){
     // we require a token, so return a 403 if there isnt one
     return res.status(403).send({
       success: false,
-      message: 'No token provided'
+      message: 'No token provided',
+      //token: req.token || null,
+      //req: req.body,
+      //headers: req.headers
     });
   }
 });
 
 // routes
-app.use('/api/staff', staff);
-app.use('/api/news-events', news_events);
-app.use('/api/feedback', feedback);
+app.use('/api/categories', categories);
 app.use('/api/documents', documents);
 app.use('/api/document-groups', document_groups);
-app.use('/api/categories', categories);
+app.use('/api/feedback', feedback);
+app.use('/api/news-events', news_events);
+app.use('/api/search', search_data); // search
+app.use('/api/staff', staff);
 app.use('/seeders', seeders);
 
 // catch 404 and forward to error handler

@@ -3,13 +3,19 @@ module.exports = function(app){
   console.log(app);
   // App bootstrapping + DI
   /*@ngInject*/
-  app.config(function($urlRouterProvider, $datepickerProvider, $httpProvider){
+  app.config(function($urlRouterProvider, $datepickerProvider, $typeaheadProvider, $httpProvider){
       // route the default state to the app home
       $urlRouterProvider.when('', '/dashboard');
       $urlRouterProvider.when('/', '/dashboard');
 
       console.log("CONFIG INTERCEPTOR");
       //console.log(AuthInterceptorProvider);
+
+      angular.extend($typeaheadProvider.defaults, {
+        animation: 'am-fade',
+        minLength: 2,
+        limit: 8
+      });
 
       // add the http interceptor
       $httpProvider.interceptors.push('AuthInterceptor');

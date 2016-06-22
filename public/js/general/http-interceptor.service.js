@@ -10,8 +10,11 @@ module.exports = function(app){
       request: function(config){
         // add the token to all requests
         var token = TokenService.get();
-        if(token) {
-          config.headers.Authorization = 'Bearer ' + token;
+        if(config.url.indexOf(".html") < 0 && token) {
+          $log.log(config);
+          //config.header.access_token = token;
+          config.url = (config.url.indexOf("?") > -1) ? config.url + "&access_token=" + token : config.url + "?access_token=" + token;
+          //$log.log()
         }
 
         return config;

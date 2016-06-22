@@ -12,6 +12,7 @@ module.exports = function(app){
       },
       link: function(scope, elem, attrs){
         $log.log("News summary directive");
+        scope.news = _.orderBy(scope.news, ['meta.posted_at'], ['desc']);
 
       }
     };

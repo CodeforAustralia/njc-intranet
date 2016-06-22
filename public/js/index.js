@@ -14,7 +14,8 @@ import angularLocalStorage from 'npm/angular-local-storage';
 import angularMoment from 'npm/angular-moment';
 import angularBase64Upload from 'npm/angular-base64-upload';
 import angularSanitize from 'npm/angular-sanitize';
-import angularStrap from 'npm/angular-strap';
+import angularStrap from 'npm/angular-strap/dist/angular-strap.min';
+import angularStrapTpl from 'npm/angular-strap/dist/angular-strap.tpl.min';
 import angularToastr from 'npm/angular-toastr';
 import angularRouter from 'npm/angular-ui-router';
 import angularMaterial from 'npm/angular-material/angular-material.min.js';
@@ -23,6 +24,8 @@ import angularMaterialCalendar from 'npm/angular-material-calendar/angular-mater
 
 //require('npm/angular-material');
 //require('npm/angular-material-calendar/angular-material-calendar.min.js');
+//require('npm/angular-strap/dist/angular-strap.tpl.min.js');
+//require('npm/angular-strap/dist/angular-strap.tpl.min.js');
 require('npm/angular-strap/dist/angular-strap.tpl.min.js');
 
 // create our app
@@ -37,10 +40,11 @@ var app = angular.module('njcIntranetApp', [
   'formly', 'formlyBootstrap',
   'LocalStorageModule',
   'mgcrea.ngStrap',
+  'mgcrea.ngStrap.typeahead',
   'ngSanitize',
   'toastr',
   'ngMaterial','materialCalendar',
-  'naif.base64'
+  'naif.base64',
 ]);
 
 // load all our modules and DI the app module
