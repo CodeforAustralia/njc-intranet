@@ -53,6 +53,25 @@ module.exports = function(app){
           label: 'Is '+vm.staff.name+' the duty worker?',
         }
       },
+      {
+        key: 'return_date',
+        type: 'input',
+        templateOptions: {
+          label: 'Return date',
+          'bs-datepicker': 'bs-datepicker',
+        },
+        ngModelAttrs: {
+          'bs-datepicker': {attribute: 'bs-datepicker'},
+        },
+        hideExpression: 'model.in'
+      },
+      {
+        key: 'notes',
+        type: 'textarea',
+        templateOptions: {
+          label: 'Notes',
+        }
+      }      
     ];
 
     vm.fields.details = [

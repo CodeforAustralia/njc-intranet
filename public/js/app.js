@@ -19,13 +19,13 @@ module.exports = function(app){
 
       // add the http interceptor
       $httpProvider.interceptors.push('AuthInterceptor');
-      /*angular.extend($datepickerProvider.defaults, {
+      angular.extend($datepickerProvider.defaults, {
         dateFormat: 'dd/MM/yyyy',
         modelDateFormat: 'yyyy-MM-dd HH:mm:ss',
         startWeek: 1,
         minDate: new Date(),
         autoclose: true,
-      });*/
+      });
     })
     .config(function (CacheFactoryProvider) {
       angular.extend(CacheFactoryProvider.defaults, { maxAge: 15 * 60 * 1000 });

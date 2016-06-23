@@ -1,9 +1,11 @@
-const webpack = require('webpack');
-//const ngAnnotatePlugin = require('ng-annotate-webpack-plugin');
+var webpack = require('webpack');
 
 module.exports = {
   context: __dirname + '/public/js',
-  entry: ['./index.js'],
+  entry: [
+    'bootstrap-loader',
+    './index.js'
+  ],
   output: {
     path: __dirname + '/public/build',
     publicPath: '/build/',
@@ -19,14 +21,16 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loaders: ['babel-loader', 'ng-annotate']
+        loaders: ['ng-annotate']
       },
       {
         test: /\.html$/,
         exclude: /node_modules/,
         loader: "raw-loader"
       },
-      //{ test: /\.css$/, loader: "style-loader!css-loader" }
+      { test: /\.css$/, loader: "style-loader!css-loader" },
+
+      { test: /\.(ttf|eot|svg|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" }
     ]
   },
 
@@ -34,7 +38,7 @@ module.exports = {
     alias: {
       'npm': __dirname+'/node_modules'
     },
-    extensions: ['', '.js', '.es6'] // not sure what this does
+    extensions: ['', '.js'] // not sure what this does
   },
 
   plugins: [

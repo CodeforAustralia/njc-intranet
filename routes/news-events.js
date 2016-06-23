@@ -26,9 +26,6 @@ function getEvents(params, done){
     for (var i=0;i<res.length;i++)
       res[i].type = 'event';
 
-    console.log("SET TYPE");
-    console.log(res);
-
     done(null, res);
   });
 }
@@ -71,14 +68,9 @@ router.get('/', function(req, res, next){
   // return all news and events items togethor
   // use different icons in the UI?
   // merge the results, sorted by meta.posted_at date
-
-  console.log(req.query);
   var params = {
     limit: req.query.limit || null
   };
-
-  console.log("Params");
-  console.log(params);
 
   if (req.query.type === 'news'){
     News.find(params, function(err, results){
@@ -103,7 +95,6 @@ router.get('/', function(req, res, next){
       if (err) throw Error(err);
 
       // merge the arrays of results and sort them by date posted
-      //console.log(_.flatten(results));
       results = _.sortBy(_.flatten(results), function(o){ return -o.meta.posted_at; });
       res.send(results);
     });
@@ -113,7 +104,6 @@ router.get('/', function(req, res, next){
 /* GET all the news / event item */
 router.get('/:permalink', function(req, res, next){
   var permalink = req.params.permalink;
-  console.log(permalink);
 
   async.parallel([
     function(callback){
@@ -131,13 +121,9 @@ router.get('/:permalink', function(req, res, next){
 /* POST add a new news / event */
 router.post('/', function(req, res, next){
   var data = req.body;
-  console.log(data);
   var model = (data.type == 'news') ? createNewsItem(data) : createEventItem(data);
-  console.log("***MODEL***");
-  console.log(model);
 
   model.save(function(err, result){
-    console.log(err);
     if (err) res.sendStatus(500);
 
     if (data.share && data.share !== ''){ shareItemWithGroup(result.meta.permalink, data.share); }

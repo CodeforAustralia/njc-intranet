@@ -27,11 +27,15 @@
         </td>
         <td class="staff-member-status staff-member-status-in" ng-if="staff_member.status.in">
           <span class="staff-member-status-text">In</span>&nbsp;
-          <span class="fa fa-circle"></span>
+          <span class="fa fa-circle"></span><br/>
+          <span class="staff-member-status-text" ng-if="staff_member.status.return_date">Returning {{ staff_member.status.return_date | date: "dd MMM, yyyy" }}</span><br/>
+          <span class="staff-member-status-text" ng-if="staff_member.status.notes.length > 0">{{ staff_member.status.notes }}</span>
         </td>
         <td class="staff-member-status staff-member-status-out" ng-if="!staff_member.status.in">
           <span class="staff-member-status-text">Out</span>&nbsp;
-          <span class="fa fa-circle"></span>
+          <span class="fa fa-circle"></span><br/>
+          <span class="staff-member-status-text" ng-if="staff_member.status.return_date">Returning {{ staff_member.status.return_date | date: "dd MMM, yyyy" }}</span><br/>
+          <span class="staff-member-status-text" ng-if="staff_member.status.notes.length > 0">{{ staff_member.status.notes }}</span>
         </td>
         <td ng-if="canEdit" class="staff-member-edit">
           <button class="btn btn-default" type="button" ui-sref='staff.edit({id:staff_member._id})'>

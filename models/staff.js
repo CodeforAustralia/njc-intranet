@@ -23,7 +23,9 @@ var StaffSchema = mongoose.Schema({
   },
   status: {
     in: {type: Boolean, default: false},
-    duty_worker: {type: Boolean, default: false}
+    duty_worker: {type: Boolean, default: false},
+    notes: {type: String},
+    return_date: {type: Date}
   },
   last_updated: {type: Date, default: new Date()}
 });

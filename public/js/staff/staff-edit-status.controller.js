@@ -11,7 +11,7 @@ module.exports = function(app){
     $log.log(StaffList);
 
     vm.staff_list = _.map(StaffList.data, function(s){
-      return {name: s.name, value: s._id, in: s.status.in, duty_worker: s.status.duty_worker };
+      return {name: s.name, value: s._id, in: s.status.in, duty_worker: s.status.duty_worker, notes: null, return_date: null };
     });
 
     $log.log(vm.staff_list);
@@ -40,6 +40,25 @@ module.exports = function(app){
           label: 'Is duty worker?',
         }
       },
+      {
+        key: 'return_date',
+        type: 'input',
+        templateOptions: {
+          label: 'Return date',
+          'bs-datepicker': 'bs-datepicker',
+        },
+        ngModelAttrs: {
+          'bs-datepicker': {attribute: 'bs-datepicker'},
+        },
+        hideExpression: 'model.in'
+      },
+      {
+        key: 'notes',
+        type: 'textarea',
+        templateOptions: {
+          label: 'Notes',
+        }
+      }
     ];
 
     vm.dismiss = function(){
