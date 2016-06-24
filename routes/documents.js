@@ -162,7 +162,8 @@ router.put("/:id", function(req, res, next){
 function cleanupDocLocations(arr){
   // fixes the dropbox links, turns them into direct links
   return _.map(arr, function(item){
-    if (typeof item.location.url !== 'undefined' && item.location.url.indexOf("?dl=0") > -1 && item.location.url.indexOf("www.dropbox.com") > -1){
+    if (typeof item.location.url !== 'undefined' && item.location.url !== ''  && item.location.url !== null
+      && item.location.url.indexOf("?dl=0") > -1 && item.location.url.indexOf("www.dropbox.com") > -1){
       item.location.url = item.location.url.replace('?dl=0', '?dl=1');
     }
     return item;

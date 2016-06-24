@@ -14,19 +14,18 @@ require('npm/angular-moment');
 require('npm/angular-base64-upload');
 require('npm/angular-sanitize');
 require('npm/angular-spinkit');
-require('npm/angular-strap/dist/angular-strap.min');
-require('npm/angular-strap/dist/angular-strap.tpl.min');
+require('npm/angular-strap/dist/angular-strap');
+require('npm/angular-strap/dist/angular-strap.tpl');
 require('npm/angular-toastr');
 require('npm/angular-ui-router');
-require('npm/angular-material/angular-material.min.js');
-require('npm/angular-material-calendar/angular-material-calendar.min.js');
+require('npm/angular-material/angular-material.js');
+require('npm/angular-material-calendar/angular-material-calendar.js');
 
-require('npm/angular-strap/dist/angular-strap.tpl.min.js');
-require('npm/bootstrap-additions/dist/bootstrap-additions.min.css');
-require('npm/angular-toastr/dist/angular-toastr.min.css');
+require('npm/bootstrap-additions/dist/bootstrap-additions.css');
+require('npm/angular-toastr/dist/angular-toastr.css');
 // import the extra css we need
-require('npm/angular-spinkit/build/angular-spinkit.min.css');
-require('npm/angular-material/angular-material.min.css');
+require('npm/angular-spinkit/src/angular-spinkit.css');
+require('npm/angular-material/angular-material.css');
 
 // create our app
 var app = angular.module('njcIntranetApp', [

@@ -13,10 +13,12 @@
         <!--<td class="staff-member-avatar text-center"><span class="fa fa-user fa-2x"></span></td>-->
         <td class="staff-member-details-staff">
           <div class="avatar">
-            <div ng-if="staff_member.avatar" class="avatar-image" style="background-image:url('data:image/png;base64,{{ staff_member.avatar }}');background-size:cover;background-position:center center;"/>
+            <div class="avatar-image" style="background-image:url('/api/staff/{{ staff_member._id }}/avatar?access_token={{ access_token }}');background-size:cover;background-position:center center;"/>
+            <!--<div ng-if="staff_member.avatar" class="avatar-image" style="background-image:url('data:image/png;base64,{{ staff_member.avatar }}');background-size:cover;background-position:center center;"/>
             <div ng-if="!staff_member.avatar" class="avatar-placeholder text-center">
               <span class="fa fa-user fa-2x"></span>
             </div>
+            -->
             <div class="avatar-text">
               <span class="staff-member-details-name">{{ staff_member.name }}</span><br/>
               <span ng-if="staff_member.organisation.role" class="staff-member-details-role">{{ staff_member.organisation.role }}</span><br ng-if="staff_member.organisation.role" />

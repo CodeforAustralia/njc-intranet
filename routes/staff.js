@@ -9,7 +9,7 @@ router.get('/', function(req, res, next){
   var params = {};
   if (req.query.duty_worker) params['status.duty_worker'] = req.query.duty_worker;
 
-  var q = Staff.find(params).sort('name');
+  var q = Staff.find(params).select('name contact organisation status').sort('name');
   // execute the query at a later time
   q.exec(function (err, staff) {
     if (err) return res.json(err);
@@ -17,10 +17,35 @@ router.get('/', function(req, res, next){
   });
 });
 
+/* GET a staff members avatar */
+router.get('/:id/avatar', function(req, res, next){
+  var id = req.params.id;
+  var q = Staff.findOne({_id: id}).select('avatar');
+
+  console.log("Fetching avatar");
+
+  // execute the query at a later time
+  q.exec(function (err, results) {
+    if (err) return res.json(err);
+    // return the base64 image
+    // if there is no image, we need a placeholder image that we can send
+    var img = new Buffer(String(results.avatar), 'base64');
+
+    res.writeHead(200, {
+     'Content-Type': 'image/png',
+     'Content-Length': img.length
+    });
+
+    res.end(img);
+  });
+});
+
 /* GET a staff member by id */
 router.get('/:id', function(req, res, next){
   var id = req.params.id;
   var q = Staff.find({_id: id});
+
+  console.log("getting staff");
 
   // execute the query at a later time
   q.exec(function (err, staff) {
