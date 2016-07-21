@@ -25,6 +25,8 @@ module.exports = function(app){
         startWeek: 1,
         minDate: new Date(),
         autoclose: true,
+        iconLeft: 'fa fa-angle-double-left',
+        iconRight: 'fa fa-angle-double-right'        
       });
     })
     .config(function (CacheFactoryProvider) {

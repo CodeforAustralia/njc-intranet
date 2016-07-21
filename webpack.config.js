@@ -29,7 +29,6 @@ module.exports = {
         loader: "raw-loader"
       },
       { test: /\.css$/, loader: "style-loader!css-loader" },
-
       { test: /\.(ttf|eot|svg|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" }
     ]
   },

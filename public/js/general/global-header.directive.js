@@ -12,6 +12,9 @@ module.exports = function(app){
         query: '=',
         hideSearch: '@'
       },
+      controller: GlobalHeaderController,
+      controllerAs: 'vm',
+      bindToController: true,
       link: function(scope, elem, attrs){
         $log.log("global header directive");
         $log.log(scope);
@@ -41,3 +44,12 @@ module.exports = function(app){
   });
 
 };
+
+/*@ngInject*/
+function GlobalHeaderController($log, TokenService){
+  var vm = this;
+
+  vm.currentToken = function(){
+    return TokenService.get();
+  };
+}

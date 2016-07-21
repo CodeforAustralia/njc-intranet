@@ -5,6 +5,7 @@ notes.md
 .env
 
 # General
+dumps
 /bootstrap/compiled.php
 /vendor
 composer.phar
