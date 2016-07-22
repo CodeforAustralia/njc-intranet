@@ -1,0 +1,18 @@
+<section ng-cloak class="feedback-list page">
+  <table class="table table-condensed">
+    <thead>
+      <tr>
+        <th>Type of feedback</th>
+        <th>Message</th>
+        <!--<th>Status</th>-->
+      </tr>
+    </thead>
+    <tbody ng-if='feedback.length > 0'>
+      <tr class="feedback-item" ng-repeat="item in feedback">
+        <td>{{ item.type }}</td>
+        <td>{{ item.message }}</td>
+        <!--<td>{{ item.status }}</td>-->
+      </tr>
+    </tbody>
+  </table>
+</section>

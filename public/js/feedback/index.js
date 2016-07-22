@@ -1,5 +1,7 @@
 module.exports = function(app){
+  require('./feedback-list.directive')(app);
   require('./feedback-form.controller')(app);
+  require('./feedback-index.controller')(app);
   require('./feedback.service')(app);
 
   app.config(function($stateProvider){
@@ -12,6 +14,19 @@ module.exports = function(app){
           Teams: function(TeamsService){
             return TeamsService.all();
           }
+        }
+      })
+      .state('feedback.index', {
+        url: '/feedback',
+        authenticate : true,
+        template: require('./feedback-index.html'),
+    		controller: 'FeedbackIndexController',
+        controllerAs: 'vm',
+        resolve: {
+          FeedbackList: function(FeedbackService, $log){
+            $log.log("Resolving the feedback list");
+            return FeedbackService.all();
+          },
         }
       })
       .state('feedback.create', {

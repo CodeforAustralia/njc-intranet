@@ -1,6 +1,6 @@
 {
   "name": "njc-intranet-v2",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "private": true,
   "engines": {
     "node": "5.8.0"

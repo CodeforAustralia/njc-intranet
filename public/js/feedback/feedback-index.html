@@ -1,0 +1,28 @@
+<section ng-cloak class="page documents">
+  <global-header hide-search=true></global-header>
+  <main>
+    <div class="container">
+      <div class="row page-nav">
+        <div class="col-xs-12">
+          <button class="btn btn-default" ui-sref="dashboard">
+            Return to dashboard
+          </button>
+          <a ng-if="vm.is_admin" class="btn btn-default" href="/api/feedback/export?access_token={{ vm.currentToken() }}">
+            Download .csv
+          </a>
+          <button ng-if="vm.is_admin" class="btn btn-default" ui-sref="feedback.create">
+            Add feedback
+          </button>
+        </div>
+      </div>
+      <div class="row page-title">
+        <div class="col-xs-12">
+          <h1>Feedback</h1>
+        </div>
+      </div>
+      <section class="row page-content">
+        <feedback-list class="col-xs-12" search="vm.query" feedback="vm.content" can-edit="vm.is_admin"></feedback-list>
+      </section>
+    </div>
+  </main>
+</section>
