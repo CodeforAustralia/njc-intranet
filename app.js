@@ -103,7 +103,7 @@ app.use(bearerToken({
   reqKey: 'token'
 }));
 
-// routes after this middleware require token auth
+/*// routes after this middleware require token auth
 app.use(function(req, res, next){
   // check the header, or url, or post params for the token
   var token = req.token;
@@ -134,7 +134,7 @@ app.use(function(req, res, next){
       //headers: req.headers
     });
   }
-});
+});*/
 
 // routes
 app.use('/api/categories', categories);

@@ -15,7 +15,7 @@ router.post('/token',
     var user = {
       username: req.body.username
     };
-    
+
     // passport handles errors in its middleware
     // generate a token and send it back
     var token = jwt.sign(user, config.TOKEN_SECRET, {
@@ -36,8 +36,8 @@ router.post('/token',
 
 // seeder
 router.post('/seeder', function(req, res, err){
-  console.log("seeder");
-  console.log(req);
+  // the demo should not allow creating / updating of content just reading
+  return res.json("Read only mode for the demo :)");
 
   AuthUser.register(new AuthUser({ username : req.body.username }), req.body.password, function(err, user) {
       if (err) {

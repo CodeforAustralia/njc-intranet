@@ -9,6 +9,8 @@ var uploader = multer({dest: './uploads'});
 /* POST new file upload */
 // handle the file upload, return an id object that can be used to associate the file with a document
 router.post('/', uploader.single('file'), function(req, res, next) {
+  // the demo should not allow creating / updating of content just reading
+  return res.json("Read only mode for the demo :)");  
   // handle a single file upload
   // move the file to proper storage
   var filepath = req.file.path;

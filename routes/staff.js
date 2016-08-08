@@ -56,6 +56,9 @@ router.get('/:id', function(req, res, next){
 
 /* POST create a new staff member */
 router.post('/', function(req, res, next){
+  // the demo should not allow creating / updating of content just reading
+  return res.json("Read only mode for the demo :)");
+
   var model = req.body; // get the passed fields
 
   var staff = new Staff({
@@ -83,6 +86,9 @@ router.post('/', function(req, res, next){
 
 /* PUT /:id full update of the model with the specified id */
 router.put('/:id', function(req, res, next){
+  // the demo should not allow creating / updating of content just reading
+  return res.json("Read only mode for the demo :)");
+
   var id = req.params.id;
   var model = req.body;
   var curr_duty_worker = {};
@@ -167,7 +173,8 @@ function resetDutyWorker(){
 
 /* PATCH /:id partial update of the model with the specified id */
 router.patch('/:id', function(req, res, next){
-
+  // the demo should not allow creating / updating of content just reading
+  return res.json("Read only mode for the demo :)");
 });
 
 module.exports = router;

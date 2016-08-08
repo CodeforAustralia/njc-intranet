@@ -120,6 +120,9 @@ router.get('/:permalink', function(req, res, next){
 
 /* POST add a new news / event */
 router.post('/', function(req, res, next){
+  // the demo should not allow creating / updating of content just reading
+  return res.json("Read only mode for the demo :)");
+    
   var data = req.body;
   var model = (data.type == 'news') ? createNewsItem(data) : createEventItem(data);
 
