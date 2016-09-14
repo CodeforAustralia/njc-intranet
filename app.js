@@ -65,7 +65,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
 // configure passport - add passport middleware and setup
-if (_.isUndefined(config.PASSPORT_SECRET) || config.PASSPORT_SECRET === "<your-passport-secret>") throw new Error(error("You must set a your own unique passport_secret in your config.json"));
+if (_.isUndefined(config.PASSPORT_SECRET) || config.PASSPORT_SECRET === "<your-passport-secret>") throw new Error(error("You must set a your own unique passport_secret in your .env file"));
 app.use(session({ secret: config.PASSPORT_SECRET, resave: false, saveUninitialized: false}));
 app.use(passport.initialize());
 app.use(passport.session());
