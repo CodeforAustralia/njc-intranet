@@ -8,6 +8,7 @@
 
 ## Running the app
 To run the app locally:
+
 1. Start webpack `webpack-dev-server`
 2. Start mongodb
 3. Run `npm start`
