@@ -2,8 +2,15 @@
 ## Installation
 1. Clone the repo
 2. Configure your env variables, see the `.env.example` file for the required environment variables. This includes a [mailgun](https://mailgun.com/) api key (feel free to replace with your own mailing service)
-3. install all packages `npm install`
-4. Build the app `npm install`
+3. Run `node seed-database` to seed the database with fake data (or skip if you want a blank copy)
+4. install all packages `npm install`
+5. Build the app `npm install`
+
+## Running the app
+To run the app locally:
+1. Start webpack `webpack-dev-server`
+2. Start mongodb
+3. Run `npm start`
 
 ## Usage
 This app requires npm and nodejs
